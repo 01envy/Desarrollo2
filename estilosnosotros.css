@@ -84,23 +84,7 @@ body{
 
 
 /*---------------Index--------------*/
-/*---Barra de Redireccion--*/
-.navegacion{
-    background-color: #364c59;
-    margin: 20px 20px 0 20px;
-    padding: 30px 220px 30px 220px;
-    display: flex;
-    justify-content: space-between;
-}
 
-.nav-scrollspy .active{
-    background-color: white;
-}
-.enlace{
-    text-decoration: none;
-    font-family: TrebuchetMS;
-    color: white;
-}
 
 /*-----------Carrusel-----------*/
 .overlay { 

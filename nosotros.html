@@ -5,10 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nosotros</title>
     <link rel="stylesheet" href="estilosnosotros.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" 
-    rel="stylesheet" 
-    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" 
-    crossorigin="anonymous">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 
 </head>
@@ -17,14 +13,14 @@
     <!--Barra de navegacion-->
 
 
-    <header class="header sticky-top navbar nav-scrollspy" id="navabar-scrollspy">
+    <header class="header sticky-top nav-scrollspy " id="navabar-scrollspy">
         <div class="logo">
             <img src="img/logo-udacorp-lineablanca.png" alt="Logo de la marca">
         </div>
         <nav class="nav-scrollspy" id="navabar-scrollspy">
-           <ul class="nav-links text-white ml-auto">
+           <ul class="nav-links text-white">
                 <li class="nav-item">
-                    <a class="nav-link text-reset" href="#informacionpersonal">boton1</a>
+                    <a class="nav-link text-reset" href="#">boton1</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link text-reset" href="#articulos">boton2</a>
@@ -45,28 +41,35 @@
 
     <div class="overlay"><h1>Sobre nosotros</h1></div>
         <div id="myCarousel" class="carousel slide">
-        <div id="carouselExampleFade" class="carousel slide carousel-fade">
-            <div class="carousel-inner">
-              <div class="carousel-item active">
-                <img src="FotosDIICC/_ALX9325.JPG" class="d-block w-100"  alt="foto_carrusel1">
-              </div>
-              <div class="carousel-item">
-                <img src="FotosDIICC/_ALX9336.JPG" class="d-block w-100" alt="foto_carrusel2">
-              </div>
-              <div class="carousel-item">
-                <img src="FotosDIICC/_ALX9328.JPG" class="d-block w-100" alt="foto_carrusel3">
-              </div>
+            <div id="carouselExampleFade" class="carousel slide carousel-fade">
+                <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="FotosDIICC/_ALX9325.JPG" class="d-block w-100"  alt="foto_carrusel1">
+                </div>
+                <div class="carousel-item">
+                    <img src="FotosDIICC/_ALX9336.JPG" class="d-block w-100" alt="foto_carrusel2">
+                </div>
+                <div class="carousel-item">
+                    <img src="FotosDIICC/_ALX9328.JPG" class="d-block w-100" alt="foto_carrusel3">
+                </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+                </button>
             </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
-              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-              <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
-              <span class="carousel-control-next-icon" aria-hidden="true"></span>
-              <span class="visually-hidden">Next</span>
-            </button>
-          </div>
-  </div>
+        </div>
+        <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+            <i class="glyphicon glyphicon-chevron-left"></i>
+        </a>
+        <a class="right carousel-control" href="#myCarousel" data-slide="next">
+            <i class="glyphicon glyphicon-chevron-right"></i>
+        </a>  
+    </div>
     
 
 
