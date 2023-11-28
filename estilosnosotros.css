@@ -90,7 +90,7 @@ body{
     color:#fff;
     position:absolute;
     z-index:40;
-    top:30%;
+    top:15%;
     left:0;
     bottom: 50%;
     width:100%;
@@ -106,6 +106,7 @@ body{
     margin: 60px 50px 20px 80px;
     border-radius: 20px;
     font-family: MontserratRegular;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 .tituloquienessomos::after{
     content: "";
@@ -115,6 +116,38 @@ body{
 }
 .quienessomos{
     padding: 20px;
-    background-color: rgba(255, 255, 255, 0.445);
     border-radius: 20px;
+}
+
+/*--------Preguntas frecuentes----------*/
+
+.preguntasfrecuentes{
+    font-family: MontserratRegular;
+    margin: 60px 50px 20px 80px;
+    text-align: center;   
+}
+.titulopreguntas{
+    margin-bottom: 50px; ;
+}
+.titulopreguntas::after{
+    content: "";
+    display: block;
+    border-bottom: 2px solid;
+    margin-top: 5px;
+}
+
+
+/*---------Informacion de contacto---------*/
+
+.contactanos{
+    background-color: rgba(229, 229, 229, 0.955);
+    border-radius: 20px;
+    font-family: MontserratRegular;
+    margin: 60px 50px 20px 80px;
+    display: flex;
+    padding: 20px 40px 20px 40px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+.tablacontactanos{
+    width: 100%;
 }
