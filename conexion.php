@@ -2,7 +2,7 @@
 function conectar(){
     $host="localhost";
     $user="root";
-    $pass="toto68257514";
+    $pass="";
 
     $bd="horario_Atencion";
 
