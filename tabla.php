@@ -101,9 +101,4 @@
 
 <?php
 // Función para obtener el nombre del día de la semana
-function dia_semana($numero_dia) {
-    $dias_semana = array('Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado');
-    return $dias_semana[$numero_dia - 1];
-}
-?>
 
