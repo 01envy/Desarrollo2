@@ -11,6 +11,7 @@ $con = conectar();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="style.css">
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous"></head>
     <!--Barra de navegacion-->
     <header class="header">
@@ -26,6 +27,7 @@ $con = conectar();
             </nav>
             <a class="btn" href="#"><button>Nombre</button></a>
         </header>
+
 <body>
     <div class="grid-container">
         <?php if (isset($_GET['success']) && $_GET['success'] === 'true') : ?>
@@ -33,6 +35,7 @@ $con = conectar();
         <?php elseif (isset($_GET['success']) && $_GET['success'] === 'false') : ?>
         <div class="alert alert-danger">Error: La actualización ha fallado.</div>
         <?php endif; ?>
+
         
         <ul class="nav nav-tabs">
     <li class="nav-item">
@@ -83,6 +86,7 @@ $con = conectar();
     </div>
     <div class="tab-content mt-2">
         <!-- Informacion -->
+
         <div class="tab-pane fade show active" id="tabla1">
             <table class="table mx-auto">
                 <thead class="table-success table-striped">
@@ -123,7 +127,9 @@ $con = conectar();
                                     <div style="color:black" class="modal-body">
                                     <!--formulario de actualizar-->
                                         <form action="update.php" method="POST">
+
                                             <input type="hidden" name="Id"value="<?php echo $row['Id'] ?? ''; ?>">
+
                                             <label>Nombre</label>
                                             <input type="text" class="form-control mb-3" name="nombre"placeholder="Nombre" value="<?php echo $row['nombre'] ?? ''; ?>">
                                             <button type="submit" class="btn btn-primary">Actualizar</button>
@@ -201,7 +207,9 @@ $con = conectar();
                                     <div style="color:black" class="modal-body">
                                     <!--formulario de actualizar-->
                                         <form action="update.php" method="POST">
+
                                             <input type="hidden" name="Id"value="<?php echo $row['Id'] ?? ''; ?>">
+
                                             <label>Nombre</label>
                                             <input type="text" class="form-control mb-3" name="nombre"placeholder="Nombre" value="<?php echo $row['nombre'] ?? ''; ?>">
                                             <button type="submit" class="btn btn-primary">Actualizar</button>
@@ -360,7 +368,9 @@ $con = conectar();
                                     <div style="color:black" class="modal-body">
                                     <!--formulario de actualizar-->
                                         <form action="update.php" method="POST">
+
                                             <input type="hidden" name="Id"value="<?php echo $row['Id'] ?? ''; ?>">
+
                                             <label>Nombre</label>
                                             <input type="text" class="form-control mb-3" name="nombre"placeholder="Nombre" value="<?php echo $row['nombre'] ?? ''; ?>">
                                             <button type="submit" class="btn btn-primary">Actualizar</button>
@@ -401,6 +411,7 @@ $con = conectar();
             </table>
         </div>
     </div>
+
     <!--Footer-->
     <div class="footer">
         <div class= "container-fluid ml-5 ms-5">
@@ -474,6 +485,7 @@ $con = conectar();
 </body>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+
 <script>
 $(document).ready(function() {
     $('#buscar').on('input', function() {

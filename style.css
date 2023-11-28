@@ -12,7 +12,9 @@ table {
 }
 
 td.ocupado {
+
     background-color: #00ff00;
+
 }
 
 th, td {
@@ -24,6 +26,7 @@ th, td {
 th {
     background-color: #f2f2f2;
 }
+
 .seleccionado {
     background-color: green;
 }
@@ -179,3 +182,4 @@ body{
 .tesis{
     margin: 40px 80px 20px 80px;
 }
+
