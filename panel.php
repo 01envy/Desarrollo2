@@ -459,7 +459,7 @@ $con = conectar();
                         <a class="text-secondary text-decoration-none" href="#">Facultad de Ingenieria</a>
                     </div>
                     <div class="mb-2 enlacesfooter">
-                        <a class="text-secondary text-decoration-none" href="#">Instagram</a>
+                        <a class="text-secondary text-decoration-none" href="#">facebook</a>
                     </div>
                 </div>
     
