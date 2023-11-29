@@ -94,11 +94,10 @@
     </div>
 </body>
 </html>
-=======
-    </div>
+
 </body>
 </html>
 
 <?php
-// Función para obtener el nombre del día de la semana
+
 
