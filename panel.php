@@ -1,6 +1,43 @@
 <?php
 include("conexion.php");
 $con = conectar();
+
+// Verificar la conexión a la base de datos
+if (!$con) {
+    die("Error de conexión a la base de datos: " . mysqli_connect_error());
+}
+
+// Realizar la consulta SQL para la pestaña 'informacion'
+$queryInformacion = mysqli_query($con, "SELECT * FROM informacion");
+
+// Verificar si la consulta fue exitosa
+if (!$queryInformacion) {
+    die("Error en la consulta 'informacion': " . mysqli_error($con));
+}
+
+// Realizar la consulta SQL para la pestaña 'proyectos'
+$queryProyectos = mysqli_query($con, "SELECT * FROM proyectos");
+
+// Verificar si la consulta fue exitosa
+if (!$queryProyectos) {
+    die("Error en la consulta 'proyectos': " . mysqli_error($con));
+}
+
+// Realizar la consulta SQL para la pestaña 'publicaciones'
+$queryPublicaciones = mysqli_query($con, "SELECT * FROM publicaciones");
+
+// Verificar si la consulta fue exitosa
+if (!$queryPublicaciones) {
+    die("Error en la consulta 'publicaciones': " . mysqli_error($con));
+}
+
+// Realizar la consulta SQL para la pestaña 'tesis'
+$queryTesis = mysqli_query($con, "SELECT * FROM tesis");
+
+// Verificar si la consulta fue exitosa
+if (!$queryTesis) {
+    die("Error en la consulta 'tesis': " . mysqli_error($con));
+}
 ?>
 
 <!DOCTYPE html>
@@ -39,46 +76,18 @@ $con = conectar();
         
         <ul class="nav nav-tabs">
     <li class="nav-item">
-        <a class="nav-link active" id="tab1" data-bs-toggle="tab" href="#tabla1" data-modal-id="ingresarModal">Informacion</a>
+        <a class="nav-link active" id="tab1" data-bs-toggle="tab" href="#tabla1">Informacion</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" id="tab2" data-bs-toggle="tab" href="#tabla2" data-modal-id="ingresarModal">Proyectos</a>
+        <a class="nav-link" id="tab2" data-bs-toggle="tab" href="#tabla2" >Proyectos</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" id="tab3" data-bs-toggle="tab" href="#tabla3" data-modal-id="ingresarModal">Publicaciones</a>
+        <a class="nav-link" id="tab3" data-bs-toggle="tab" href="#tabla3" >Publicaciones</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" id="tab4" data-bs-toggle="tab" href="#tabla4" data-modal-id="ingresarModal">Tesis</a>
+        <a class="nav-link" id="tab4" data-bs-toggle="tab" href="#tabla4" >Tesis</a>
     </li>
 </ul>
-<button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#ingresarModal" data-modal-id="ingresarModal">Ingresar Datos</button>
-<button type="button" class="btn btn-info edit-button" data-bs-toggle="modal" data-bs-target="#editModal<?php echo $row['Id']; ?>" data-modal-id="editModal<?php echo $row['Id']; ?>">Editar</button>
-
-<!-- Modal de ingreso de datos -->
-<div class="modal fade" id="ingresarModal" tabindex="-1" aria-labelledby="ingresarModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="ingresarModalLabel">Ingresar Datos</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form action="">
-                    <input type="text" name="nombre" placeholder="Nombre del usuario" required/>
-                    <br />
-                    <input type="email" name="correo" placeholder="Correo electronico" required/>
-                    <br />
-                    <input type="password" name="contrasena" placeholder="Contraseña" required/>
-                    <br />
-                    <input type="submit" value="Agregar Usuario"/>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-            </div>
-        </div>
-    </div>
-</div>
 <!--a-->
         <div class="col-md-8">
             <input type="text" class="form-control mb-3" id="buscar" placeholder="Buscar">
@@ -86,12 +95,101 @@ $con = conectar();
     </div>
     <div class="tab-content mt-2">
         <!-- Informacion -->
-
         <div class="tab-pane fade show active" id="tabla1">
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ingresarModal1">Ingresar datos</button>
+            <!-- Modal para ingresar datos en la tabla 'informacion' -->
+            <div class="modal fade" id="ingresarModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Ingresar Datos</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <!-- Agrega aquí el formulario para ingresar datos -->
+                            <form action="" method="GET" class="row g-3 needs-validation" onsubmit="return validar_registro()" novalidate>
+                <div>
+                    <label for="I_nombre">Nombre:</label>
+                    <input type="text" class="form-control" name="R_nombre" id="I_nombre required">
+                    <div id="error-nombre" class="text-danger"></div>
+                </div>
+                <div>
+                    <label for="I_correo">Correo:</label>
+                    <input type="email" class="form-control" name="R_correo" id="I_correo">
+                    <div id="error-correo" class="text-danger"></div>
+                </div>
+                <div>
+                    <label for="I_fono">Fono:</label>
+                    <input type="text" class="form-control" name="R_fono" id="I_fono">
+                    <div id="error-fono" class="text-danger"></div>
+                </div>
+                <div>
+                    <label for="I_cargo">Cargo:</label>
+                    <input type="text" class="form-control" name="R_cargo" id="I_cargo">
+                    <div id="error-cargo" class="text-danger"></div>
+                </div>
+                <div>
+                    <label for="I_descripcion">Descripción:</label>
+                    <textarea class="form-control" aria-label="With textarea" id="I_descripcion"></textarea>
+                    <div id="error-descripcion" class="text-danger"></div>
+                </div>
+                <div>
+                    <label for="I_grado">Grado académico:</label>
+                    <input type="text" class="form-control" name="R_grado" id="I_grado">
+                    <div id="error-grado" class="text-danger"></div>
+                </div>
+                <div class="col-6">
+                    <label for="I_nombre">Contraseña:</label>
+                    <input type="password" class="form-control" name="R_contrasena" id="I_contrasena">
+                    <div id="error-contrasena" class="text-danger"></div>
+                </div>
+                <div class="col-6">
+                    <label for="I_nombre">Confirmacion de contraseña:</label>
+                    <input type="password" class="form-control" name="R_confirmacion_contrasena" id="I_confirmacion_contrasena">
+                    <div id="error-confirmacion-contra" class="text-danger"></div>
+                </div>
+                <div class="container">
+                    <label>Areas de interes:</label>
+                    <div class="row align-items-start">
+                        <div class="col-4">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="I_check1" name="AreasInteres[]">
+                                <label class="form-check-label" for="I_check1">Gestión informática</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="I_check2" name="AreasInteres[]">
+                                <label class="form-check-label" for="I_check2">Ciencia de datos</label>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="I_check3" name="AreasInteres[]">
+                                <label class="form-check-label" for="I_check3">Ingeniería de software</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="I_check4" name="AreasInteres[]">
+                                <label class="form-check-label" for="I_check4">Informática educativa</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="error-areas" class="text-danger"></div>
+                </div>
+                <div class="input-group mb-3">
+                    <label class="input-group-text" for="inputGroupFile01">Imagen de perfil:</label>
+                    <input type="file" class="form-control" id="inputGroupFile01">
+                </div>
+                <button type="submit" class="btn btn-primary" onclick="alert('¿Estas seguro de enviar estos datos?')">Enviar</button>
+                <p class="text-center">¿Ya estás registrado? Inicia sesión <a href="inicio_de_sesion.html">Aquí</a></p>
+            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <table class="table mx-auto">
                 <thead class="table-success table-striped">
                     <tr>
                         <th>Id</th>
+                        <th>imagen</th>
                         <th>Nombre</th>
                         <th>Apellido</th>
                         <th>Email</th>
@@ -105,13 +203,14 @@ $con = conectar();
                 </thead>
                 <tbody style="color:white">
                     <?php
-                        while ($row = mysqli_fetch_array($query)) {
+                        while ($row = mysqli_fetch_array($queryInformacion)) {
                     ?>
                     <tr>
-                        <td><?php echo $row['Id'] ?></td>
+                        <td><?php echo $row['id'] ?></td>
+                        <td><?php echo $row['imagen'] ?></td>
                         <td><?php echo $row['nombre'] ?></td>
                         <td><?php echo $row['apellido'] ?></td>
-                        <td><?php echo $row['email'] ?></td>
+                        <td><?php echo $row['correo'] ?></td>
                         <td><?php echo $row['cargo'] ?></td>
                         <td><?php echo $row['contrasena'] ?></td>
                         <td><?php echo $row['informacion'] ?></td>
@@ -171,6 +270,32 @@ $con = conectar();
         </div>
         <!-- Proyectos-->
         <div class="tab-pane fade" id="tabla2">
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ingresarModal">Ingresar Proyecto</button>
+            <!-- Modal para ingresar datos en la tabla 'informacion' -->
+            <div class="modal fade" id="ingresarModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Ingresar Datos</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <!-- Agrega aquí el formulario para ingresar datos -->
+                            <form action="ingresar.php" method="POST">
+                                <!-- Campos del formulario -->
+                                <label for="campo1">Campo 1:</label>
+                                <input type="text" class="form-control" id="campo1" name="campo1" required>
+
+                                <!-- Agrega más campos según tus necesidades -->
+
+                                <!-- Botones del formulario -->
+                                <button type="submit" class="btn btn-primary">Guardar</button>
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <table class="table mx-auto">
                 <thead class="table-success table-striped">
                     <tr>
@@ -185,17 +310,14 @@ $con = conectar();
                 </thead>
                 <tbody style="color:white">
                     <?php
-                        while ($row = mysqli_fetch_array($query)) {
+                        while ($row = mysqli_fetch_array($queryProyectos)) {
                             ?>
                     <tr>
-                        <td><?php echo $row['Id'] ?></td>
-                        <td><?php echo $row['nombre'] ?></td>
-                        <td><?php echo $row['apellido'] ?></td>
-                        <td><?php echo $row['email'] ?></td>
-                        <td><?php echo $row['cargo'] ?></td>
-                        <td><?php echo $row['contrasena'] ?></td>
-                        <td><?php echo $row['informacion'] ?></td>
-                        <td><?php echo $row['rut'] ?></td>
+                        <td><?php echo $row['idproyectos'] ?></td>
+                        <td><?php echo $row['titulo'] ?></td>
+                        <td><?php echo $row['anio'] ?></td>
+                        <td><?php echo $row['link'] ?></td>
+                        <td><?php echo $row['proyectos'] ?></td>
                         <td><button type="button" class="btn btn-info" data-bs-toggle="modal"data-bs-target="#editModal<?php echo $row['Id']; ?>">Editar</button></td>
                         <div class="modal fade" id="editModal<?php echo $row['Id']; ?>" tabindex="-1"aria-labelledby="editModalLabel<?php echo $row['Id']; ?>" aria-hidden="true">
                             <div class="modal-dialog">
@@ -251,6 +373,32 @@ $con = conectar();
         </div>
         <!-- Publicaciones -->
         <div class="tab-pane fade" id="tabla3">
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ingresarModal">Ingresar Publicacion</button>
+            <!-- Modal para ingresar datos en la tabla 'informacion' -->
+            <div class="modal fade" id="ingresarModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Ingresar Datos</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <!-- Agrega aquí el formulario para ingresar datos -->
+                            <form action="ingresar.php" method="POST">
+                                <!-- Campos del formulario -->
+                                <label for="campo1">Campo 1:</label>
+                                <input type="text" class="form-control" id="campo1" name="campo1" required>
+
+                                <!-- Agrega más campos según tus necesidades -->
+
+                                <!-- Botones del formulario -->
+                                <button type="submit" class="btn btn-primary">Guardar</button>
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <table class="table mx-auto">
                 <thead class="table-success table-striped">
                     <tr>
@@ -268,17 +416,16 @@ $con = conectar();
                 </thead>
                 <tbody style="color:white">
                     <?php
-                        while ($row = mysqli_fetch_array($query)) {
+                        while ($row = mysqli_fetch_array($queryPublicaciones)) {
                             ?>
                     <tr>
-                        <td><?php echo $row['Id'] ?></td>
-                        <td><?php echo $row['nombre'] ?></td>
-                        <td><?php echo $row['apellido'] ?></td>
-                        <td><?php echo $row['email'] ?></td>
-                        <td><?php echo $row['cargo'] ?></td>
-                        <td><?php echo $row['contrasena'] ?></td>
-                        <td><?php echo $row['informacion'] ?></td>
-                        <td><?php echo $row['rut'] ?></td>
+                        <td><?php echo $row['idpublicaciones'] ?></td>
+                        <td><?php echo $row['titulo'] ?></td>
+                        <td><?php echo $row['fecha'] ?></td>
+                        <td><?php echo $row['autor'] ?></td>
+                        <td><?php echo $row['revision'] ?></td>
+                        <td><?php echo $row['acceso'] ?></td>
+                        <td><?php echo $row['archivo'] ?></td>
                         <td><button type="button" class="btn btn-info" data-bs-toggle="modal"data-bs-target="#editModal<?php echo $row['Id']; ?>">Editar</button></td>
                         <div class="modal fade" id="editModal<?php echo $row['Id']; ?>" tabindex="-1"aria-labelledby="editModalLabel<?php echo $row['Id']; ?>" aria-hidden="true">
                             <div class="modal-dialog">
@@ -332,6 +479,32 @@ $con = conectar();
         </div>
         <!-- Tesis -->
         <div class="tab-pane fade" id="tabla4">
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ingresarModal">Ingresar Tesis</button>
+            <!-- Modal para ingresar datos en la tabla 'informacion' -->
+            <div class="modal fade" id="ingresarModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Ingresar Datos</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <!-- Agrega aquí el formulario para ingresar datos -->
+                            <form action="ingresar.php" method="POST">
+                                <!-- Campos del formulario -->
+                                <label for="campo1">Campo 1:</label>
+                                <input type="text" class="form-control" id="campo1" name="campo1" required>
+
+                                <!-- Agrega más campos según tus necesidades -->
+
+                                <!-- Botones del formulario -->
+                                <button type="submit" class="btn btn-primary">Guardar</button>
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <table class="table mx-auto">
                 <thead class="table-success table-striped">
                     <tr>
@@ -340,23 +513,19 @@ $con = conectar();
                         <th>Año</th>
                         <th>Link</th>
                         <th>Imagen</th>
-                        <th>Tesis</th>
                         <th></th>
                         <th></th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php
-                        while ($row = mysqli_fetch_array($query)) {?>
+                        while ($row = mysqli_fetch_array($queryTesis)) {?>
                     <tr>
-                        <td><?php echo $row['Id'] ?></td>
-                        <td><?php echo $row['nombre'] ?></td>
-                        <td><?php echo $row['apellido'] ?></td>
-                        <td><?php echo $row['email'] ?></td>
-                        <td><?php echo $row['cargo'] ?></td>
-                        <td><?php echo $row['contrasena'] ?></td>
-                        <td><?php echo $row['informacion'] ?></td>
-                        <td><?php echo $row['rut'] ?></td>
+                        <td><?php echo $row['idtesis'] ?></td>
+                        <td><?php echo $row['titulo'] ?></td>
+                        <td><?php echo $row['anio'] ?></td>
+                        <td><?php echo $row['link'] ?></td>
+                        <td><?php echo $row['imagen'] ?></td>
                         <td><button type="button" class="btn btn-info" data-bs-toggle="modal"data-bs-target="#editModal<?php echo $row['Id']; ?>">Editar</button></td>
                         <div class="modal fade" id="editModal<?php echo $row['Id']; ?>" tabindex="-1"aria-labelledby="editModalLabel<?php echo $row['Id']; ?>" aria-hidden="true">
                             <div class="modal-dialog">
@@ -459,10 +628,7 @@ $con = conectar();
                         <a class="text-secondary text-decoration-none" href="#">Facultad de Ingenieria</a>
                     </div>
                     <div class="mb-2 enlacesfooter">
-                        <a class="text-secondary text-decoration-none" href="#">Instagram</a>
-                    </div>
-                    <div class="mb-2 enlacesfooter">
-                        <a class="text-secondary text-decoration-none" href="#">Instagram</a>
+                        <a class="text-secondary text-decoration-none" href="#">facebook</a>
                     </div>
                 </div>
     
