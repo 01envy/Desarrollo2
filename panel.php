@@ -2,6 +2,7 @@
 include("conexion.php");
 $con = conectar();
 
+
 // Verificar la conexión a la base de datos
 if (!$con) {
     die("Error de conexión a la base de datos: " . mysqli_connect_error());
@@ -38,6 +39,7 @@ $queryTesis = mysqli_query($con, "SELECT * FROM tesis");
 if (!$queryTesis) {
     die("Error en la consulta 'tesis': " . mysqli_error($con));
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -76,6 +78,7 @@ if (!$queryTesis) {
         
         <ul class="nav nav-tabs">
     <li class="nav-item">
+
         <a class="nav-link active" id="tab1" data-bs-toggle="tab" href="#tabla1">Informacion</a>
     </li>
     <li class="nav-item">
@@ -88,6 +91,7 @@ if (!$queryTesis) {
         <a class="nav-link" id="tab4" data-bs-toggle="tab" href="#tabla4" >Tesis</a>
     </li>
 </ul>
+
 <!--a-->
         <div class="col-md-8">
             <input type="text" class="form-control mb-3" id="buscar" placeholder="Buscar">
@@ -95,6 +99,7 @@ if (!$queryTesis) {
     </div>
     <div class="tab-content mt-2">
         <!-- Informacion -->
+
         <div class="tab-pane fade show active" id="tabla1">
             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ingresarModal1">Ingresar datos</button>
             <!-- Modal para ingresar datos en la tabla 'informacion' -->
@@ -185,11 +190,14 @@ if (!$queryTesis) {
                     </div>
                 </div>
             </div>
+
             <table class="table mx-auto">
                 <thead class="table-success table-striped">
                     <tr>
                         <th>Id</th>
+
                         <th>imagen</th>
+
                         <th>Nombre</th>
                         <th>Apellido</th>
                         <th>Email</th>
@@ -211,6 +219,7 @@ if (!$queryTesis) {
                         <td><?php echo $row['nombre'] ?></td>
                         <td><?php echo $row['apellido'] ?></td>
                         <td><?php echo $row['correo'] ?></td>
+
                         <td><?php echo $row['cargo'] ?></td>
                         <td><?php echo $row['contrasena'] ?></td>
                         <td><?php echo $row['informacion'] ?></td>
@@ -270,6 +279,7 @@ if (!$queryTesis) {
         </div>
         <!-- Proyectos-->
         <div class="tab-pane fade" id="tabla2">
+
             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ingresarModal">Ingresar Proyecto</button>
             <!-- Modal para ingresar datos en la tabla 'informacion' -->
             <div class="modal fade" id="ingresarModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -296,6 +306,7 @@ if (!$queryTesis) {
                     </div>
                 </div>
             </div>
+
             <table class="table mx-auto">
                 <thead class="table-success table-striped">
                     <tr>
@@ -310,6 +321,7 @@ if (!$queryTesis) {
                 </thead>
                 <tbody style="color:white">
                     <?php
+
                         while ($row = mysqli_fetch_array($queryProyectos)) {
                             ?>
                     <tr>
@@ -318,6 +330,7 @@ if (!$queryTesis) {
                         <td><?php echo $row['anio'] ?></td>
                         <td><?php echo $row['link'] ?></td>
                         <td><?php echo $row['proyectos'] ?></td>
+
                         <td><button type="button" class="btn btn-info" data-bs-toggle="modal"data-bs-target="#editModal<?php echo $row['Id']; ?>">Editar</button></td>
                         <div class="modal fade" id="editModal<?php echo $row['Id']; ?>" tabindex="-1"aria-labelledby="editModalLabel<?php echo $row['Id']; ?>" aria-hidden="true">
                             <div class="modal-dialog">
@@ -373,6 +386,7 @@ if (!$queryTesis) {
         </div>
         <!-- Publicaciones -->
         <div class="tab-pane fade" id="tabla3">
+
             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ingresarModal">Ingresar Publicacion</button>
             <!-- Modal para ingresar datos en la tabla 'informacion' -->
             <div class="modal fade" id="ingresarModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -399,6 +413,7 @@ if (!$queryTesis) {
                     </div>
                 </div>
             </div>
+
             <table class="table mx-auto">
                 <thead class="table-success table-striped">
                     <tr>
@@ -426,6 +441,7 @@ if (!$queryTesis) {
                         <td><?php echo $row['revision'] ?></td>
                         <td><?php echo $row['acceso'] ?></td>
                         <td><?php echo $row['archivo'] ?></td>
+
                         <td><button type="button" class="btn btn-info" data-bs-toggle="modal"data-bs-target="#editModal<?php echo $row['Id']; ?>">Editar</button></td>
                         <div class="modal fade" id="editModal<?php echo $row['Id']; ?>" tabindex="-1"aria-labelledby="editModalLabel<?php echo $row['Id']; ?>" aria-hidden="true">
                             <div class="modal-dialog">
@@ -479,6 +495,7 @@ if (!$queryTesis) {
         </div>
         <!-- Tesis -->
         <div class="tab-pane fade" id="tabla4">
+
             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ingresarModal">Ingresar Tesis</button>
             <!-- Modal para ingresar datos en la tabla 'informacion' -->
             <div class="modal fade" id="ingresarModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -505,6 +522,7 @@ if (!$queryTesis) {
                     </div>
                 </div>
             </div>
+
             <table class="table mx-auto">
                 <thead class="table-success table-striped">
                     <tr>
@@ -513,12 +531,14 @@ if (!$queryTesis) {
                         <th>Año</th>
                         <th>Link</th>
                         <th>Imagen</th>
+
                         <th></th>
                         <th></th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php
+
                         while ($row = mysqli_fetch_array($queryTesis)) {?>
                     <tr>
                         <td><?php echo $row['idtesis'] ?></td>
@@ -526,6 +546,7 @@ if (!$queryTesis) {
                         <td><?php echo $row['anio'] ?></td>
                         <td><?php echo $row['link'] ?></td>
                         <td><?php echo $row['imagen'] ?></td>
+
                         <td><button type="button" class="btn btn-info" data-bs-toggle="modal"data-bs-target="#editModal<?php echo $row['Id']; ?>">Editar</button></td>
                         <div class="modal fade" id="editModal<?php echo $row['Id']; ?>" tabindex="-1"aria-labelledby="editModalLabel<?php echo $row['Id']; ?>" aria-hidden="true">
                             <div class="modal-dialog">
