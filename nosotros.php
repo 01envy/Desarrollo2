@@ -15,7 +15,7 @@
 
     <header class="header sticky-top nav-scrollspy " id="navabar-scrollspy">
         <div class="logo">
-            <img src="img/logo-udacorp-lineablanca.png" alt="Logo de la marca">
+            <img src="img/logo-udacorp-txtblanco.png" alt="Logo de la marca">
         </div>
         <nav class="nav-scrollspy" id="navabar-scrollspy">
            <ul class="nav-links text-white">
