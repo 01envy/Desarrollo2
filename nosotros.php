@@ -33,7 +33,17 @@
                 </li>
            </ul>            
         </nav>
-        <a class="btn" href="#"><button>Nombre</button></a>
+        <?php
+            session_start();
+
+            if(isset($_SESSION["Correo"])){
+                $Nombre_profesor = $_SESSION["Nombre"];
+
+                echo '<a class="btn" href="#"><button>'.$Nombre_profesor.'</button></a>';
+            }else{
+                echo '<a class="btn" href="#"><button>Nombre</button></a>';
+            }
+        ?>
     </header>
 
 
