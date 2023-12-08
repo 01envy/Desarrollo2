@@ -112,80 +112,81 @@ if (!$queryTesis) {
                         </div>
                         <div class="modal-body">
                             <!-- Agrega aquí el formulario para ingresar datos -->
-                            <form action="" method="GET" class="row g-3 needs-validation" onsubmit="return validar_registro()" novalidate>
-                <div>
-                    <label for="I_nombre">Nombre:</label>
-                    <input type="text" class="form-control" name="R_nombre" id="I_nombre required">
-                    <div id="error-nombre" class="text-danger"></div>
-                </div>
-                <div>
-                    <label for="I_correo">Correo:</label>
-                    <input type="email" class="form-control" name="R_correo" id="I_correo">
-                    <div id="error-correo" class="text-danger"></div>
-                </div>
-                <div>
-                    <label for="I_fono">Fono:</label>
-                    <input type="text" class="form-control" name="R_fono" id="I_fono">
-                    <div id="error-fono" class="text-danger"></div>
-                </div>
-                <div>
-                    <label for="I_cargo">Cargo:</label>
-                    <input type="text" class="form-control" name="R_cargo" id="I_cargo">
-                    <div id="error-cargo" class="text-danger"></div>
-                </div>
-                <div>
-                    <label for="I_descripcion">Descripción:</label>
-                    <textarea class="form-control" aria-label="With textarea" id="I_descripcion"></textarea>
-                    <div id="error-descripcion" class="text-danger"></div>
-                </div>
-                <div>
-                    <label for="I_grado">Grado académico:</label>
-                    <input type="text" class="form-control" name="R_grado" id="I_grado">
-                    <div id="error-grado" class="text-danger"></div>
-                </div>
-                <div class="col-6">
-                    <label for="I_nombre">Contraseña:</label>
-                    <input type="password" class="form-control" name="R_contrasena" id="I_contrasena">
-                    <div id="error-contrasena" class="text-danger"></div>
-                </div>
-                <div class="col-6">
-                    <label for="I_nombre">Confirmacion de contraseña:</label>
-                    <input type="password" class="form-control" name="R_confirmacion_contrasena" id="I_confirmacion_contrasena">
-                    <div id="error-confirmacion-contra" class="text-danger"></div>
-                </div>
-                <div class="container">
-                    <label>Areas de interes:</label>
-                    <div class="row align-items-start">
-                        <div class="col-4">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="I_check1" name="AreasInteres[]">
-                                <label class="form-check-label" for="I_check1">Gestión informática</label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="I_check2" name="AreasInteres[]">
-                                <label class="form-check-label" for="I_check2">Ciencia de datos</label>
-                            </div>
-                        </div>
-                        <div class="col-4">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="I_check3" name="AreasInteres[]">
-                                <label class="form-check-label" for="I_check3">Ingeniería de software</label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="I_check4" name="AreasInteres[]">
-                                <label class="form-check-label" for="I_check4">Informática educativa</label>
-                            </div>
-                        </div>
-                    </div>
-                    <div id="error-areas" class="text-danger"></div>
-                </div>
-                <div class="input-group mb-3">
-                    <label class="input-group-text" for="inputGroupFile01">Imagen de perfil:</label>
-                    <input type="file" class="form-control" id="inputGroupFile01">
-                </div>
-                <button type="submit" class="btn btn-primary" onclick="alert('¿Estas seguro de enviar estos datos?')">Enviar</button>
-                <p class="text-center">¿Ya estás registrado? Inicia sesión <a href="inicio_de_sesion.html">Aquí</a></p>
-            </form>
+                            <form action="insertarinfo.php" method="POST" enctype="multipart/form-data" class="form1 row g-3 needs-validation" onsubmit="return validar_registro()" novalidate>
+
+                                <div>
+                                    <label for="I_nombre">Nombre:</label>
+                                    <input type="text" class="form-control" name="R_nombre" id="I_nombre required">
+                                    <div id="error-nombre" class="text-danger"></div>
+                                </div>
+                                <div>
+                                    <label for="I_correo">Correo:</label>
+                                    <input type="email" class="form-control" name="R_correo" id="I_correo">
+                                    <div id="error-correo" class="text-danger"></div>
+                                </div>
+                                <div>
+                                    <label for="I_fono">Fono:</label>
+                                    <input type="text" class="form-control" name="R_fono" id="I_fono">
+                                    <div id="error-fono" class="text-danger"></div>
+                                </div>
+                                <div>
+                                    <label for="I_cargo">Cargo:</label>
+                                    <input type="text" class="form-control" name="R_cargo" id="I_cargo">
+                                    <div id="error-cargo" class="text-danger"></div>
+                                </div>
+                                <div>
+                                    <label for="I_descripcion">Descripción:</label>
+                                    <textarea class="form-control" aria-label="With textarea" name="R_descripcion"id="I_descripcion"></textarea>
+                                    <div id="error-descripcion" class="text-danger"></div>
+                                </div>
+                                <div>
+                                    <label for="I_grado">Grado académico:</label>
+                                    <input type="text" class="form-control" name="R_grado" id="I_grado">
+                                    <div id="error-grado" class="text-danger"></div>
+                                </div>
+                                <div class="col-6">
+                                    <label for="I_nombre">Contraseña:</label>
+                                    <input type="password" class="form-control" name="R_contrasena" id="I_contrasena">
+                                    <div id="error-contrasena" class="text-danger"></div>
+                                </div>
+                                <div class="col-6">
+                                    <label for="I_nombre">Confirmacion de contraseña:</label>
+                                    <input type="password" class="form-control" name="R_confirmacion_contrasena" id="I_confirmacion_contrasena">
+                                    <div id="error-confirmacion-contra" class="text-danger"></div>
+                                </div>
+                                <div class="container">
+                                    <label>Areas de interes:</label>
+                                    <div class="row align-items-start">
+                                        <div class="col-4">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="I_check1" name="areasInteres[]"value="Gestión informática">
+                                                <label class="form-check-label" for="I_check1">Gestión informática</label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="I_check2" name="areasInteres[]"value="Ciencia de datos">
+                                                <label class="form-check-label" for="I_check2">Ciencia de datos</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-4">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="I_check3" name="areasInteres[]"value="Ingeniería de software">
+                                                <label class="form-check-label" for="I_check3">Ingeniería de software</label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="I_check4" name="areasInteres[]" value="Informática educativa">
+                                                <label class="form-check-label" for="I_check4">Informática educativa</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="error-areas" class="text-danger"></div>
+                                </div>
+                                <div class="input-group mb-3">
+                                    <label class="input-group-text" for="inputGroupFile01">Imagen de perfil:</label>
+                                    <input type="file" class="form-control" id="inputGroupFile01" name="imagen">
+                                </div>
+                                <button type="submit" class="btn btn-primary" onclick="alert('¿Estas seguro de enviar estos datos?')">Enviar</button>
+                                <p class="text-center">¿Ya estás registrado? Inicia sesión <a href="inicio_de_sesion.html">Aquí</a></p>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -199,12 +200,11 @@ if (!$queryTesis) {
                         <th>imagen</th>
 
                         <th>Nombre</th>
-                        <th>Apellido</th>
                         <th>Email</th>
                         <th>cargo</th>
                         <th>Contraseña</th>
                         <th>Informacion</th>
-                        <th>rut</th>
+                        <th>Area</th>
                         <th></th>
                         <th></th>
                     </tr>
@@ -217,29 +217,42 @@ if (!$queryTesis) {
                         <td><?php echo $row['id'] ?></td>
                         <td><?php echo $row['imagen'] ?></td>
                         <td><?php echo $row['nombre'] ?></td>
-                        <td><?php echo $row['apellido'] ?></td>
                         <td><?php echo $row['correo'] ?></td>
 
                         <td><?php echo $row['cargo'] ?></td>
                         <td><?php echo $row['contrasena'] ?></td>
-                        <td><?php echo $row['informacion'] ?></td>
-                        <td><?php echo $row['rut'] ?></td>
-                        <td><button type="button" class="btn btn-info" data-bs-toggle="modal"data-bs-target="#editModal<?php echo $row['Id']; ?>">Editar</button></td>
-                        <div class="modal fade" id="editModal<?php echo $row['Id']; ?>" tabindex="-1"aria-labelledby="editModalLabel<?php echo $row['Id']; ?>" aria-hidden="true">
+                        <td><?php echo $row['descripcion'] ?></td>
+                        <td><?php echo $row['areasInteres'] ?></td>
+                        <td><button type="button" class="btn btn-info" data-bs-toggle="modal"data-bs-target="#editModal<?php echo $row['id']; ?>">Editar</button></td>
+                        <div class="modal fade" id="editModal<?php echo $row['id']; ?>" tabindex="-1"aria-labelledby="editModalLabel<?php echo $row['Id']; ?>" aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="editModalLabel<?php echo $row['Id']; ?>">Editar:</h5>
+                                        <h5 class="modal-title" id="editModalLabel<?php echo $row['id']; ?>">Editar:</h5>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal"aria-label="Close"></button>
                                     </div>
                                     <div style="color:black" class="modal-body">
                                     <!--formulario de actualizar-->
                                         <form action="update.php" method="POST">
 
-                                            <input type="hidden" name="Id"value="<?php echo $row['Id'] ?? ''; ?>">
+                                            <input type="hidden" name="id"value="<?php echo $row['id'] ?? ''; ?>">
 
                                             <label>Nombre</label>
                                             <input type="text" class="form-control mb-3" name="nombre"placeholder="Nombre" value="<?php echo $row['nombre'] ?? ''; ?>">
+                                            <label>Apellido</label>
+                                            <input type="text" class="form-control mb-3" name="apellido"placeholder="Apellido" value="<?php echo $row['apellido'] ?? ''; ?>">
+                                            <label>imagen</label>
+                                            <input type="text" class="form-control mb-3" name="imagen"placeholder="Imagen" value="<?php echo $row['imagen'] ?? ''; ?>">
+                                            <label>Correo</label>
+                                            <input type="text" class="form-control mb-3" name="correo"placeholder="Correo" value="<?php echo $row['correo'] ?? ''; ?>">
+                                            <label>Cargo Academico</label>
+                                            <input type="text" class="form-control mb-3" name="cargo"placeholder="Cargo Academico" value="<?php echo $row['cargo'] ?? ''; ?>">
+                                            <label>Contraseña</label>
+                                            <input type="text" class="form-control mb-3" name="contrasena"placeholder="Contraseña" value="<?php echo $row['contrasena'] ?? ''; ?>">
+                                            <label>Informacion</label>
+                                            <input type="text" class="form-control mb-3" name="informacion"placeholder="Informacion" value="<?php echo $row['informacion'] ?? ''; ?>">
+                                            <label>Rut</label>
+                                            <input type="text" class="form-control mb-3" name="rut"placeholder="12345678-9" value="<?php echo $row['rut'] ?? ''; ?>">
                                             <button type="submit" class="btn btn-primary">Actualizar</button>
                                             <a href="panel.php" class="btn btn-primary">Volver</a>
                                         </form>
@@ -253,19 +266,19 @@ if (!$queryTesis) {
                         <!--eliminar-->
                         <td><a class="btn btn-danger" data-bs-toggle="modal"data-bs-target="#confirmDeleteModal<?php echo $row['Id']; ?>">Eliminar</a>
                         </td>
-                        <div class="modal fade" id="confirmDeleteModal<?php echo $row['Id']; ?>"tabindex="-1" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
+                        <div class="modal fade" id="confirmDeleteModal<?php echo $row['Id']; ?>" tabindex="-1" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <h5 class="modal-title" id="confirmDeleteModalLabel">Confirmar Eliminación</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal"aria-label="Close"></button>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
                                         <p>¿Seguro que desea eliminar de forma permanente?</p>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary"data-bs-dismiss="modal">Cancelar</button>
-                                        <a href="delete.php?id=<?php echo $row['Id']; ?>"class="btn btn-danger">Eliminar</a>
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                        <a href="delete.php?id=<?php echo $row['Id']; ?>" class="btn btn-danger">Eliminar</a>
                                     </div>
                                 </div>
                             </div>
@@ -280,9 +293,9 @@ if (!$queryTesis) {
         <!-- Proyectos-->
         <div class="tab-pane fade" id="tabla2">
 
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ingresarModal">Ingresar Proyecto</button>
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ingresarModal2">Ingresar Proyecto</button>
             <!-- Modal para ingresar datos en la tabla 'informacion' -->
-            <div class="modal fade" id="ingresarModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal fade" id="ingresarModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -291,16 +304,29 @@ if (!$queryTesis) {
                         </div>
                         <div class="modal-body">
                             <!-- Agrega aquí el formulario para ingresar datos -->
-                            <form action="ingresar.php" method="POST">
-                                <!-- Campos del formulario -->
-                                <label for="campo1">Campo 1:</label>
-                                <input type="text" class="form-control" id="campo1" name="campo1" required>
-
-                                <!-- Agrega más campos según tus necesidades -->
-
-                                <!-- Botones del formulario -->
-                                <button type="submit" class="btn btn-primary">Guardar</button>
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                            <form action="insertarpro.php" method="GET" class="row g-3 needs-validation" onsubmit="return validar_registro()" novalidate>
+                                <div>
+                                    <label for="I_nombre">Titulo:</label>
+                                    <input type="text" class="form-control" name="R_titulo" id="I_nombre required">
+                                    <div id="error-nombre" class="text-danger"></div>
+                                </div>
+                                <div>
+                                    <label for="I_correo">Año:</label>
+                                    <input type="email" class="form-control" name="R_anio" id="I_correo">
+                                    <div id="error-correo" class="text-danger"></div>
+                                </div>
+                                <div>
+                                    <label for="I_fono">Link:</label>
+                                    <input type="text" class="form-control" name="R_link" id="I_fono">
+                                    <div id="error-fono" class="text-danger"></div>
+                                </div>
+                                <div>
+                                    <label for="I_cargo">Proyecto:</label>
+                                    <input type="text" class="form-control" name="R_proyectos" id="I_cargo">
+                                    <div id="error-cargo" class="text-danger"></div>
+                                </div>
+                                <button type="submit" class="btn btn-primary" onclick="alert('¿Estás seguro de enviar estos datos?')">Enviar</button>
+                                <p class="text-center">¿Ya estás registrado? Inicia sesión <a href="inicio_de_sesion.html">Aquí</a></p>
                             </form>
                         </div>
                     </div>
@@ -386,10 +412,10 @@ if (!$queryTesis) {
         </div>
         <!-- Publicaciones -->
         <div class="tab-pane fade" id="tabla3">
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ingresarModal3">Ingresar Publicacion</button>
 
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ingresarModal">Ingresar Publicacion</button>
             <!-- Modal para ingresar datos en la tabla 'informacion' -->
-            <div class="modal fade" id="ingresarModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal fade" id="ingresarModal3" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -398,16 +424,40 @@ if (!$queryTesis) {
                         </div>
                         <div class="modal-body">
                             <!-- Agrega aquí el formulario para ingresar datos -->
-                            <form action="ingresar.php" method="POST">
-                                <!-- Campos del formulario -->
-                                <label for="campo1">Campo 1:</label>
-                                <input type="text" class="form-control" id="campo1" name="campo1" required>
-
-                                <!-- Agrega más campos según tus necesidades -->
-
-                                <!-- Botones del formulario -->
-                                <button type="submit" class="btn btn-primary">Guardar</button>
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                            <form action="insertarpu.php" method="POST"enctype="multipart/form-data" class="row g-3 needs-validation" onsubmit="return validar_registro()" novalidate>
+                                <div>
+                                    <label for="I_nombre">Titulo:</label>
+                                    <input type="text" class="form-control" name="R_titulo" id="I_nombre required">
+                                    <div id="error-nombre" class="text-danger"></div>
+                                </div>
+                                <div>
+                                    <label for="I_correo">Fecha:</label>
+                                    <input type="email" class="form-control" name="R_fecha" id="I_correo">
+                                    <div id="error-correo" class="text-danger"></div>
+                                </div>
+                                <div>
+                                    <label for="I_fono">Autor:</label>
+                                    <input type="text" class="form-control" name="R_autor" id="I_fono">
+                                    <div id="error-fono" class="text-danger"></div>
+                                </div>
+                                <div>
+                                    <label for="I_cargo">Revision:</label>
+                                    <input type="text" class="form-control" name="R_revision" id="I_cargo">
+                                    <div id="error-cargo" class="text-danger"></div>
+                                </div>
+                                <div>
+                                    <label for="I_descripcion">Acceso:</label>
+                                    <textarea class="form-control" aria-label="With textarea"name="R_acceso" id="I_acceso"></textarea>
+                                    <div id="error-descripcion" class="text-danger"></div>
+                                </div>
+                                <div>
+                                <div class="input-group mb-3">
+                                    <label class="input-group-text" for="inputGroupFile01">Archivo:</label>
+                                    <input type="file" class="form-control" id="inputGroupFile01" name="archivo">
+                                </div>
+                                </div>
+                                <button type="submit" class="btn btn-primary" onclick="alert('¿Estás seguro de enviar estos datos?')">Enviar</button>
+                                <p class="text-center">¿Ya estás registrado? Inicia sesión <a href="inicio_de_sesion.html">Aquí</a></p>
                             </form>
                         </div>
                     </div>
@@ -424,7 +474,6 @@ if (!$queryTesis) {
                         <th>Revision</th>
                         <th>Acceso</th>
                         <th>Archivo</th>
-                        <th>Publicaciones</th>
                         <th></th>
                         <th></th>
                     </tr>
@@ -496,9 +545,10 @@ if (!$queryTesis) {
         <!-- Tesis -->
         <div class="tab-pane fade" id="tabla4">
 
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ingresarModal">Ingresar Tesis</button>
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ingresarModal4">Ingresar Tesis</button>
+
             <!-- Modal para ingresar datos en la tabla 'informacion' -->
-            <div class="modal fade" id="ingresarModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal fade" id="ingresarModal4" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -507,16 +557,24 @@ if (!$queryTesis) {
                         </div>
                         <div class="modal-body">
                             <!-- Agrega aquí el formulario para ingresar datos -->
-                            <form action="ingresar.php" method="POST">
-                                <!-- Campos del formulario -->
-                                <label for="campo1">Campo 1:</label>
-                                <input type="text" class="form-control" id="campo1" name="campo1" required>
-
-                                <!-- Agrega más campos según tus necesidades -->
-
-                                <!-- Botones del formulario -->
-                                <button type="submit" class="btn btn-primary">Guardar</button>
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                            <form action="insertarte.php" method="POST" class="row g-3 needs-validation" onsubmit="return validar_registro()" novalidate>
+                                <div>
+                                    <label for="I_nombre">Titulo:</label>
+                                    <input type="text" class="form-control" name="R_titulo" id="I_nombre required">
+                                    <div id="error-nombre" class="text-danger"></div>
+                                </div>
+                                <div>
+                                    <label for="I_correo">Año:</label>
+                                    <input type="date" class="form-control" name="R_anio" id="I_correo">
+                                    <div id="error-correo" class="text-danger"></div>
+                                </div>
+                                <div>
+                                    <label for="I_fono">Link:</label>
+                                    <input type="text" class="form-control" name="R_link" id="I_fono">
+                                    <div id="error-fono" class="text-danger"></div>
+                                </div>
+                                <button type="submit" class="btn btn-primary" onclick="alert('¿Estas seguro de enviar estos datos?')">Enviar</button>
+                                <p class="text-center">¿Ya estás registrado? Inicia sesión <a href="inicio_de_sesion.html">Aquí</a></p>
                             </form>
                         </div>
                     </div>
@@ -530,7 +588,6 @@ if (!$queryTesis) {
                         <th>Titulo</th>
                         <th>Año</th>
                         <th>Link</th>
-                        <th>Imagen</th>
 
                         <th></th>
                         <th></th>
@@ -545,7 +602,6 @@ if (!$queryTesis) {
                         <td><?php echo $row['titulo'] ?></td>
                         <td><?php echo $row['anio'] ?></td>
                         <td><?php echo $row['link'] ?></td>
-                        <td><?php echo $row['imagen'] ?></td>
 
                         <td><button type="button" class="btn btn-info" data-bs-toggle="modal"data-bs-target="#editModal<?php echo $row['Id']; ?>">Editar</button></td>
                         <div class="modal fade" id="editModal<?php echo $row['Id']; ?>" tabindex="-1"aria-labelledby="editModalLabel<?php echo $row['Id']; ?>" aria-hidden="true">

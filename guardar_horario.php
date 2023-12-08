@@ -1,8 +1,8 @@
 <?php
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Conexión a la base de datos
-    include("conexion.php");
-    $con = conectar();
+    include("conexion_horario.php");
+    $con = conectar_horario();
 
     // Verificar la conexión
     if ($con->connect_error) {
@@ -32,7 +32,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $con->close();
 
     // Redirigir a la página principal
-    header("Location: tabla.php");
+    header("Location: index.php");
     exit();
     
 }
