@@ -11,16 +11,16 @@
 
         <?php
 
-        include("conexion.php");
-        $con = conectar();
+        include("conexion_horario.php");
+        $con_horario = conectar();
 
         // Verificar la conexión
-        if ($con->connect_error) {
-            die('Error de conexión: ' . $con->connect_error);
+        if ($con_horario->connect_error) {
+            die('Error de conexión: ' . $con_horario->connect_error);
         }
 
         // Recuperar el horario de la base de datos
-        $consulta = $con->query("SELECT * FROM horario");
+        $consulta = $con_horario->query("SELECT * FROM horario");
         $horario_db = array();
 
         while ($fila = $consulta->fetch_assoc()) {
@@ -32,7 +32,7 @@
 
         }
 
-        $con->close();
+        $con_horario->close();
         ?>
         
         <form action="guardar_horario.php" method="post" id="horarioForm">
@@ -91,10 +91,6 @@
                 });
             });
         </script>
-    </div>
-</body>
-</html>
-=======
     </div>
 </body>
 </html>

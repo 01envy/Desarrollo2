@@ -1,0 +1,267 @@
+@font-face {
+    font-family: MontserratSemibold;
+    src: url(fonts/Montserrat\ Semibold.ttf);
+}
+@font-face {
+    font-family: MontserratRegular;
+    src: url(fonts/Montserrat\ Regular.ttf);
+}
+@font-face {
+    font-family: TrebuchetMS;
+    src: url(fonts/TrebuchetMS.ttf);
+}
+body{
+    padding: 0;
+    margin: 0;
+}
+
+/*--Barra de navegación--*/
+.header{
+    background-color: #364c59;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    height: 85px;
+    padding: 5px 10%;
+    font-family: MontserratSemibold;
+}
+.header .logo{
+    cursor: pointer;
+    margin-right: auto;
+}
+.header .logo img{
+    height: 70px;
+    width: auto;
+    transition: all 0.3s;
+}
+.header .logo img:hover{
+    transform: scale(1.1);
+    color: yellow;
+}
+.header .nav-links{
+    list-style: none;
+}
+.header .nav-links li{
+    display: inline-block;
+    padding: 0 20px;    
+    transition: all 0.3s ease 0s;
+}
+.header .nav-links li:hover{
+    transform: scale(1.1);
+    color: yellow;
+}
+.header .nav-links a{
+    color: #eceff1;
+    text-decoration: none;    
+}
+.header .btn button{
+    margin-left: 20px;
+    font-weight: 700;
+    color: #1b3039;
+    padding: 9px 25px;
+    background: #eceff1;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease 0s;
+}
+.header .btn button:hover{
+    background-color: #e2f1f8;
+    color: #dbca11;
+    transform: scale(1.1);
+}
+
+
+/*--Footer--*/
+.enlacesfooter{
+    transition: all 0.5s ease 0s;
+}
+.enlacesfooter:hover{
+    padding-left: 6px;
+}
+.footer{
+    font-family: TrebuchetMS;
+    margin: 0 200px 0 200px;
+}
+
+
+/*---------------Index--------------*/
+
+
+/*---Barra de Redireccion--*/
+.navegacion{
+    background-color: #364c59;
+    margin: 20px 20px 0 20px;
+    padding: 30px 220px 30px 220px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.nav-scrollspy .active{
+    background-color: white;
+}
+.enlace{
+    text-decoration: none;
+    font-family: TrebuchetMS;
+    color: white;
+}
+
+
+/*---Informacion personal---*/
+.infopersonal{
+    margin: 40px 50px 20px 80px;
+    display: flex;
+}
+.fotodeperfil{
+    
+    display: flex;
+    flex-wrap: flex;
+    justify-content: space-between;
+    width: 450px;
+}
+.cajafoto{
+    position: relative;
+    width: 400px;
+    height: 500px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+.cajafoto .imagencaja{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.cajafoto .imagencaja img{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: 0.5s;
+}
+
+.cajafoto:hover .imagencaja img{
+    opacity: 10%;
+}
+
+.cajafoto .contenidocaja{
+    position: absolute;
+    bottom: 0px;
+    left: 0;
+    width: 100%;
+    height: 50px;
+    background: #fff;
+    transition: 0.5s;
+    overflow: hidden;
+    padding: 10px;
+    box-sizing: border-box;
+    font-family: MontserratSemibold;
+}
+.titulocaja::after{
+    content: "";
+    display: block;
+    border-bottom: 2px solid;
+    margin-top: 20px;
+}
+
+.cajafoto:hover .contenidocaja{
+    width: 100%;
+    height: 40%;
+    bottom: 0;
+    left: 0;
+}
+.contenidocaja{
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+    border-top-right-radius: 20px;
+    border-top-left-radius: 20px;
+}
+.titulocaja{
+    text-align: center;
+}
+.informacioncaja{
+    font-family: TrebuchetMS;
+    font-size: 20px;
+}
+/*-------Recuadro descriptivo------*/
+
+
+.cargoacademico{
+    font-weight: 50;
+}
+.nombreacademico::after{
+    content: "";
+    display: block;
+    border-bottom: 2px solid;
+    margin-top: 5px;
+}
+
+.datospersonales{
+   padding: 0 30px 0 30px;
+}
+.descripcion{
+    background-color: rgba(229, 229, 229, 0.956);
+    font-size: 20px;
+    padding: 10px;
+    border-radius: 20px;
+    font-family: TrebuchetMS;
+}
+
+/*---Articulos---*/
+
+.articulos{
+    background-color: rgba(229, 229, 229, 0.956);
+    margin: 40px 80px 20px 80px;
+    border-radius: 20px;
+}
+
+/*---Horario---*/
+
+.horario{
+    background-color: rgba(229, 229, 229, 0.956);
+    margin: 40px 80px 20px 80px;
+    padding: 0 0 10px 0;
+    border-radius: 20px;
+    
+}
+.testhorario{
+    background-color: rgb(172, 172, 172);
+    margin: 50px;
+    padding: 20px;
+}
+.tesis{
+    margin: 40px 80px 20px 80px;
+}
+
+
+/*tabla*/
+.container {
+    max-width: 600px;
+    margin: 50px auto;
+}
+
+table {
+    margin-top: 20px;
+}
+
+td.ocupado {
+
+    background-color: #00ff00;
+
+}
+
+th, td {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+.seleccionado {
+    background-color: green;
+}
