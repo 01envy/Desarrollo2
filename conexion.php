@@ -3,7 +3,7 @@ function conectar(){
     $host="localhost";
     $user="root";
     $pass="toto68257514";
-
+  
     $bd="profesores";
 
  
