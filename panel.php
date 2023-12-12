@@ -223,8 +223,10 @@ if (!$queryTesis) {
                         <td><?php echo $row['contrasena'] ?></td>
                         <td><?php echo $row['descripcion'] ?></td>
                         <td><?php echo $row['areasInteres'] ?></td>
+
                         <td><button type="button" class="btn btn-info" data-bs-toggle="modal"data-bs-target="#editModal2<?php echo $row['id']; ?>">Editar</button></td>
                         <div class="modal fade" id="editModal2<?php echo $row['id']; ?>" tabindex="-1"aria-labelledby="editModalLabel<?php echo $row['id']; ?>" aria-hidden="true">
+
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
@@ -233,6 +235,7 @@ if (!$queryTesis) {
                                     </div>
                                     <div style="color:black" class="modal-body">
                                     <!--formulario de actualizar-->
+
                                         <form action="actualizarinfo.php" method="POST" enctype="multipart/form-data">
 
                                         <input type="hidden" name="id" value="<?php echo $row['id'] ?? ''; ?>">
@@ -296,6 +299,7 @@ if (!$queryTesis) {
 
                                         <button type="submit" class="btn btn-primary" onclick="return confirm('¿Estás seguro de enviar estos datos?')">Actualizar</button>
                                         <a href="panel.php" class="btn btn-primary">Volver</a>
+
                                         </form>
 
                                     </div>
@@ -345,7 +349,9 @@ if (!$queryTesis) {
                         </div>
                         <div class="modal-body">
                             <!-- Agrega aquí el formulario para ingresar datos -->
+
                             <form action="insertarpro.php" method="POST" class="row g-3 needs-validation" onsubmit="return validar_registro()" novalidate>
+
                                 <div>
                                     <label for="I_nombre">Titulo:</label>
                                     <input type="text" class="form-control" name="R_titulo" id="I_nombre required">
@@ -353,7 +359,9 @@ if (!$queryTesis) {
                                 </div>
                                 <div>
                                     <label for="I_correo">Año:</label>
+
                                     <input type="text" class="form-control" name="R_anio" id="I_correo">
+
                                     <div id="error-correo" class="text-danger"></div>
                                 </div>
                                 <div>
@@ -361,6 +369,7 @@ if (!$queryTesis) {
                                     <input type="text" class="form-control" name="R_link" id="I_fono">
                                     <div id="error-fono" class="text-danger"></div>
                                 </div>
+
                                 <button type="submit" class="btn btn-primary" onclick="alert('¿Estás seguro de enviar estos datos?')">Enviar</button>
                                 <p class="text-center">¿Ya estás registrado? Inicia sesión <a href="inicio_de_sesion.html">Aquí</a></p>
                             </form>
@@ -449,8 +458,8 @@ if (!$queryTesis) {
         </div>
         <!-- Publicaciones -->
         <div class="tab-pane fade" id="tabla3">
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ingresarModal3">Ingresar Publicacion</button>
 
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ingresarModal">Ingresar Publicacion</button>
             <!-- Modal para ingresar datos en la tabla 'informacion' -->
             <div class="modal fade" id="ingresarModal3" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
@@ -463,8 +472,10 @@ if (!$queryTesis) {
                             <!-- Agrega aquí el formulario para ingresar datos -->
                             <form action="insertarpu.php" method="POST"enctype="multipart/form-data" class="row g-3 needs-validation" onsubmit="return validar_registro()" novalidate>
                                 <div>
+
                                     <label for="R_titulo">Título:</label>
                                     <input type="text" class="form-control" name="R_titulo" id="I_nombre" required>
+
                                     <div id="error-nombre" class="text-danger"></div>
                                 </div>
                                 <div>
@@ -597,7 +608,8 @@ if (!$queryTesis) {
         <!-- Tesis -->
         <div class="tab-pane fade" id="tabla4">
 
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ingresarModal">Ingresar Tesis</button>
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ingresarModal4">Ingresar Tesis</button>
+
             <!-- Modal para ingresar datos en la tabla 'informacion' -->
             <div class="modal fade" id="ingresarModal4" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
@@ -639,7 +651,6 @@ if (!$queryTesis) {
                         <th>Titulo</th>
                         <th>Año</th>
                         <th>Link</th>
-                        <th>Imagen</th>
 
                         <th></th>
                         <th></th>
@@ -654,9 +665,11 @@ if (!$queryTesis) {
                         <td><?php echo $row['titulo'] ?></td>
                         <td><?php echo $row['anio'] ?></td>
                         <td><?php echo $row['link'] ?></td>
+
                         <td><?php echo $row['imagen'] ?></td>
                         <td><button type="button" class="btn btn-info" data-bs-toggle="modal"data-bs-target="#editModal<?php echo $row['idtesis']; ?>">Editar</button></td>
                         <div class="modal fade" id="editModal<?php echo $row['idtesis']; ?>" tabindex="-1"aria-labelledby="editModalLabel<?php echo $row['idtesis']; ?>" aria-hidden="true">
+
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">

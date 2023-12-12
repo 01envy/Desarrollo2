@@ -73,7 +73,9 @@ if (!$queryTesis) {
                     <a class="nav-link text-reset" href="#informacionpersonal">Informacion personal</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-reset" href="#articulos">Artículos</a>
+
+                    <a class="nav-link text-reset" href="#articulos">publicaciones</a>
+
                 </li>
                 <li class="nav-item">
                     <a class="nav-link text-reset" href="#horario">Horario</a>
@@ -136,7 +138,9 @@ if (!$queryTesis) {
         <!--Publicaciones-->
         <div id="articulos" class=" pt-5 mt-5"></div>
         <div class="articulos">
-            <h2>Articulos</h2>
+
+            <h2>Publicaciones</h2>
+
             <table class="table mx-auto">
                 <thead class="table-success table-striped">
                     <tr>
@@ -165,103 +169,26 @@ if (!$queryTesis) {
 
         <!--Horario-->
         <div id="horario" class="pt-5 "></div>
-        <div class="horario " >
-            <ul class="nav nav-tabs">
-                <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">Horario de atención</a>
-                </li>
-                <li class="nav-item">
-                <a class="nav-link" href="#">Horario de clases</a>
-                </li>
-            </ul>
-            <div class="testhorario">
-            <div class="container">
 
-        <?php
-        // Verificar la conexión
-        if ($con_horario->connect_error) {
-            die('Error de conexión: ' . $con_horario->connect_error);
-        }
-
-        // Recuperar el horario de la base de datos
-        $consulta = $con_horario->query("SELECT * FROM horario");
-        $horario_db = array();
-
-        while ($fila = $consulta->fetch_assoc()) {
-            $dia = $fila['dia_semana'];
-            $hora_inicio = date('H:i', strtotime($fila['hora_inicio']));
-            // Almacenar el rango de horas ocupadas
-            $hora_fin = date('H:i', strtotime($fila['hora_inicio'] . ' +1 hour 30 minutes'));
-            $horario_db[$dia][$hora_inicio] = $hora_fin;
-
-        }
-
-        $con_horario->close();
-        ?>
+        <div class="horario">
         
-        <form action="guardar_horario.php" method="post" id="horarioForm">
-
-            <table>
-                <tr>
-                    <th></th>
-                    <th>Lunes</th>
-                    <th>Martes</th>
-                    <th>Miércoles</th>
-                    <th>Jueves</th>
-                    <th>Viernes</th>
-                </tr>
-                <?php
-                $horas = array("09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00");
-
-                foreach ($horas as $hora) {
-                    echo "<tr>
-                            <td>$hora - " . date('H:i', strtotime("$hora +1 hour 30 minutes")) . "</td>";
+            
+        
 
 
-                    for ($i = 1; $i <= 5; $i++) {
-                        $dia_actual = dia_semana($i);
-                        $hora_fin = date('H:i', strtotime("$hora +1 hour 30 minutes"));
-                        $clase_ocupado = isset($horario_db[$dia_actual][$hora]) ? 'ocupado' : '';
-                        echo "<td class='$clase_ocupado'><input type='checkbox' name='horario[$hora][$dia_actual]' value='1'></td>";
-                    }
 
-
-                    echo "</tr>";
-                }
-
-                function dia_semana($numero_dia) {
-                    $dias_semana = array('Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado');
-                    return $dias_semana[$numero_dia - 1];
-                }
-
-                ?>
-            </table>
-            <input type="submit" value="Guardar">
-        </form>
-
-            <button id="btnModificar">Modificar</button>
-
-        <script>
-            document.addEventListener("DOMContentLoaded", function () {
-                var formulario = document.getElementById('horarioForm');
-                var btnModificar = document.getElementById('btnModificar');
-
-                btnModificar.addEventListener("click", function (event) {
-                    var checkboxes = formulario.querySelectorAll('input[type="checkbox"]');
-                    
-                    checkboxes.forEach(function (checkbox) {
-                        checkbox.disabled = !checkbox.disabled;
-                    });
-                });
-            });
-        </script>
-    </div>
-            </div>
+        <!--Div para cerrar horario-->
         </div>
+            
 
-        <!--Tesis-->
 
-        <div class="tesis pt-5 mt-5" id="tesis">
+
+
+
+    <!--Tesis-->
+
+    <div class="tesis pt-5 mt-5" id="tesis">
+
             <h2>Tesis</h2>
             <table class="table mx-auto">
                 <thead class="table-success table-striped">
@@ -285,24 +212,29 @@ if (!$queryTesis) {
                         ?>
                 </tbody>
             </table>
+
         </div>
     </div>
+
 
     
 
 
     <!--Footer-->
     <div class="footer">
-        <div class= "container-fluid ml-5 ms-5">
-            <div class="row p-5 bg-white text-secondary">
-    
-                <!--Columna1-->
-                <div class="col-xs-12 col-md-6 col-lg-3">
-                    <img src="img/logo-udacorporativo.png" width="300" height="94">
+
+        <div class="container-fluid">
+            <div class="row p-3 p-md-5 text-secondary">
+
+                <!-- Columna 1 -->
+                <div class="col-xs-12 col-md-6 col-lg-3 mb-3 mb-md-0">
+                    <img src="img/logo-udacorporativo.png" class="img-fluid" alt="Logo UDA">
                 </div>
-                <!--Columna 2-->
-                <div class="col-xs-12 col-md-6 col-lg-3">
-                    <p class="h3"></p>
+
+                <!-- Columna 2 -->
+                <div class="col-xs-12 col-md-6 col-lg-3 mb-3 mb-md-0">
+                    <p class="h5">Enlaces</p>
+
                     <div class="mb-2 enlacesfooter">
                         <a class="text-secondary text-decoration-none" href="#">Académicos</a>
                     </div>
@@ -315,10 +247,14 @@ if (!$queryTesis) {
                     <div class="mb-2 enlacesfooter">
                         <a class="text-secondary text-decoration-none" href="#">Publicaciones</a>
                     </div>
+
+                    <!-- Otros enlaces... -->
                 </div>
-                <!--Columna 3-->
-                <div class="col-xs-12 col-md-6 col-lg-3">
-                    <p class="h3">Links</p>
+
+                <!-- Columna 3 -->
+                <div class="col-xs-12 col-md-6 col-lg-3 mb-3 mb-md-0">
+                    <p class="h5">Links</p>
+
                     <div class="mb-2 enlacesfooter">
                         <a class="text-secondary text-decoration-none" href="#">Intranet Alumnos</a>
                     </div>
@@ -340,11 +276,13 @@ if (!$queryTesis) {
                     <div class="mb-2 enlacesfooter">
                         <a class="text-secondary text-decoration-none" href="#">Instagram</a>
                     </div>
+
+                    <!-- Otros enlaces... -->
                 </div>
-    
-                <!--Columna 4-->
+
+                <!-- Columna 4 -->
                 <div class="col-xs-12 col-md-6 col-lg-3">
-                    <p class="h3">Contactos</p>
+                    <p class="h5">Contactos</p>
                     <div class="mb-2">
                         <p>Ubícanos en<br>Copiapó, Av. Copayapu 485</p>
                     </div>
@@ -355,10 +293,10 @@ if (!$queryTesis) {
                         <p>anakarina.pena@uda.cl</p>
                     </div>
                 </div>
-                
-    
+
+
             </div>
-    
+
         </div>
     </div>
     

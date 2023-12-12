@@ -89,44 +89,79 @@ body{
 
 /*---------formulario inicio----------*/
 
+
 .formularioinicio{
+
     display: flex;
     border-radius: 20px;
     background-color: rgb(218, 215, 215);
     margin: 100px 300px 200px 300px;
     box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
 }
-.formularioinicio img{
-    width: 600px;
-    height: 700px;
+
+
+.formularioinicio img {
+    max-width: 100%; 
+    max-height: 100%; 
+    object-fit: cover; 
     border-bottom-left-radius: 20px;
     border-top-left-radius: 20px;
+    background-position: center center;
+    margin-right: 120px;
 }
-.formulario{
-    width: 600px;
-    margin-top: 150px;
+
+.formulario {
+    margin-top: 90px;
+    width: 100%;
+    
 }
+
+@media (max-width: 768px) {
+    .formularioinicio {
+        flex-direction: column;
+        margin: 20px auto;
+    }
+
+    .formularioinicio img {
+        border-bottom-left-radius: 0;
+        border-top-left-radius: 0;
+    }
+}
+
+
+
 
 /*------Formulario registro------*/
 
 
-.contenedor_formulario{
-    width: 40%;
-    margin: auto;
-}
-.formularioregistro{
+.formularioregistro {
     display: flex;
     border-radius: 20px;
     background-color: rgb(218, 215, 215);
-    margin: 100px 200px 200px 200px;
+    margin: 50px auto; 
     box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+    overflow: hidden; 
 }
-.formularioregistro img{
-    width: 700px;
-    height: 1042px;
-    border-bottom-left-radius: 20px;
-    border-top-left-radius: 20px;
+
+.formularioregistro img {
+    width: 100%;
+    height: auto;
+    object-fit: cover; 
 }
+
+.contenedor_formulario {
+    padding: 40px;
+    width: 100%;
+}
+
+
+@media (min-width: 768px) {
+    .formularioregistro {
+        margin: 50px 200px; 
+    }
+}
+
+
 
 
 /*------Formulario inicio sesion------*/

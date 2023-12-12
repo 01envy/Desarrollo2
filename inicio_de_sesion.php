@@ -27,26 +27,33 @@
 
     <section class="formularioinicio">
         <div class="imagensesion">
-            <img src="FotosDIICC/_ALX9328.JPG">
+
+            <img src="imginiciosesion/_ALX9328 (2).jpg">
+
         </div>
         <div class="formulario">
             <h1 class="text-center">Inicio de sesión</h1>
             <form action="ingreso_de_sesion.php" method="get" class="contenedor_formulario_2 row g-3 needs-validation" novalidate>
-                <div>
+
+                <div class="mb-4">
+
                     <label for="I_inicio_usuario">Correo:</label>
                     <input type="text" class="form-control" name="Sesion_correo" id="I_inicio_correo" required>
                     <div class="invalid-feedback">
                         Por favor ingrese el correo.
                     </div>
                 </div>
-                <div>
+
+                <div class="mb-4">
                     <label for="I_inicio_contrasena">Contraseña:</label>
                     <input type="password" class="form-control" name="Sesion_contrasena" id="I_inicio_contrasena" required>
                     <div class="invalid-feedback">
                         Por favor ingrese la contraseña.
                     </div>
                 </div>
-                <button type="submit" class="btn btn-primary" name="btnIngresar_sesion">Iniciar sesión</button>
+
+                <button type="submit" class="btn btn-primary d-grid" name="btnIngresar_sesion">Iniciar sesión</button>
+
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="text-center">¿No estas registrado? Regístrate <a href="registro.php">Aquí</a></li>
                     <li class="text-center">¿Has olvidado tu contraseña? Restáurala <a href="">Aquí</a></li>
