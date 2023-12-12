@@ -2,28 +2,28 @@
 include("conexion.php");
 $con = conectar();
 
-// Obtener los datos del formulario
-
+// Obtener los datos actualizados del formulario
 $nuevoTitulo = $_POST['R_titulo'];
 $nuevoAnio = $_POST['R_anio'];
 $nuevoLink = $_POST['R_link'];
-// Query para insertar los datos
-$sql = "INSERT INTO proyectos (titulo, anio, link) VALUES (?, ?, ?)";
 
+// Obtener el ID a actualizar
+$idActualizar = $_POST['idproyectos'];
+
+// Query para actualizar el registro utilizando consultas preparadas
+$sql = "UPDATE proyectos SET titulo=?, anio=?, link=? WHERE idproyectos=?";
 
 $stmt = $con->prepare($sql);
 
 if ($stmt) {
     // Vincular parámetros
-
-    $stmt->bind_param("sss", $nuevoTitulo, $nuevoAnio, $nuevoLink);
-
+    $stmt->bind_param("sssi", $nuevoTitulo, $nuevoAnio, $nuevoLink, $idActualizar);
 
     if ($stmt->execute()) {
-        echo "<script>alert('¡Inicio de sesión exitoso!');</script>";
+        echo "Registro actualizado correctamente";
         header("refresh:0;url=panel.php");
     } else {
-        echo "Error al insertar datos: " . $stmt->error;
+        echo "Error al actualizar registro: " . $stmt->error;
     }
 
     $stmt->close();

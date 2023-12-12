@@ -223,8 +223,10 @@ if (!$queryTesis) {
                         <td><?php echo $row['contrasena'] ?></td>
                         <td><?php echo $row['descripcion'] ?></td>
                         <td><?php echo $row['areasInteres'] ?></td>
-                        <td><button type="button" class="btn btn-info" data-bs-toggle="modal"data-bs-target="#editModal<?php echo $row['id']; ?>">Editar</button></td>
-                        <div class="modal fade" id="editModal<?php echo $row['id']; ?>" tabindex="-1"aria-labelledby="editModalLabel<?php echo $row['Id']; ?>" aria-hidden="true">
+
+                        <td><button type="button" class="btn btn-info" data-bs-toggle="modal"data-bs-target="#editModal2<?php echo $row['id']; ?>">Editar</button></td>
+                        <div class="modal fade" id="editModal2<?php echo $row['id']; ?>" tabindex="-1"aria-labelledby="editModalLabel<?php echo $row['id']; ?>" aria-hidden="true">
+
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
@@ -233,29 +235,73 @@ if (!$queryTesis) {
                                     </div>
                                     <div style="color:black" class="modal-body">
                                     <!--formulario de actualizar-->
-                                        <form action="update.php" method="POST">
 
-                                            <input type="hidden" name="id"value="<?php echo $row['id'] ?? ''; ?>">
+                                        <form action="actualizarinfo.php" method="POST" enctype="multipart/form-data">
 
-                                            <label>Nombre</label>
-                                            <input type="text" class="form-control mb-3" name="nombre"placeholder="Nombre" value="<?php echo $row['nombre'] ?? ''; ?>">
-                                            <label>Apellido</label>
-                                            <input type="text" class="form-control mb-3" name="apellido"placeholder="Apellido" value="<?php echo $row['apellido'] ?? ''; ?>">
-                                            <label>imagen</label>
-                                            <input type="text" class="form-control mb-3" name="imagen"placeholder="Imagen" value="<?php echo $row['imagen'] ?? ''; ?>">
-                                            <label>Correo</label>
-                                            <input type="text" class="form-control mb-3" name="correo"placeholder="Correo" value="<?php echo $row['correo'] ?? ''; ?>">
-                                            <label>Cargo Academico</label>
-                                            <input type="text" class="form-control mb-3" name="cargo"placeholder="Cargo Academico" value="<?php echo $row['cargo'] ?? ''; ?>">
-                                            <label>Contraseña</label>
-                                            <input type="text" class="form-control mb-3" name="contrasena"placeholder="Contraseña" value="<?php echo $row['contrasena'] ?? ''; ?>">
-                                            <label>Informacion</label>
-                                            <input type="text" class="form-control mb-3" name="informacion"placeholder="Informacion" value="<?php echo $row['informacion'] ?? ''; ?>">
-                                            <label>Rut</label>
-                                            <input type="text" class="form-control mb-3" name="rut"placeholder="12345678-9" value="<?php echo $row['rut'] ?? ''; ?>">
-                                            <button type="submit" class="btn btn-primary">Actualizar</button>
-                                            <a href="panel.php" class="btn btn-primary">Volver</a>
+                                        <input type="hidden" name="id" value="<?php echo $row['id'] ?? ''; ?>">
+
+                                        <label for="R_nombre">Nombre:</label>
+                                        <input type="text" class="form-control mb-3" name="R_nombre" placeholder="Nombre" value="<?php echo $row['nombre'] ?? ''; ?>">
+
+                                        <label for="R_correo">Correo:</label>
+                                        <input type="email" class="form-control mb-3" name="R_correo" placeholder="Correo" value="<?php echo $row['correo'] ?? ''; ?>">
+
+                                        <label for="R_fono">Fono:</label>
+                                        <input type="text" class="form-control mb-3" name="R_fono" placeholder="Fono" value="<?php echo $row['fono'] ?? ''; ?>">
+
+                                        <label for="R_cargo">Cargo:</label>
+                                        <input type="text" class="form-control mb-3" name="R_cargo" placeholder="Cargo" value="<?php echo $row['cargo'] ?? ''; ?>">
+
+                                        <label for="I_descripcion">Descripción:</label>
+                                        <textarea class="form-control mb-3" name="I_descripcion" placeholder="Descripción"><?php echo $row['descripcion'] ?? ''; ?></textarea>
+
+                                        <label for="R_grado">Grado académico:</label>
+                                        <input type="text" class="form-control mb-3" name="R_grado" placeholder="Grado académico" value="<?php echo $row['grado'] ?? ''; ?>">
+
+                                        <label for="R_contrasena">Contraseña:</label>
+                                        <input type="password" class="form-control mb-3" name="R_contrasena" placeholder="Contraseña">
+
+                                        <label for="R_confirmacion_contrasena">Confirmación de contraseña:</label>
+                                        <input type="password" class="form-control mb-3" name="R_confirmacion_contrasena" placeholder="Confirmación de contraseña">
+
+                                        <div class="container">
+                                            <label>Áreas de interés:</label>
+                                            <div class="row align-items-start">
+                                                <!-- Asegúrate de que los valores del checkbox coincidan con las áreas de interés en tu base de datos -->
+                                                <div class="col-4">
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" id="I_check1" name="areasInteres[]" value="Gestión informática">
+                                                        <label class="form-check-label" for="I_check1">Gestión informática</label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" id="I_check2" name="areasInteres[]" value="Ciencia de datos">
+                                                        <label class="form-check-label" for="I_check2">Ciencia de datos</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-4">
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" id="I_check3" name="areasInteres[]" value="Ingeniería de software">
+                                                        <label class="form-check-label" for="I_check3">Ingeniería de software</label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" id="I_check4" name="areasInteres[]" value="Informática educativa">
+                                                        <label class="form-check-label" for="I_check4">Informática educativa</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div id="error-areas" class="text-danger"></div>
+                                        </div>
+
+                                        <div class="input-group mb-3">
+                                            <label class="input-group-text" for="inputGroupFile01">Imagen de perfil:</label>
+                                            <input type="file" class="form-control" id="inputGroupFile01" name="imagen">
+                                        </div>
+
+                                        <button type="submit" class="btn btn-primary" onclick="return confirm('¿Estás seguro de enviar estos datos?')">Actualizar</button>
+                                        <a href="panel.php" class="btn btn-primary">Volver</a>
+
                                         </form>
+
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary"data-bs-dismiss="modal">Cerrar</button>
@@ -292,7 +338,6 @@ if (!$queryTesis) {
         </div>
         <!-- Proyectos-->
         <div class="tab-pane fade" id="tabla2">
-
             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ingresarModal2">Ingresar Proyecto</button>
             <!-- Modal para ingresar datos en la tabla 'informacion' -->
             <div class="modal fade" id="ingresarModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -304,7 +349,9 @@ if (!$queryTesis) {
                         </div>
                         <div class="modal-body">
                             <!-- Agrega aquí el formulario para ingresar datos -->
-                            <form action="insertarpro.php" method="GET" class="row g-3 needs-validation" onsubmit="return validar_registro()" novalidate>
+
+                            <form action="insertarpro.php" method="POST" class="row g-3 needs-validation" onsubmit="return validar_registro()" novalidate>
+
                                 <div>
                                     <label for="I_nombre">Titulo:</label>
                                     <input type="text" class="form-control" name="R_titulo" id="I_nombre required">
@@ -312,7 +359,9 @@ if (!$queryTesis) {
                                 </div>
                                 <div>
                                     <label for="I_correo">Año:</label>
-                                    <input type="email" class="form-control" name="R_anio" id="I_correo">
+
+                                    <input type="text" class="form-control" name="R_anio" id="I_correo">
+
                                     <div id="error-correo" class="text-danger"></div>
                                 </div>
                                 <div>
@@ -320,11 +369,7 @@ if (!$queryTesis) {
                                     <input type="text" class="form-control" name="R_link" id="I_fono">
                                     <div id="error-fono" class="text-danger"></div>
                                 </div>
-                                <div>
-                                    <label for="I_cargo">Proyecto:</label>
-                                    <input type="text" class="form-control" name="R_proyectos" id="I_cargo">
-                                    <div id="error-cargo" class="text-danger"></div>
-                                </div>
+
                                 <button type="submit" class="btn btn-primary" onclick="alert('¿Estás seguro de enviar estos datos?')">Enviar</button>
                                 <p class="text-center">¿Ya estás registrado? Inicia sesión <a href="inicio_de_sesion.html">Aquí</a></p>
                             </form>
@@ -340,7 +385,6 @@ if (!$queryTesis) {
                         <th>Titulo</th>
                         <th>Año</th>
                         <th>Link</th>
-                        <th>Proyectos</th>
                         <th></th>
                         <th></th>
                     </tr>
@@ -362,20 +406,22 @@ if (!$queryTesis) {
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="editModalLabel<?php echo $row['Id']; ?>">Editar:</h5>
+                                        <h5 class="modal-title" id="editModalLabel3<?php echo $row['id']; ?>">Editar:</h5>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal"aria-label="Close"></button>
                                     </div>
                                     <div style="color:black" class="modal-body">
                                     <!--formulario de actualizar-->
-                                        <form action="update.php" method="POST">
-
-                                            <input type="hidden" name="Id"value="<?php echo $row['Id'] ?? ''; ?>">
-
-                                            <label>Nombre</label>
-                                            <input type="text" class="form-control mb-3" name="nombre"placeholder="Nombre" value="<?php echo $row['nombre'] ?? ''; ?>">
-                                            <button type="submit" class="btn btn-primary">Actualizar</button>
-                                            <a href="panel.php" class="btn btn-primary">Volver</a>
-                                        </form>
+                                    <form action="actualizarpro.php" method="POST">
+                                        <input type="hidden" name="idproyectos" value="<?php echo $row['idproyectos']; ?>">
+                                        <label>Titulo</label>
+                                        <input type="text" class="form-control mb-3" name="R_titulo" placeholder="Titulo" value="<?php echo $row['titulo']; ?>">
+                                        <label>Año</label>
+                                        <input type="text" class="form-control mb-3" name="R_anio" placeholder="Año" value="<?php echo $row['anio']; ?>">
+                                        <label>Link</label>
+                                        <input type="text" class="form-control mb-3" name="R_link" placeholder="url" value="<?php echo $row['link']; ?>">
+                                        <button type="submit" class="btn btn-primary">Actualizar</button>
+                                        <a href="panel.php" class="btn btn-primary">Volver</a>
+                                    </form>
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary"data-bs-dismiss="modal">Cerrar</button>
@@ -426,8 +472,10 @@ if (!$queryTesis) {
                             <!-- Agrega aquí el formulario para ingresar datos -->
                             <form action="insertarpu.php" method="POST"enctype="multipart/form-data" class="row g-3 needs-validation" onsubmit="return validar_registro()" novalidate>
                                 <div>
-                                    <label for="I_nombre">Titulo:</label>
-                                    <input type="text" class="form-control" name="R_titulo" id="I_nombre required">
+
+                                    <label for="R_titulo">Título:</label>
+                                    <input type="text" class="form-control" name="R_titulo" id="I_nombre" required>
+
                                     <div id="error-nombre" class="text-danger"></div>
                                 </div>
                                 <div>
@@ -490,27 +538,42 @@ if (!$queryTesis) {
                         <td><?php echo $row['revision'] ?></td>
                         <td><?php echo $row['acceso'] ?></td>
                         <td><?php echo $row['archivo'] ?></td>
-
-                        <td><button type="button" class="btn btn-info" data-bs-toggle="modal"data-bs-target="#editModal<?php echo $row['Id']; ?>">Editar</button></td>
-                        <div class="modal fade" id="editModal<?php echo $row['Id']; ?>" tabindex="-1"aria-labelledby="editModalLabel<?php echo $row['Id']; ?>" aria-hidden="true">
+                        <td><button type="button" class="btn btn-info" data-bs-toggle="modal"data-bs-target="#editModal<?php echo $row['idpublicaciones']; ?>">Editar</button></td>
+                        <div class="modal fade" id="editModal<?php echo $row['idpublicaciones']; ?>" tabindex="-1"aria-labelledby="editModalLabel<?php echo $row['idpublicaciones']; ?>" aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="editModalLabel<?php echo $row['Id']; ?>">Editar:</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal"aria-label="Close"></button>
+                                        <h5 class="modal-title" id="editModalLabel<?php echo $row['id']; ?>">Editar Publicación</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
-                                    <div style="color:black" class="modal-body">
-                                    <!--formulario de actualizar-->
-                                        <form action="update.php" method="POST">
-                                            <input type="hidden" name="cod_estudiante"value="<?php echo $row['Id'] ?? ''; ?>">
-                                            <label>Nombre</label>
-                                            <input type="text" class="form-control mb-3" name="nombre"placeholder="Nombre" value="<?php echo $row['nombre'] ?? ''; ?>">
+                                    <div class="modal-body">
+                                        <!-- Formulario de actualización -->
+                                        <form action="actualizarpu.php" method="POST" enctype="multipart/form-data">
+                                            <input type="hidden" name="idpublicaciones" value="<?php echo $row['idpublicaciones']; ?>">
+                                            <label for="R_titulo">Título:</label>
+                                            <input type="text" class="form-control" name="R_titulo" value="<?php echo $row['titulo']; ?>">
+                                            
+                                            <label for="R_fecha">Fecha:</label>
+                                            <input type="text" class="form-control" name="R_fecha" value="<?php echo $row['fecha']; ?>">
+                                            
+                                            <label for="R_autor">Autor:</label>
+                                            <input type="text" class="form-control" name="R_autor" value="<?php echo $row['autor']; ?>">
+                                            
+                                            <label for="R_revision">Revisión:</label>
+                                            <input type="text" class="form-control" name="R_revision" value="<?php echo $row['revision']; ?>">
+                                            
+                                            <label for="R_acceso">Acceso:</label>
+                                            <textarea class="form-control" name="R_acceso"><?php echo $row['acceso']; ?></textarea>
+
+                                            <label for="R_archivo">Archivo:</label>
+                                            <input type="file" class="form-control" name="archivo">
+                                            
                                             <button type="submit" class="btn btn-primary">Actualizar</button>
                                             <a href="panel.php" class="btn btn-primary">Volver</a>
                                         </form>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary"data-bs-dismiss="modal">Cerrar</button>
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
                                     </div>
                                 </div>
                             </div>
@@ -603,22 +666,37 @@ if (!$queryTesis) {
                         <td><?php echo $row['anio'] ?></td>
                         <td><?php echo $row['link'] ?></td>
 
-                        <td><button type="button" class="btn btn-info" data-bs-toggle="modal"data-bs-target="#editModal<?php echo $row['Id']; ?>">Editar</button></td>
-                        <div class="modal fade" id="editModal<?php echo $row['Id']; ?>" tabindex="-1"aria-labelledby="editModalLabel<?php echo $row['Id']; ?>" aria-hidden="true">
+                        <td><?php echo $row['imagen'] ?></td>
+                        <td><button type="button" class="btn btn-info" data-bs-toggle="modal"data-bs-target="#editModal<?php echo $row['idtesis']; ?>">Editar</button></td>
+                        <div class="modal fade" id="editModal<?php echo $row['idtesis']; ?>" tabindex="-1"aria-labelledby="editModalLabel<?php echo $row['idtesis']; ?>" aria-hidden="true">
+
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="editModalLabel<?php echo $row['Id']; ?>">Editar:</h5>
+                                        <h5 class="modal-title" id="editModalLabel<?php echo $row['id']; ?>">Editar:</h5>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal"aria-label="Close"></button>
                                     </div>
                                     <div style="color:black" class="modal-body">
                                     <!--formulario de actualizar-->
-                                        <form action="update.php" method="POST">
+                                        <form action="actualizarte.php" method="POST">
 
-                                            <input type="hidden" name="Id"value="<?php echo $row['Id'] ?? ''; ?>">
+                                            <input type="hidden" name="idtesis" value="<?php echo $row['idtesis'] ?? ''; ?>">
 
-                                            <label>Nombre</label>
-                                            <input type="text" class="form-control mb-3" name="nombre"placeholder="Nombre" value="<?php echo $row['nombre'] ?? ''; ?>">
+                                            <div class="mb-3">
+                                                <label for="titulo" class="form-label">Titulo:</label>
+                                                <input type="text" class="form-control" name="titulo" placeholder="Titulo" value="<?php echo $row['titulo'] ?? ''; ?>">
+                                            </div>
+
+                                            <div class="mb-3">
+                                                <label for="anio" class="form-label">Año:</label>
+                                                <input type="text" class="form-control" name="anio" placeholder="Año" value="<?php echo $row['anio'] ?? ''; ?>">
+                                            </div>
+
+                                            <div class="mb-3">
+                                                <label for="link" class="form-label">Link:</label>
+                                                <input type="text" class="form-control" name="link" placeholder="Link" value="<?php echo $row['link'] ?? ''; ?>">
+                                            </div>
+
                                             <button type="submit" class="btn btn-primary">Actualizar</button>
                                             <a href="panel.php" class="btn btn-primary">Volver</a>
                                         </form>
@@ -729,9 +807,8 @@ if (!$queryTesis) {
         </div>
     </div>
 </body>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
 <script>
 $(document).ready(function() {
     $('#buscar').on('input', function() {

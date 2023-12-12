@@ -73,7 +73,9 @@ if (!$queryTesis) {
                     <a class="nav-link text-reset" href="#informacionpersonal">Informacion personal</a>
                 </li>
                 <li class="nav-item">
+
                     <a class="nav-link text-reset" href="#articulos">publicaciones</a>
+
                 </li>
                 <li class="nav-item">
                     <a class="nav-link text-reset" href="#horario">Horario</a>
@@ -136,7 +138,9 @@ if (!$queryTesis) {
         <!--Publicaciones-->
         <div id="articulos" class=" pt-5 mt-5"></div>
         <div class="articulos">
+
             <h2>Publicaciones</h2>
+
             <table class="table mx-auto">
                 <thead class="table-success table-striped">
                     <tr>
@@ -165,6 +169,7 @@ if (!$queryTesis) {
 
         <!--Horario-->
         <div id="horario" class="pt-5 "></div>
+
         <div class="horario">
         
             
@@ -183,6 +188,7 @@ if (!$queryTesis) {
     <!--Tesis-->
 
     <div class="tesis pt-5 mt-5" id="tesis">
+
             <h2>Tesis</h2>
             <table class="table mx-auto">
                 <thead class="table-success table-striped">
@@ -206,14 +212,17 @@ if (!$queryTesis) {
                         ?>
                 </tbody>
             </table>
+
+        </div>
     </div>
-   
+
 
     
 
 
     <!--Footer-->
     <div class="footer">
+
         <div class="container-fluid">
             <div class="row p-3 p-md-5 text-secondary">
 
@@ -225,6 +234,7 @@ if (!$queryTesis) {
                 <!-- Columna 2 -->
                 <div class="col-xs-12 col-md-6 col-lg-3 mb-3 mb-md-0">
                     <p class="h5">Enlaces</p>
+
                     <div class="mb-2 enlacesfooter">
                         <a class="text-secondary text-decoration-none" href="#">Académicos</a>
                     </div>
@@ -237,12 +247,14 @@ if (!$queryTesis) {
                     <div class="mb-2 enlacesfooter">
                         <a class="text-secondary text-decoration-none" href="#">Publicaciones</a>
                     </div>
+
                     <!-- Otros enlaces... -->
                 </div>
 
                 <!-- Columna 3 -->
                 <div class="col-xs-12 col-md-6 col-lg-3 mb-3 mb-md-0">
                     <p class="h5">Links</p>
+
                     <div class="mb-2 enlacesfooter">
                         <a class="text-secondary text-decoration-none" href="#">Intranet Alumnos</a>
                     </div>
@@ -264,6 +276,7 @@ if (!$queryTesis) {
                     <div class="mb-2 enlacesfooter">
                         <a class="text-secondary text-decoration-none" href="#">Instagram</a>
                     </div>
+
                     <!-- Otros enlaces... -->
                 </div>
 
@@ -281,7 +294,9 @@ if (!$queryTesis) {
                     </div>
                 </div>
 
+
             </div>
+
         </div>
     </div>
     
