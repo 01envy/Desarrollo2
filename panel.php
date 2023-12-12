@@ -391,6 +391,7 @@ if (!$queryTesis) {
                         <td><?php echo $row['anio'] ?></td>
                         <td><?php echo $row['link'] ?></td>
                         <td><?php echo $row['proyectos'] ?></td>
+
                         <td><button type="button" class="btn btn-info" data-bs-toggle="modal"data-bs-target="#editModal<?php echo $row['Id']; ?>">Editar</button></td>
                         <div class="modal fade" id="editModal<?php echo $row['Id']; ?>" tabindex="-1"aria-labelledby="editModalLabel<?php echo $row['Id']; ?>" aria-hidden="true">
                             <div class="modal-dialog">
@@ -448,6 +449,7 @@ if (!$queryTesis) {
         </div>
         <!-- Publicaciones -->
         <div class="tab-pane fade" id="tabla3">
+
             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ingresarModal">Ingresar Publicacion</button>
             <!-- Modal para ingresar datos en la tabla 'informacion' -->
             <div class="modal fade" id="ingresarModal3" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -594,6 +596,7 @@ if (!$queryTesis) {
         </div>
         <!-- Tesis -->
         <div class="tab-pane fade" id="tabla4">
+
             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ingresarModal">Ingresar Tesis</button>
             <!-- Modal para ingresar datos en la tabla 'informacion' -->
             <div class="modal fade" id="ingresarModal4" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -637,6 +640,7 @@ if (!$queryTesis) {
                         <th>Año</th>
                         <th>Link</th>
                         <th>Imagen</th>
+
                         <th></th>
                         <th></th>
                     </tr>
