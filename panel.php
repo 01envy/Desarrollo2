@@ -93,13 +93,13 @@ if (!$queryTesis) {
 </ul>
 
 <!--a-->
-        <div class="col-md-8">
-            <input type="text" class="form-control mb-3" id="buscar" placeholder="Buscar">
-        </div>
-    </div>
+    
+
     <div class="tab-content mt-2">
         <!-- Informacion -->
-
+        <div class="col-md-8">
+            <input type="text" id="buscar" name="buscar" placeholder="Buscar...">
+        </div>
         <div class="tab-pane fade show active" id="tabla1">
             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ingresarModal1">Ingresar datos</button>
             <!-- Modal para ingresar datos en la tabla 'informacion' -->
@@ -116,7 +116,7 @@ if (!$queryTesis) {
 
                                 <div>
                                     <label for="I_nombre">Nombre:</label>
-                                    <input type="text" class="form-control" name="R_nombre" id="I_nombre required">
+                                    <input type="text" class="form-control" name="R_nombre" id="I_nombre" required>
                                     <div id="error-nombre" class="text-danger"></div>
                                 </div>
                                 <div>
@@ -196,9 +196,7 @@ if (!$queryTesis) {
                 <thead class="table-success table-striped">
                     <tr>
                         <th>Id</th>
-
                         <th>imagen</th>
-
                         <th>Nombre</th>
                         <th>Email</th>
                         <th>cargo</th>
@@ -215,10 +213,9 @@ if (!$queryTesis) {
                     ?>
                     <tr>
                         <td><?php echo $row['id'] ?></td>
-                        <td><?php echo $row['imagen'] ?></td>
+                        <td><img style="width:100px" src="imagenes/<?php echo $row['imagen']; ?>" alt="Imagen de perfil"></td>
                         <td><?php echo $row['nombre'] ?></td>
                         <td><?php echo $row['correo'] ?></td>
-
                         <td><?php echo $row['cargo'] ?></td>
                         <td><?php echo $row['contrasena'] ?></td>
                         <td><?php echo $row['descripcion'] ?></td>
@@ -264,36 +261,34 @@ if (!$queryTesis) {
                                         <div class="container">
                                             <label>Áreas de interés:</label>
                                             <div class="row align-items-start">
-                                                <!-- Asegúrate de que los valores del checkbox coincidan con las áreas de interés en tu base de datos -->
                                                 <div class="col-4">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" id="I_check1" name="areasInteres[]" value="Gestión informática" <?php echo in_array('Gestión informática', explode(', ', $row['areasInteres'])) ? 'checked' : ''; ?>>
+                                                    <label class="form-check-label" for="I_check1">Gestión informática</label>
+                                                </div>
                                                     <div class="form-check">
-                                                        <input class="form-check-input" type="checkbox" id="I_check1" name="areasInteres[]" value="Gestión informática">
-                                                        <label class="form-check-label" for="I_check1">Gestión informática</label>
-                                                    </div>
-                                                    <div class="form-check">
-                                                        <input class="form-check-input" type="checkbox" id="I_check2" name="areasInteres[]" value="Ciencia de datos">
+                                                        <input class="form-check-input" type="checkbox" id="I_check2" name="areasInteres[]" value="Ciencia de datos"<?php echo in_array('Ciencia de datos', explode(', ', $row['areasInteres'])) ? 'checked' : ''; ?>>
                                                         <label class="form-check-label" for="I_check2">Ciencia de datos</label>
                                                     </div>
                                                 </div>
                                                 <div class="col-4">
                                                     <div class="form-check">
-                                                        <input class="form-check-input" type="checkbox" id="I_check3" name="areasInteres[]" value="Ingeniería de software">
+                                                        <input class="form-check-input" type="checkbox" id="I_check3" name="areasInteres[]" value="Ingeniería de software"<?php echo in_array('Ingeniería de software', explode(', ', $row['areasInteres'])) ? 'checked' : ''; ?>>
                                                         <label class="form-check-label" for="I_check3">Ingeniería de software</label>
                                                     </div>
                                                     <div class="form-check">
-                                                        <input class="form-check-input" type="checkbox" id="I_check4" name="areasInteres[]" value="Informática educativa">
+                                                        <input class="form-check-input" type="checkbox" id="I_check4" name="areasInteres[]" value="Informática educativa"<?php echo in_array('Informática educativa', explode(', ', $row['areasInteres'])) ? 'checked' : ''; ?>>
                                                         <label class="form-check-label" for="I_check4">Informática educativa</label>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div id="error-areas" class="text-danger"></div>
                                         </div>
-
                                         <div class="input-group mb-3">
                                             <label class="input-group-text" for="inputGroupFile01">Imagen de perfil:</label>
-                                            <input type="file" class="form-control" id="inputGroupFile01" name="imagen">
+                                            <input type="file" class="form-control" id="inputGroupFile01" name="imagen" value="imagenes/<?php echo $row['imagen']; ?>">
                                         </div>
-
+                                        <img src="imagenes/<?php echo $row['imagen']; ?>" alt="Imagen de perfil actual" class="mb-3" width="100">
                                         <button type="submit" class="btn btn-primary" onclick="return confirm('¿Estás seguro de enviar estos datos?')">Actualizar</button>
                                         <a href="panel.php" class="btn btn-primary">Volver</a>
                                         </form>
@@ -306,9 +301,8 @@ if (!$queryTesis) {
                             </div>
                         </div>
                         <!--eliminar-->
-                        <td><a class="btn btn-danger" data-bs-toggle="modal"data-bs-target="#confirmDeleteModal<?php echo $row['Id']; ?>">Eliminar</a>
-                        </td>
-                        <div class="modal fade" id="confirmDeleteModal<?php echo $row['Id']; ?>" tabindex="-1" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
+                        <td><a class="btn btn-danger" data-bs-toggle="modal"data-bs-target="#confirmDeleteModal<?php echo $row['id']; ?>">Eliminar</a></td>
+                        <div class="modal fade" id="confirmDeleteModal<?php echo $row['id']; ?>" tabindex="-1" aria-labelledby="confirmDeleteModalLabel<?php echo $row['id']; ?>" aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
@@ -320,7 +314,7 @@ if (!$queryTesis) {
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                                        <a href="delete.php?id=<?php echo $row['Id']; ?>" class="btn btn-danger">Eliminar</a>
+                                        <a href="eliminarinfo.php?id=<?php echo $row['id']; ?>" class="btn btn-danger">Eliminar</a>
                                     </div>
                                 </div>
                             </div>
@@ -421,21 +415,20 @@ if (!$queryTesis) {
                             </div>
                         </div>
                         <!--eliminar-->
-                        <td><a class="btn btn-danger" data-bs-toggle="modal"data-bs-target="#confirmDeleteModal<?php echo $row['Id']; ?>">Eliminar</a>
-                        </td>
-                        <div class="modal fade" id="confirmDeleteModal<?php echo $row['Id']; ?>"tabindex="-1" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
+                        <td><a class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal<?php echo $row['idproyectos']; ?>">Eliminar</a></td>
+                        <div class="modal fade" id="confirmDeleteModal<?php echo $row['idproyectos']; ?>" tabindex="-1" aria-labelledby="confirmDeleteModalLabel<?php echo $row['idproyectos']; ?>" aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <h5 class="modal-title" id="confirmDeleteModalLabel">Confirmar Eliminación</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal"aria-label="Close"></button>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
                                         <p>¿Seguro que desea eliminar de forma permanente?</p>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary"data-bs-dismiss="modal">Cancelar</button>
-                                        <a href="delete.php?id=<?php echo $row['Id']; ?>"class="btn btn-danger">Eliminar</a>
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                        <a href="eliminarpro.php?id=<?php echo $row['idproyectos']; ?>" class="btn btn-danger">Eliminar</a>
                                     </div>
                                 </div>
                             </div>
@@ -450,7 +443,7 @@ if (!$queryTesis) {
         <!-- Publicaciones -->
         <div class="tab-pane fade" id="tabla3">
 
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ingresarModal">Ingresar Publicacion</button>
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ingresarModal3">Ingresar Publicacion</button>
             <!-- Modal para ingresar datos en la tabla 'informacion' -->
             <div class="modal fade" id="ingresarModal3" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
@@ -568,9 +561,8 @@ if (!$queryTesis) {
                             </div>
                         </div>
                         <!--eliminar-->
-                        <td><a class="btn btn-danger" data-bs-toggle="modal"data-bs-target="#confirmDeleteModal<?php echo $row['Id']; ?>">Eliminar</a>
-                        </td>
-                        <div class="modal fade" id="confirmDeleteModal<?php echo $row['Id']; ?>"tabindex="-1" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
+                        <td><a class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal<?php echo $row['idpublicaciones']; ?>">Eliminar</a></td>
+                        <div class="modal fade" id="confirmDeleteModal<?php echo $row['idpublicaciones']; ?>" tabindex="-1" aria-labelledby="confirmDeleteModalLabel<?php echo $row['idpublicaciones']; ?>" aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
@@ -582,7 +574,7 @@ if (!$queryTesis) {
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary"data-bs-dismiss="modal">Cancelar</button>
-                                        <a href="delete.php?id=<?php echo $row['Id']; ?>"class="btn btn-danger">Eliminar</a>
+                                        <a href="eliminarpu.php?id=<?php echo $row['idpublicaciones']; ?>"class="btn btn-danger">Eliminar</a>
                                     </div>
                                 </div>
                             </div>
@@ -597,7 +589,7 @@ if (!$queryTesis) {
         <!-- Tesis -->
         <div class="tab-pane fade" id="tabla4">
 
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ingresarModal">Ingresar Tesis</button>
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ingresarModal4">Ingresar Tesis</button>
             <!-- Modal para ingresar datos en la tabla 'informacion' -->
             <div class="modal fade" id="ingresarModal4" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
@@ -695,9 +687,8 @@ if (!$queryTesis) {
                             </div>
                         </div>
                         <!--eliminar-->
-                        <td><a class="btn btn-danger" data-bs-toggle="modal"data-bs-target="#confirmDeleteModal<?php echo $row['Id']; ?>">Eliminar</a>
-                        </td>
-                        <div class="modal fade" id="confirmDeleteModal<?php echo $row['Id']; ?>"tabindex="-1" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
+                        <td><a class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal<?php echo $row['idtesis']; ?>">Eliminar</a></td>
+                        <div class="modal fade" id="confirmDeleteModal<?php echo $row['idtesis']; ?>" tabindex="-1" aria-labelledby="confirmDeleteModalLabel<?php echo $row['idtesis']; ?>" aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
@@ -709,7 +700,7 @@ if (!$queryTesis) {
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary"data-bs-dismiss="modal">Cancelar</button>
-                                        <a href="delete.php?id=<?php echo $row['Id']; ?>"class="btn btn-danger">Eliminar</a>
+                                        <a href="eliminarte.php?id=<?php echo $row['idtesis']; ?>"class="btn btn-danger">Eliminar</a>
                                     </div>
                                 </div>
                             </div>
@@ -794,22 +785,24 @@ if (!$queryTesis) {
         </div>
     </div>
 </body>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
 <script>
-$(document).ready(function() {
-    $('#buscar').on('input', function() {
+$(document).ready(function () {
+    $('#buscar').on('input', function () {
         var query = $(this).val();
 
         if (query !== '') {
             $.ajax({
                 type: "POST",
                 url: "buscar.php",
+                
                 data: {
                     c: query
                 },
-                success: function(data) {
-                    $('tbody').html(data);
+                success: function (data) {
+                    $('#search-results').html(data);
                 }
             });
         } else {
@@ -819,13 +812,16 @@ $(document).ready(function() {
                 data: {
                     c: ''
                 },
-                success: function(data) {
-                    $('tbody').html(data);
+                success: function (data) {
+                    $('#search-results').html(data);
                 }
             });
         }
     });
 });
+
+
+
 </script>
 
 </html>

@@ -13,18 +13,24 @@ $nuevaContrasena = password_hash($_POST['R_contrasena'], PASSWORD_DEFAULT);
 $nuevaConfirmacionContrasena = password_hash($_POST['R_confirmacion_contrasena'], PASSWORD_DEFAULT);
 $nuevasAreasInteres = isset($_POST['areasInteres']) ? implode(", ", $_POST['areasInteres']) : "";
 
-$nombreImagen = $_FILES['imagen']['name'];
-$rutaImagen = "imagenes/" . $nombreImagen;
+// Verificar si se ha subido una nueva imagen
+if (!empty($_FILES['imagen']['name'])) {
+    $nombreImagen = $_FILES['imagen']['name'];
+    $rutaImagen = "imagenes/" . $nombreImagen;
 
-if ($_FILES['imagen']['error'] == UPLOAD_ERR_OK) {
-    if (move_uploaded_file($_FILES['imagen']['tmp_name'], $rutaImagen)) {
-        echo "Imagen subida correctamente.";
-        header("refresh:0;url=panel.php");
+    if ($_FILES['imagen']['error'] == UPLOAD_ERR_OK) {
+        if (move_uploaded_file($_FILES['imagen']['tmp_name'], $rutaImagen)) {
+            // Imagen subida correctamente, proceder con la actualización de la base de datos
+        } else {
+            echo "Error al mover la imagen al directorio de destino.";
+        }
     } else {
-        echo "Error al mover la imagen al directorio de destino.";
+        echo "Error en la carga de la imagen: " . $_FILES['imagen']['error'];
     }
 } else {
-    echo "Error en la carga de la imagen: " . $_FILES['imagen']['error'];
+    // No se proporcionó una nueva imagen, mantener la imagen existente en la base de datos
+    $nombreImagen = $_POST['imagen_actual']; // Asegúrate de tener este campo oculto en tu formulario
+    $rutaImagen = "imagenes/" . $nombreImagen;
 }
 
 $sql = "UPDATE informacion SET 
@@ -46,6 +52,7 @@ if ($stmt) {
 
     if ($stmt->execute()) {
         echo "Registro actualizado correctamente";
+        header("refresh:0;url=panel.php");
     } else {
         echo "Error al actualizar registro: " . $stmt->error;
     }
