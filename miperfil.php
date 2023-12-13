@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 include("conexion_horario.php");
 include("conexion.php");
 $con = conectar();
@@ -8,11 +10,10 @@ if (!$con) {
     die("Error de conexión a la base de datos: " . mysqli_connect_error());
 }
 
-
-$correo_persona = "andres.alfaro@uda.cl";
+$correo_persona=$_SESSION["correo"];
 
 // Realizar la consulta SQL para la pestaña 'publicaciones'
-$queryPublicaciones = mysqli_query($con, "SELECT * FROM publicaciones WHERE idpublicaciones IN (SELECT id from informacion where correo='$correo_persona')");
+$queryPublicaciones = mysqli_query($con, "SELECT * FROM publicaciones WHERE idprofesor IN (SELECT id from informacion where correo='$correo_persona')");
 
 // Verificar si la consulta fue exitosa
 if (!$queryPublicaciones) {
@@ -20,7 +21,7 @@ if (!$queryPublicaciones) {
 }
 
 // Realizar la consulta SQL para la pestaña 'tesis'
-$queryTesis = mysqli_query($con, "SELECT * FROM tesis");
+$queryTesis = mysqli_query($con, "SELECT * FROM tesis WHERE idprofesor IN (SELECT id from informacion where correo='$correo_persona')");
 
 // Verificar si la consulta fue exitosa
 if (!$queryTesis) {
@@ -53,8 +54,7 @@ if (!$queryTesis) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Academico</title>
-    <link rel="stylesheet" href="estilosindex.css">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="estilosindex.css"> 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" 
     rel="stylesheet" 
     integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" 
@@ -74,9 +74,7 @@ if (!$queryTesis) {
                     <a class="nav-link text-reset" href="#informacionpersonal">Informacion personal</a>
                 </li>
                 <li class="nav-item">
-
                     <a class="nav-link text-reset" href="#articulos">publicaciones</a>
-
                 </li>
                 <li class="nav-item">
                     <a class="nav-link text-reset" href="#horario">Horario</a>
@@ -86,8 +84,6 @@ if (!$queryTesis) {
                 </li>
                 <li class="nav-item">
                 <?php
-                    session_start();
-
                     if(isset($_SESSION["correo"])){
                         $Nombre_profesor = $_SESSION["nombre"];
 
@@ -113,11 +109,11 @@ if (!$queryTesis) {
     
     <!--Div para el scrollspy-->
 
-    
+    <div data-bs-spy="scroll" data-bs-target="#navbar-example2" data-bs-root-margin="0px 0px -40%" data-bs-smooth-scroll="true" class="scrollspy-example bg-light p-3 rounded-2" tabindex="0">
 
         <!--Informacion personal-->
-    <div id="informacionpersonal"></div>
-    <div class="infopersonal pt-5 mt-5" >
+        <div id="informacionpersonal"></div>
+        <div class="infopersonal pt-5 mt-5" >
 
             <!--Recuadro de foto de perfil-->
             <div class="fotodeperfil">
@@ -146,16 +142,12 @@ if (!$queryTesis) {
                     <p><strong>Áreas de interés:</strong><?php echo isset($Areas) ? $Areas : 'Áreas no disponibles'; ?></p>
                 </div>
             </div>
-    </div>
+        </div>
 
         <!--Publicaciones-->
-    <div id="articulos" class=" pt-5 mt-5"></div>
-    
-    <div class="articulos">
-        <h2>Publicaciones</h2>
-
-            
-
+        <div id="articulos" class=" pt-5 mt-5"></div>
+        <div class="articulos">
+            <h2>Publicaciones</h2>
             <table class="table mx-auto">
                 <thead class="table-success table-striped">
                     <tr>
@@ -180,9 +172,8 @@ if (!$queryTesis) {
                         ?>
                 </tbody>
             </table>
-    </div>
-
-        <!--Horario-->
+        </div>
+            <!--Horario-->
     <div id="horario" class="pt-5 "></div>
     <div class="horario " >
 
@@ -270,124 +261,101 @@ if (!$queryTesis) {
             </div>
         </div>
     </div>
-            
-
-    
-        <!--Tesis-->
-    <div id="tesis" class=" pt-5 mt-5"></div>           
-    <div class="tesis">
-
-                <h2>Tesis</h2>
-                <table class="table mx-auto">
-                    <thead class="table-success table-striped">
-                        <tr>
-                            <th>Titulo</th>
-                            <th>Año</th>
-                            <th>Link</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php
-                            while ($row = mysqli_fetch_array($queryTesis)) {?>
-                        <tr>
-                            <td><?php echo $row['titulo'] ?></td>
-                            <td><?php echo $row['anio'] ?></td>
-                            <td><?php $link = $row['link'];
-                            echo "<a href=\"$link\">$link</a>";?></td>                        
-                        </tr>
-                        <?php
-                            }
-                            ?>
-                    </tbody>
-                </table>
-
-            </div>
+    <!--Tesis-->
+    <div class="tesis pt-5 mt-5" id="tesis">
+            <h2>Tesis</h2>
+            <table class="table mx-auto">
+                <thead class="table-success table-striped">
+                    <tr>
+                        <th>Titulo</th>
+                        <th>Año</th>
+                        <th>Link</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                        while ($row = mysqli_fetch_array($queryTesis)) {?>
+                    <tr>
+                        <td><?php echo $row['titulo'] ?></td>
+                        <td><?php echo $row['anio'] ?></td>
+                        <td><?php $link = $row['link'];
+                        echo "<a href=\"$link\">$link</a>";?></td>                        
+                    </tr>
+                    <?php
+                        }
+                        ?>
+                </tbody>
+            </table>
     </div>
-
-
-
-        <!--Footer-->
+    <!--Footer-->
     <div class="footer">
-
-            <div class="container-fluid">
-                <div class="row p-3 p-md-5 text-secondary">
-
-                    <!-- Columna 1 -->
-                    <div class="col-xs-12 col-md-6 col-lg-3 mb-3 mb-md-0">
-                        <img src="img/logo-udacorporativo.png" class="img-fluid" alt="Logo UDA">
+        <div class="container-fluid">
+            <div class="row p-3 p-md-5 text-secondary">
+                <!-- Columna 1 -->
+                <div class="col-xs-12 col-md-6 col-lg-3 mb-3 mb-md-0">
+                    <img src="img/logo-udacorporativo.png" class="img-fluid" alt="Logo UDA">
+                </div>
+                <!-- Columna 2 -->
+                <div class="col-xs-12 col-md-6 col-lg-3 mb-3 mb-md-0">
+                    <p class="h5">Enlaces</p>
+                    <div class="mb-2 enlacesfooter">
+                        <a class="text-secondary text-decoration-none" href="#">Académicos</a>
                     </div>
-
-                    <!-- Columna 2 -->
-                    <div class="col-xs-12 col-md-6 col-lg-3 mb-3 mb-md-0">
-                        <p class="h5">Enlaces</p>
-
-                        <div class="mb-2 enlacesfooter">
-                            <a class="text-secondary text-decoration-none" href="#">Académicos</a>
-                        </div>
-                        <div class="mb-2 enlacesfooter">
-                            <a class="text-secondary text-decoration-none" href="#">Noticias</a>
-                        </div>
-                        <div class="mb-2 enlacesfooter">
-                            <a class="text-secondary text-decoration-none" href="#">Eventos</a>
-                        </div>
-                        <div class="mb-2 enlacesfooter">
-                            <a class="text-secondary text-decoration-none" href="#">Publicaciones</a>
-                        </div>
-
-                        <!-- Otros enlaces... -->
+                    <div class="mb-2 enlacesfooter">
+                        <a class="text-secondary text-decoration-none" href="#">Noticias</a>
                     </div>
-
-                    <!-- Columna 3 -->
-                    <div class="col-xs-12 col-md-6 col-lg-3 mb-3 mb-md-0">
-                        <p class="h5">Links</p>
-
-                        <div class="mb-2 enlacesfooter">
-                            <a class="text-secondary text-decoration-none" href="#">Intranet Alumnos</a>
-                        </div>
-                        <div class="mb-2 enlacesfooter">
-                            <a class="text-secondary text-decoration-none" href="#">Intranet Académicos</a>
-                        </div>
-                        <div class="mb-2 enlacesfooter">
-                            <a class="text-secondary text-decoration-none" href="#">Moodle</a>
-                        </div>
-                        <div class="mb-2 enlacesfooter">
-                            <a class="text-secondary text-decoration-none" href="#">Biblioteca</a>
-                        </div>
-                        <div class="mb-2 enlacesfooter">
-                            <a class="text-secondary text-decoration-none" href="#">FSCU</a>
-                        </div>
-                        <div class="mb-2 enlacesfooter">
-                            <a class="text-secondary text-decoration-none" href="#">Facultad de Ingenieria</a>
-                        </div>
-                        <div class="mb-2 enlacesfooter">
-                            <a class="text-secondary text-decoration-none" href="#">Instagram</a>
-                        </div>
-
-                        <!-- Otros enlaces... -->
+                    <div class="mb-2 enlacesfooter">
+                        <a class="text-secondary text-decoration-none" href="#">Eventos</a>
                     </div>
-
-                    <!-- Columna 4 -->
-                    <div class="col-xs-12 col-md-6 col-lg-3">
-                        <p class="h5">Contactos</p>
-                        <div class="mb-2">
-                            <p>Ubícanos en<br>Copiapó, Av. Copayapu 485</p>
-                        </div>
-                        <div class="mb-2">
-                            <p>(52) 2 255555</p>
-                        </div>
-                        <div class="mb-2">
-                            <p>anakarina.pena@uda.cl</p>
-                        </div>
+                    <div class="mb-2 enlacesfooter">
+                        <a class="text-secondary text-decoration-none" href="#">Publicaciones</a>
                     </div>
+                    <!-- Otros enlaces... -->
+                </div>
 
-
+                <!-- Columna 3 -->
+                <div class="col-xs-12 col-md-6 col-lg-3 mb-3 mb-md-0">
+                    <p class="h5">Links</p>
+                    <div class="mb-2 enlacesfooter">
+                        <a class="text-secondary text-decoration-none" href="#">Intranet Alumnos</a>
+                    </div>
+                    <div class="mb-2 enlacesfooter">
+                        <a class="text-secondary text-decoration-none" href="#">Intranet Académicos</a>
+                    </div>
+                    <div class="mb-2 enlacesfooter">
+                        <a class="text-secondary text-decoration-none" href="#">Moodle</a>
+                    </div>
+                    <div class="mb-2 enlacesfooter">
+                        <a class="text-secondary text-decoration-none" href="#">Biblioteca</a>
+                    </div>
+                    <div class="mb-2 enlacesfooter">
+                        <a class="text-secondary text-decoration-none" href="#">FSCU</a>
+                    </div>
+                    <div class="mb-2 enlacesfooter">
+                        <a class="text-secondary text-decoration-none" href="#">Facultad de Ingenieria</a>
+                    </div>
+                    <div class="mb-2 enlacesfooter">
+                        <a class="text-secondary text-decoration-none" href="#">Instagram</a>
+                    </div>
+                    <!-- Otros enlaces... -->
+                </div>
+                <!-- Columna 4 -->
+                <div class="col-xs-12 col-md-6 col-lg-3">
+                    <p class="h5">Contactos</p>
+                    <div class="mb-2">
+                        <p>Ubícanos en<br>Copiapó, Av. Copayapu 485</p>
+                    </div>
+                    <div class="mb-2">
+                        <p>(52) 2 255555</p>
+                    </div>
+                    <div class="mb-2">
+                        <p>anakarina.pena@uda.cl</p>
+                    </div>
                 </div>
 
             </div>
+        </div>
     </div>
-    
-    </div>
-  
     <!--Scripts de boostrap-->
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
