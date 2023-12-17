@@ -95,7 +95,10 @@ body{
     bottom: 50%;
     width:100%;
     text-align:center;
-    font-family: MontserratSemibold;
+}
+.titulooverlay{
+    font-family: MontserratRegular;
+    font-size: 70px;
 }
 
 /*----------Informacion sobre nosotros----------*/

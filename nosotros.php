@@ -1,3 +1,35 @@
+<?php
+$host="localhost";
+$user="root";
+$pass="fernando2001";
+$bd="profesores";
+
+// Crea la conexión
+$conn = new mysqli($host, $user, $pass, $bd);
+
+// Verifica la conexión
+if ($conn->connect_error) {
+    die("Conexión fallida: " . $conn->connect_error);
+}
+
+// Procesa el formulario si se ha enviado
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $nombre = $_POST["nombre"];
+    $email = $_POST["email"];
+    $mensaje = $_POST["mensaje"];
+
+    $sql = "INSERT INTO formulario_contacto (nombre, email, mensaje) VALUES ('$nombre', '$email', '$mensaje')";
+
+    if ($conn->query($sql) === TRUE) {
+        header("Refresh: 0; url=nosotros.php");
+        echo '<script>alert("Registro exitoso");</script>';
+    } else {
+        echo "Error al registrar datos: " . $conn->error;
+    }
+}
+
+$conn->close();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,18 +51,6 @@
         </div>
         <nav class="nav-scrollspy" id="navabar-scrollspy">
            <ul class="nav-links text-white">
-                <li class="nav-item">
-                    <a class="nav-link text-reset" href="#">boton1</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-reset" href="#articulos">boton2</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-reset" href="#horario">boton3</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-reset" href="#tesis">boton4</a>
-                </li>
            </ul>            
         </nav>
         <?php
@@ -41,7 +61,7 @@
 
                 echo '<a class="btn" href="#"><button>'.$Nombre_profesor.'</button></a>';
             }else{
-                echo '<a class="btn" href="#"><button>Nombre</button></a>';
+                echo '<a class="btn" href="#"><button>Iniciar Sesión</button></a>';
             }
         ?>
     </header>
@@ -49,7 +69,9 @@
 
     <!--Carrusel-->
 
-    <div class="overlay"><h1>Sobre nosotros</h1></div>
+    <div class="overlay">
+        <h1 class="titulooverlay">Sobre nosotros</h1>
+    </div>
     <div id="myCarousel" class="carousel slide">
         <div id="carouselExampleFade" class="carousel slide carousel-fade">
             <div class="carousel-inner">
@@ -141,42 +163,49 @@
 
 
     <!--Contáctanos-->
-    <div class="contactanos">
-        <div class="textocontactanos">
-            <h2>¿Tienes algún problema?</h2>
-            <p>No dudes en escribirnos a través del siguiente formulario</p>
-        </div>
-        
-        <div class="tablacontactanos">
-            <div class="mb-3">
-                <label for="exampleFormControlInput1" class="form-label">Nombre</label>
-                <input type="nombre" class="form-control" id="exampleFormControlInput1" placeholder="Introduzca su nombre completo">
+    <form method="post"  action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
+        <div class="contactanos">
+            <div class="textocontactanos">
+                <h2>¿Tienes algún problema?</h2>
+                <p>No dudes en escribirnos a través del siguiente formulario</p>
             </div>
-            <div class="mb-3">
-                <label for="exampleFormControlInput1" class="form-label">Email address</label>
-                <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="nombre@ejemplo.com">
-            </div>
-            <div class="mb-3">
-                <label for="exampleFormControlTextarea1" class="form-label">Describa su problema</label>
-                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-            </div>
-        </div>
-
-    </div>
-
-
-    <!--Footer-->
-    <div class="footer">
-        <div class= "container-fluid ml-5 ms-5">
-            <div class="row p-5 bg-white text-secondary">
-    
-                <!--Columna1-->
-                <div class="col-xs-12 col-md-6 col-lg-3">
-                    <img src="img/logo-udacorporativo.png" width="300" height="94">
+            
+            <div class="tablacontactanos">
+                <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">Nombre</label>
+                    <input type="nombre" class="form-control" id="nombre" name="nombre" placeholder="Introduzca su nombre completo">
                 </div>
-                <!--Columna 2-->
-                <div class="col-xs-12 col-md-6 col-lg-3">
-                    <p class="h3">Informacion</p>
+                <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">Email address</label>
+                    <input type="email" class="form-control" id="email" name="email" placeholder="nombre@ejemplo.com">
+                </div>
+                <div class="mb-3">
+                    <label for="exampleFormControlTextarea1" class="form-label">Describa su problema</label>
+                    <textarea class="form-control" id="mensaje" name="mensaje" rows="3"></textarea>
+                </div>
+                <button type="submit">Enviar</button>
+            </div>
+
+
+        </div>
+    </form>
+
+
+        <!--Footer-->
+    <div class="footer">
+                
+        <div class="container-fluid">
+            <div class="row p-3 p-md-5 text-secondary">
+
+                <!-- Columna 1 -->
+                <div class="col-xs-12 col-md-6 col-lg-3 mb-3 mb-md-0">
+                    <img src="img/logo-udacorporativo.png" class="img-fluid" alt="Logo UDA">
+                </div>
+
+                <!-- Columna 2 -->
+                <div class="col-xs-12 col-md-6 col-lg-3 mb-3 mb-md-0">
+                    <p class="h5">Enlaces</p>
+
                     <div class="mb-2 enlacesfooter">
                         <a class="text-secondary text-decoration-none" href="#">Académicos</a>
                     </div>
@@ -189,10 +218,17 @@
                     <div class="mb-2 enlacesfooter">
                         <a class="text-secondary text-decoration-none" href="#">Publicaciones</a>
                     </div>
+
+                    <!-- Otros enlaces... -->
                 </div>
-                <!--Columna 3-->
-                <div class="col-xs-12 col-md-6 col-lg-3">
-                    <p class="h3">Links</p>
+
+                <!-- Columna 3 -->
+                <div class="col-xs-12 col-md-6 col-lg-3 mb-3 mb-md-0">
+                    <p class="h5">Links</p>
+
+                    <div class="mb-2 enlacesfooter">
+                        <a class="text-secondary text-decoration-none" href="nosotros.php">Nosotros</a>
+                    </div>
                     <div class="mb-2 enlacesfooter">
                         <a class="text-secondary text-decoration-none" href="#">Intranet Alumnos</a>
                     </div>
@@ -214,11 +250,13 @@
                     <div class="mb-2 enlacesfooter">
                         <a class="text-secondary text-decoration-none" href="#">Instagram</a>
                     </div>
+
+                    <!-- Otros enlaces... -->
                 </div>
-    
-                <!--Columna 4-->
+
+                <!-- Columna 4 -->
                 <div class="col-xs-12 col-md-6 col-lg-3">
-                    <p class="h3">Contactos</p>
+                    <p class="h5">Contactos</p>
                     <div class="mb-2">
                         <p>Ubícanos en<br>Copiapó, Av. Copayapu 485</p>
                     </div>
@@ -229,11 +267,13 @@
                         <p>anakarina.pena@uda.cl</p>
                     </div>
                 </div>
-                
-    
+
+
             </div>
-    
+
         </div>
+        
+
     </div>
     
     
