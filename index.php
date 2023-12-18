@@ -71,10 +71,13 @@ if (!$queryTesis) {
         <nav class="nav-scrollspy" id="navabar-scrollspy">
            <ul class="nav-links text-white">
                 <li class="nav-item">
-                    <a class="nav-link text-reset" href="#informacionpersonal">Informacion personal</a>
+                    <a class="nav-link text-reset" href="#informacionpersonal">Inf.Personal</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-reset" href="#articulos">publicaciones</a>
+                    <a class="nav-link text-reset" href="#proyectos">Proyectos</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-reset" href="#articulos">Publicaciones</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link text-reset" href="#horario">Horario</a>
@@ -146,9 +149,17 @@ if (!$queryTesis) {
             </div>
     </div>
 
+
+    <!--Proyectos-->
+    <div id="proyectos" class=" pt-5 mt-5"></div>
+    <div class="articulos">
+        <h2>Proyectos</h2>
+
+
+    </div>
+
         <!--Publicaciones-->
     <div id="articulos" class=" pt-5 mt-5"></div>
-    
     <div class="articulos">
         <h2>Publicaciones</h2>
 
@@ -319,6 +330,9 @@ if (!$queryTesis) {
                     <div class="col-xs-12 col-md-6 col-lg-3 mb-3 mb-md-0">
                         <p class="h5">Enlaces</p>
 
+                        <div class="mb-2 enlacesfooter">
+                            <a class="text-secondary text-decoration-none" href="nosotros.php">Nosotros</a>
+                        </div>
                         <div class="mb-2 enlacesfooter">
                             <a class="text-secondary text-decoration-none" href="#">Académicos</a>
                         </div>
