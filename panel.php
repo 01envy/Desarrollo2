@@ -261,6 +261,7 @@ if ($correo_persona == "admin.admin@uda.cl") {
                     <tr>
                         <td><?php echo $row['id'] ?></td>
                         <td><img style="width:100px" src="<?php echo $row['imagen']; ?>" alt="Imagen de perfil"></td>
+
                         <td><?php echo $row['nombre'] ?></td>
                         <td><?php echo $row['correo'] ?></td>
                         <td><?php echo $row['cargo'] ?></td>
@@ -338,6 +339,9 @@ if ($correo_persona == "admin.admin@uda.cl") {
                                             <label class="input-group-text" for="inputGroupFile01">Imagen de perfil:</label>
                                             <input type="file" class="form-control" id="inputGroupFile01" name="imagen" value="imagenes/<?php echo $row['imagen']; ?>">
                                         </div>
+
+                                        <img src="imagenes/<?php echo $row['imagen']; ?>" alt="Imagen de perfil actual" class="mb-3" width="100">
+
                                         <button type="submit" class="btn btn-primary" onclick="return confirm('¿Estás seguro de enviar estos datos?')">Actualizar</button>
                                         <a href="panel.php" class="btn btn-primary">Volver</a>
 

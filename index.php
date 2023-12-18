@@ -54,7 +54,8 @@ if (!$queryTesis) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Academico</title>
-    <link rel="stylesheet" href="estilosindex.css"> 
+    <link rel="stylesheet" href="estilosindex.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" 
     rel="stylesheet" 
     integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" 
@@ -95,6 +96,9 @@ if (!$queryTesis) {
                         echo '  </button>';
                         echo '  <ul class="dropdown-menu">';
                         echo '    <li><a class="dropdown-item" style="color: black" href="index.php">Home</a></li>';
+
+                        echo '    <li><a class="dropdown-item" style="color: black" href="miperfil.php">Mi perfil</a></li>';
+
                         echo '    <li><a class="dropdown-item" style="color: black" href="panel.php">Mi panel</a></li>';
                         echo '    <li><a class="dropdown-item" style="color: black" href="logout.php">Cerrar sesion</a></li>';
                         echo '  </ul>';
@@ -185,6 +189,7 @@ if (!$queryTesis) {
 
         <h2>Horario</h2>
 
+
         <div class="recuadrohorario">
             <?php
             // Verificar la conexión
@@ -210,6 +215,7 @@ if (!$queryTesis) {
             
             <form action="guardar_horario.php" method="post" id="horarioForm">
 
+
                 <table>
                     <tr>
                         <th></th>
@@ -227,6 +233,10 @@ if (!$queryTesis) {
                                 <td>$hora - " . date('H:i', strtotime("$hora +1 hour 30 minutes")) . "</td>";
 
 
+                    foreach ($horas as $hora) {
+                        echo "<tr>
+                                <td>$hora - " . date('H:i', strtotime("$hora +1 hour 30 minutes")) . "</td>";
+
                         for ($i = 1; $i <= 5; $i++) {
                             $dia_actual = dia_semana($i);
                             $hora_fin = date('H:i', strtotime("$hora +1 hour 30 minutes"));
@@ -234,6 +244,12 @@ if (!$queryTesis) {
                             echo "<td class='$clase_ocupado'><input type='checkbox' name='horario[$hora][$dia_actual]' value='1'></td>";
                         }
 
+                        for ($i = 1; $i <= 5; $i++) {
+                            $dia_actual = dia_semana($i);
+                            $hora_fin = date('H:i', strtotime("$hora +1 hour 30 minutes"));
+                            $clase_ocupado = isset($horario_db[$dia_actual][$hora]) ? 'ocupado' : '';
+                            echo "<td class='$clase_ocupado'><input type='checkbox' name='horario[$hora][$dia_actual]' value='1'></td>";
+                        }
 
                         echo "</tr>";
                     }
@@ -253,6 +269,7 @@ if (!$queryTesis) {
                 document.addEventListener("DOMContentLoaded", function () {
                     var formulario = document.getElementById('horarioForm');
                     var btnModificar = document.getElementById('btnModificar');
+
 
                     btnModificar.addEventListener("click", function (event) {
                         var checkboxes = formulario.querySelectorAll('input[type="checkbox"]');
