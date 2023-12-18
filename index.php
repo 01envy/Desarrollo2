@@ -71,12 +71,13 @@ if (!$queryTesis) {
         <nav class="nav-scrollspy" id="navabar-scrollspy">
            <ul class="nav-links text-white">
                 <li class="nav-item">
-                    <a class="nav-link text-reset" href="#informacionpersonal">Informacion personal</a>
+                    <a class="nav-link text-reset" href="#informacionpersonal">Info. personal</a>
                 </li>
                 <li class="nav-item">
-
-                    <a class="nav-link text-reset" href="#articulos">publicaciones</a>
-
+                    <a class="nav-link text-reset" href="#proyectos">Proyectos</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-reset" href="#articulos">Publicaciones</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link text-reset" href="#horario">Horario</a>
@@ -111,11 +112,10 @@ if (!$queryTesis) {
         </nav>
     </header>
     
-    <!--Div para el scrollspy-->
 
     
 
-        <!--Informacion personal-->
+    <!--Informacion personal-->
     <div id="informacionpersonal"></div>
     <div class="infopersonal pt-5 mt-5" >
 
@@ -148,9 +148,12 @@ if (!$queryTesis) {
             </div>
     </div>
 
-        <!--Publicaciones-->
-    <div id="articulos" class=" pt-5 mt-5"></div>
+
+    <!--Proyectos-->
     
+
+    <!--Publicaciones-->
+    <div id="articulos" class=" pt-5 mt-5"></div>
     <div class="articulos">
         <h2>Publicaciones</h2>
 
