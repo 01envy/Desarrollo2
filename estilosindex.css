@@ -82,6 +82,7 @@ body{
 .footer{
     font-family: TrebuchetMS;
     margin: 0 200px 0 200px;
+    background: #f8f9f9;
 }
 
 
@@ -222,15 +223,46 @@ body{
 .horario{
     background-color: rgba(229, 229, 229, 0.956);
     margin: 40px 80px 20px 80px;
-    padding: 0 0 40px 0;
+    padding: 0 0 10px 0;
     border-radius: 20px;
     
 }
 .testhorario{
     background-color: rgb(172, 172, 172);
     margin: 50px;
-    padding: 100px;
+    padding: 20px;
 }
 .tesis{
     margin: 40px 80px 20px 80px;
+}
+
+
+/*tabla*/
+.container {
+    max-width: 600px;
+    margin: 50px auto;
+}
+
+table {
+    margin-top: 20px;
+}
+
+td.ocupado {
+
+    background-color: #00ff00;
+
+}
+
+th, td {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+.seleccionado {
+    background-color: green;
 }

@@ -27,7 +27,7 @@
     <!--Formulario de registro-->
     <section class="formularioregistro">
         <div class="imagensesion">
-            <img src="FotosDIICC/_ALX9328.JPG">
+            <img src="imginiciosesion/_ALX9328 - copia.jpg">
         </div>
         <div class="contenedor_formulario">
             <h1 class="text-center">Registro</h1>

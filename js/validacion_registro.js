@@ -68,17 +68,24 @@ function validar_registro() {
         mensajeErrorConfirmacionContra = 'Las contraseñas no coinciden';
     }
 
-    if (registro_imagen.files.length === 0) {
-        mensajeErrorImagen = 'Por favor, seleccione una imagen de perfil';
-    }else {
-        var allowedExtensions = /(\.jpg|\.jpeg|\.png)$/i;
-        var maxFileSizeMB = 5;
+    
+    var allowedExtensions = /(\.jpg|\.jpeg|\.png)$/i;
+    var maxFileSizeMB = 5;
 
+    var registro_imagen = document.getElementById('I_imagen'); // Asegúrate de que el ID coincida con el HTML
+
+    var mensajeErrorImagen = '';
+
+    if (registro_imagen.files.length > 0) {
+        // Se ha seleccionado una imagen
         if (!allowedExtensions.exec(registro_imagen.value)) {
             mensajeErrorImagen = 'Formato de imagen no válido. Por favor, seleccione una imagen con formato jpg, jpeg o png';
         } else if (registro_imagen.files[0].size > maxFileSizeMB * 1024 * 1024) {
             mensajeErrorImagen = 'La imagen seleccionada supera el tamaño máximo permitido de ' + maxFileSizeMB + ' MB';
         }
+    } else {
+        // No se ha seleccionado ninguna imagen
+        mensajeErrorImagen = ''; // Puedes establecer un mensaje o realizar acciones específicas si lo deseas
     }
 
     // Funciones para mostrar el mensaje de error en la pagina

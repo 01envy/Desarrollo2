@@ -1,25 +1,47 @@
 <?php
-    //Se traen los datos del profesores a partir del correo
-    include('conexion.php');
-    $con=conectar();
+include("conexion_horario.php");
+include("conexion.php");
+$con = conectar();
+$con_horario = conectar_horario();
+// Verificar la conexión a la base de datos
+if (!$con) {
+    die("Error de conexión a la base de datos: " . mysqli_connect_error());
+}
 
-    $correo_persona = "andres.alfaro@uda.cl";
 
-    $consulta = "SELECT * FROM profesores WHERE correo = '$correo_persona'";
+$correo_persona = "andres.alfaro@uda.cl";
+
+// Realizar la consulta SQL para la pestaña 'publicaciones'
+$queryPublicaciones = mysqli_query($con, "SELECT * FROM publicaciones WHERE idprofesor IN (SELECT id from informacion where correo='$correo_persona')");
+
+// Verificar si la consulta fue exitosa
+if (!$queryPublicaciones) {
+    die("Error en la consulta 'publicaciones': " . mysqli_error($con));
+}
+
+// Realizar la consulta SQL para la pestaña 'tesis'
+$queryTesis = mysqli_query($con, "SELECT * FROM tesis WHERE idprofesor IN (SELECT id from informacion where correo='$correo_persona')");
+
+// Verificar si la consulta fue exitosa
+if (!$queryTesis) {
+    die("Error en la consulta 'tesis': " . mysqli_error($con));
+}
+
+    $consulta = "SELECT * FROM informacion WHERE correo = '$correo_persona'";
     $resultado = mysqli_query($con, $consulta);
 
     if ($resultado) {
         $profesor = mysqli_fetch_assoc($resultado);
 
         //Se guardan en variables los distintos datos
-        $Nombre = $profesor['Nombre'];
-        $Correo = $profesor['Correo'];
-        $Fono = $profesor['Fono'];
-        $Cargo = $profesor['Cargo'];
-        $Descripcion = $profesor['Descripcion'];
-        $Grado = $profesor['Grado'];
-        $Areas = $profesor['Areas'];
-        $Imagen_perfil = $profesor['Imagen_perfil'];
+        $Nombre = $profesor['nombre'];
+        $Correo = $profesor['correo'];
+        $Fono = $profesor['fono'];
+        $Cargo = $profesor['cargo'];
+        $Descripcion = $profesor['descripcion'];
+        $Grado = $profesor['grado'];
+        $Areas = $profesor['areasInteres'];
+        $Imagen_perfil = $profesor['imagen'];
 
     } else {
         echo "Error en la consulta: " . mysqli_error($con);
@@ -43,7 +65,7 @@
 
     <header class="header sticky-top navbar nav-scrollspy" id="navabar-scrollspy">
         <div class="logo">
-            <img src="img/logo-udacorporativo.png" alt="Logo de la marca">
+            <img src="img/logo-udacorp-txtblanco.png" alt="Logo de la marca">
         </div>
         <nav class="nav-scrollspy" id="navabar-scrollspy">
            <ul class="nav-links text-white">
@@ -51,7 +73,7 @@
                     <a class="nav-link text-reset" href="#informacionpersonal">Informacion personal</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-reset" href="#articulos">Artículos</a>
+                    <a class="nav-link text-reset" href="#articulos">publicaciones</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link text-reset" href="#horario">Horario</a>
@@ -59,19 +81,31 @@
                 <li class="nav-item">
                     <a class="nav-link text-reset" href="#tesis">Tesis</a>
                 </li>
+                <li class="nav-item">
+                <?php
+                    session_start();
+
+                    if(isset($_SESSION["correo"])){
+                        $Nombre_profesor = $_SESSION["nombre"];
+
+                        echo '<div class="btn-group">';
+                        echo '  <button type="button" class="btn btn-success dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">';
+                        echo $Nombre_profesor;
+                        echo '  </button>';
+                        echo '  <ul class="dropdown-menu">';
+                        echo '    <li><a class="dropdown-item" style="color: black" href="index.php">Home</a></li>';
+                        echo '    <li><a class="dropdown-item" style="color: black" href="miperfil.php">Mi perfil</a></li>';
+                        echo '    <li><a class="dropdown-item" style="color: black" href="panel.php">Mi panel</a></li>';
+                        echo '    <li><a class="dropdown-item" style="color: black" href="logout.php">Cerrar sesion</a></li>';
+                        echo '  </ul>';
+                        echo '</div>';
+                    }else{
+                        echo '<a class="btn" href="inicio_de_sesion.php"><button>Iniciar Sesión</button></a>';
+                    }
+                ?>
+                </li>
            </ul>            
         </nav>
-        <?php
-            session_start();
-
-            if(isset($_SESSION["Correo"])){
-                $Nombre_profesor = $_SESSION["Nombre"];
-
-                echo '<a class="btn" href="#"><button>'.$Nombre_profesor.'</button></a>';
-            }else{
-                echo '<a class="btn" href="#"><button>Nombre</button></a>';
-            }
-        ?>
     </header>
     
     <!--Div para el scrollspy-->
@@ -111,134 +145,98 @@
             </div>
         </div>
 
-        <!--Articulos-->
+        <!--Publicaciones-->
         <div id="articulos" class=" pt-5 mt-5"></div>
         <div class="articulos">
-            <h2>Articulos</h2>
-            <table class="table">
-                <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">First</th>
-                    <th scope="col">Last</th>
-                    <th scope="col">Handle</th>
-                </tr>
+            <h2>Publicaciones</h2>
+            <table class="table mx-auto">
+                <thead class="table-success table-striped">
+                    <tr>
+                        <th>Archivo</th>
+                        <th>Titulo</th>
+                        <th>Fecha</th>
+                    </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>@fat</td>
-                </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>@fat</td>
-                </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>@fat</td>
-                </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>@fat</td>
-                </tr>
+                    <?php
+                        while ($row = mysqli_fetch_array($queryPublicaciones)) {
+                            ?>
+                    <tr>
+                        <td><?php $imagen=$row['archivo'];
+                        echo isset($Imagen_perfil) ? "<img src='$imagen' width='100' height='100'>" : "<p>Imagen no disponible</p>"; ?></td>
+                        <td><?php echo $row['titulo'] ?></td>
+                        <td><?php echo $row['fecha'] ?></td>
+                        
+                    </tr>
+                    <?php
+                        }
+                        ?>
                 </tbody>
             </table>
         </div>
 
         <!--Horario-->
         <div id="horario" class="pt-5 "></div>
-        <div class="horario " >
-            <ul class="nav nav-tabs">
-                <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">Horario de atención</a>
-                </li>
-                <li class="nav-item">
-                <a class="nav-link" href="#">Horario de clases</a>
-                </li>
-            </ul>
-            <div class="testhorario">
-                horario
-            </div>
+        <div class="horario">
+        
+            
+        
+
+
+
+        <!--Div para cerrar horario-->
         </div>
+            
 
-        <!--Tesis-->
 
-        <div class="tesis pt-5 mt-5" id="tesis">
+
+
+
+    <!--Tesis-->
+
+    <div class="tesis pt-5 mt-5" id="tesis">
             <h2>Tesis</h2>
-            <table class="table">
-                <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">First</th>
-                    <th scope="col">Last</th>
-                    <th scope="col">Handle</th>
-                </tr>
+            <table class="table mx-auto">
+                <thead class="table-success table-striped">
+                    <tr>
+                        <th>Titulo</th>
+                        <th>Año</th>
+                        <th>Link</th>
+                    </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>@fat</td>
-                </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>@fat</td>
-                </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>@fat</td>
-                </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>@fat</td>
-                </tr>
+                    <?php
+                        while ($row = mysqli_fetch_array($queryTesis)) {?>
+                    <tr>
+                        <td><?php echo $row['titulo'] ?></td>
+                        <td><?php echo $row['anio'] ?></td>
+                        <td><?php $link = $row['link'];
+                        echo "<a href=\"$link\">$link</a>";?></td>                        
+                    </tr>
+                    <?php
+                        }
+                        ?>
                 </tbody>
             </table>
-        </div>
     </div>
+   
 
     
 
 
     <!--Footer-->
     <div class="footer">
-        <div class= "container-fluid ml-5 ms-5">
-            <div class="row p-5 bg-white text-secondary">
-    
-                <!--Columna1-->
-                <div class="col-xs-12 col-md-6 col-lg-3">
-                    <img src="img/logo-udacorporativo.png" width="300" height="94">
+        <div class="container-fluid">
+            <div class="row p-3 p-md-5 text-secondary">
+
+                <!-- Columna 1 -->
+                <div class="col-xs-12 col-md-6 col-lg-3 mb-3 mb-md-0">
+                    <img src="img/logo-udacorporativo.png" class="img-fluid" alt="Logo UDA">
                 </div>
-                <!--Columna 2-->
-                <div class="col-xs-12 col-md-6 col-lg-3">
-                    <p class="h3">Informacion</p>
+
+                <!-- Columna 2 -->
+                <div class="col-xs-12 col-md-6 col-lg-3 mb-3 mb-md-0">
+                    <p class="h5">Enlaces</p>
                     <div class="mb-2 enlacesfooter">
                         <a class="text-secondary text-decoration-none" href="#">Académicos</a>
                     </div>
@@ -251,10 +249,12 @@
                     <div class="mb-2 enlacesfooter">
                         <a class="text-secondary text-decoration-none" href="#">Publicaciones</a>
                     </div>
+                    <!-- Otros enlaces... -->
                 </div>
-                <!--Columna 3-->
-                <div class="col-xs-12 col-md-6 col-lg-3">
-                    <p class="h3">Links</p>
+
+                <!-- Columna 3 -->
+                <div class="col-xs-12 col-md-6 col-lg-3 mb-3 mb-md-0">
+                    <p class="h5">Links</p>
                     <div class="mb-2 enlacesfooter">
                         <a class="text-secondary text-decoration-none" href="#">Intranet Alumnos</a>
                     </div>
@@ -276,11 +276,12 @@
                     <div class="mb-2 enlacesfooter">
                         <a class="text-secondary text-decoration-none" href="#">Instagram</a>
                     </div>
+                    <!-- Otros enlaces... -->
                 </div>
-    
-                <!--Columna 4-->
+
+                <!-- Columna 4 -->
                 <div class="col-xs-12 col-md-6 col-lg-3">
-                    <p class="h3">Contactos</p>
+                    <p class="h5">Contactos</p>
                     <div class="mb-2">
                         <p>Ubícanos en<br>Copiapó, Av. Copayapu 485</p>
                     </div>
@@ -291,10 +292,8 @@
                         <p>anakarina.pena@uda.cl</p>
                     </div>
                 </div>
-                
-    
+
             </div>
-    
         </div>
     </div>
     
