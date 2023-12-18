@@ -1,5 +1,4 @@
 <?php
-session_start();
 include("conexion_horario.php");
 include("conexion.php");
 $con = conectar();
@@ -10,10 +9,10 @@ if (!$con) {
 }
 
 
-$correo_persona=$_SESSION["correo"];
+$correo_persona = "andres.alfaro@uda.cl";
 
 // Realizar la consulta SQL para la pestaña 'publicaciones'
-$queryPublicaciones = mysqli_query($con, "SELECT * FROM publicaciones WHERE idprofesor IN (SELECT id from informacion where correo='$correo_persona')");
+$queryPublicaciones = mysqli_query($con, "SELECT * FROM publicaciones WHERE idpublicaciones IN (SELECT id from informacion where correo='$correo_persona')");
 
 // Verificar si la consulta fue exitosa
 if (!$queryPublicaciones) {
@@ -21,7 +20,7 @@ if (!$queryPublicaciones) {
 }
 
 // Realizar la consulta SQL para la pestaña 'tesis'
-$queryTesis = mysqli_query($con, "SELECT * FROM tesis WHERE idprofesor IN (SELECT id from informacion where correo='$correo_persona')");
+$queryTesis = mysqli_query($con, "SELECT * FROM tesis");
 
 // Verificar si la consulta fue exitosa
 if (!$queryTesis) {
@@ -72,13 +71,10 @@ if (!$queryTesis) {
         <nav class="nav-scrollspy" id="navabar-scrollspy">
            <ul class="nav-links text-white">
                 <li class="nav-item">
-                    <a class="nav-link text-reset" href="#informacionpersonal">Info. personal</a>
+                    <a class="nav-link text-reset" href="#informacionpersonal">Informacion personal</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-reset" href="#proyectos">Proyectos</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-reset" href="#articulos">Publicaciones</a>
+                    <a class="nav-link text-reset" href="#articulos">publicaciones</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link text-reset" href="#horario">Horario</a>
@@ -99,9 +95,7 @@ if (!$queryTesis) {
                         echo '  </button>';
                         echo '  <ul class="dropdown-menu">';
                         echo '    <li><a class="dropdown-item" style="color: black" href="index.php">Home</a></li>';
-
                         echo '    <li><a class="dropdown-item" style="color: black" href="miperfil.php">Mi perfil</a></li>';
-
                         echo '    <li><a class="dropdown-item" style="color: black" href="panel.php">Mi panel</a></li>';
                         echo '    <li><a class="dropdown-item" style="color: black" href="logout.php">Cerrar sesion</a></li>';
                         echo '  </ul>';
@@ -115,10 +109,11 @@ if (!$queryTesis) {
         </nav>
     </header>
     
+    <!--Div para el scrollspy-->
 
     
 
-    <!--Informacion personal-->
+        <!--Informacion personal-->
     <div id="informacionpersonal"></div>
     <div class="infopersonal pt-5 mt-5" >
 
@@ -151,12 +146,9 @@ if (!$queryTesis) {
             </div>
     </div>
 
-
-    <!--Proyectos-->
-    
-
-    <!--Publicaciones-->
+        <!--Publicaciones-->
     <div id="articulos" class=" pt-5 mt-5"></div>
+    
     <div class="articulos">
         <h2>Publicaciones</h2>
 
@@ -194,7 +186,6 @@ if (!$queryTesis) {
 
         <h2>Horario</h2>
 
-
         <div class="recuadrohorario">
             <?php
             // Verificar la conexión
@@ -220,7 +211,6 @@ if (!$queryTesis) {
             
             <form action="guardar_horario.php" method="post" id="horarioForm">
 
-
                 <table>
                     <tr>
                         <th></th>
@@ -238,10 +228,6 @@ if (!$queryTesis) {
                                 <td>$hora - " . date('H:i', strtotime("$hora +1 hour 30 minutes")) . "</td>";
 
 
-                    foreach ($horas as $hora) {
-                        echo "<tr>
-                                <td>$hora - " . date('H:i', strtotime("$hora +1 hour 30 minutes")) . "</td>";
-
                         for ($i = 1; $i <= 5; $i++) {
                             $dia_actual = dia_semana($i);
                             $hora_fin = date('H:i', strtotime("$hora +1 hour 30 minutes"));
@@ -249,12 +235,6 @@ if (!$queryTesis) {
                             echo "<td class='$clase_ocupado'><input type='checkbox' name='horario[$hora][$dia_actual]' value='1'></td>";
                         }
 
-                        for ($i = 1; $i <= 5; $i++) {
-                            $dia_actual = dia_semana($i);
-                            $hora_fin = date('H:i', strtotime("$hora +1 hour 30 minutes"));
-                            $clase_ocupado = isset($horario_db[$dia_actual][$hora]) ? 'ocupado' : '';
-                            echo "<td class='$clase_ocupado'><input type='checkbox' name='horario[$hora][$dia_actual]' value='1'></td>";
-                        }
 
                         echo "</tr>";
                     }
@@ -274,7 +254,6 @@ if (!$queryTesis) {
                 document.addEventListener("DOMContentLoaded", function () {
                     var formulario = document.getElementById('horarioForm');
                     var btnModificar = document.getElementById('btnModificar');
-
 
                     btnModificar.addEventListener("click", function (event) {
                         var checkboxes = formulario.querySelectorAll('input[type="checkbox"]');
