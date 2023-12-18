@@ -32,7 +32,8 @@ $sql = "INSERT INTO informacion (nombre, correo, fono, cargo, descripcion, grado
 
 // Ejecutar la consulta
 if ($con->query($sql) === TRUE) {
-    echo "Datos insertados correctamente";
+    echo "<script>alert('¡Ingreso exitoso!');</script>";
+    header("refresh:0;url=panel.php");
 } else {
     echo "Error al insertar datos: " . $con->error;
 }

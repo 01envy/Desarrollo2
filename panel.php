@@ -2,44 +2,80 @@
 include("conexion.php");
 $con = conectar();
 
+session_start();
 
 // Verificar la conexión a la base de datos
 if (!$con) {
     die("Error de conexión a la base de datos: " . mysqli_connect_error());
 }
 
-// Realizar la consulta SQL para la pestaña 'informacion'
-$queryInformacion = mysqli_query($con, "SELECT * FROM informacion");
+$correo_persona = $_SESSION["correo"];
 
-// Verificar si la consulta fue exitosa
-if (!$queryInformacion) {
-    die("Error en la consulta 'informacion': " . mysqli_error($con));
+if ($correo_persona == "admin.admin@uda.cl") {
+    // Realizar la consulta SQL para la pestaña 'informacion'
+    $queryInformacion = mysqli_query($con, "SELECT * FROM informacion");
+
+    // Verificar si la consulta fue exitosa
+    if (!$queryInformacion) {
+        die("Error en la consulta 'informacion': " . mysqli_error($con));
+    }
+
+    // Realizar la consulta SQL para la pestaña 'proyectos'
+    $queryProyectos = mysqli_query($con, "SELECT * FROM proyectos");
+
+    // Verificar si la consulta fue exitosa
+    if (!$queryProyectos) {
+        die("Error en la consulta 'proyectos': " . mysqli_error($con));
+    }
+
+    // Realizar la consulta SQL para la pestaña 'publicaciones'
+    $queryPublicaciones = mysqli_query($con, "SELECT * FROM publicaciones");
+
+    // Verificar si la consulta fue exitosa
+    if (!$queryPublicaciones) {
+        die("Error en la consulta 'publicaciones': " . mysqli_error($con));
+    }
+
+    // Realizar la consulta SQL para la pestaña 'tesis'
+    $queryTesis = mysqli_query($con, "SELECT * FROM tesis");
+
+    // Verificar si la consulta fue exitosa
+    if (!$queryTesis) {
+        die("Error en la consulta 'tesis': " . mysqli_error($con));
+    }
+} else {
+    // Realizar la consulta SQL para la pestaña 'informacion'
+    $queryInformacion = mysqli_query($con, "SELECT * FROM informacion WHERE correo='$correo_persona'");
+
+    // Verificar si la consulta fue exitosa
+    if (!$queryInformacion) {
+        die("Error en la consulta 'informacion': " . mysqli_error($con));
+    }
+
+    // Realizar la consulta SQL para la pestaña 'proyectos'
+    $queryProyectos = mysqli_query($con, "SELECT * FROM proyectos WHERE idprofesor IN (SELECT id FROM informacion WHERE correo='$correo_persona')");
+
+    // Verificar si la consulta fue exitosa
+    if (!$queryProyectos) {
+        die("Error en la consulta 'proyectos': " . mysqli_error($con));
+    }
+
+    // Realizar la consulta SQL para la pestaña 'publicaciones'
+    $queryPublicaciones = mysqli_query($con, "SELECT * FROM publicaciones WHERE idprofesor IN (SELECT id FROM informacion WHERE correo='$correo_persona')");
+
+    // Verificar si la consulta fue exitosa
+    if (!$queryPublicaciones) {
+        die("Error en la consulta 'publicaciones': " . mysqli_error($con));
+    }
+
+    // Realizar la consulta SQL para la pestaña 'tesis'
+    $queryTesis = mysqli_query($con, "SELECT * FROM tesis WHERE idprofesor IN (SELECT id FROM informacion WHERE correo='$correo_persona')");
+
+    // Verificar si la consulta fue exitosa
+    if (!$queryTesis) {
+        die("Error en la consulta 'tesis': " . mysqli_error($con));
+    }
 }
-
-// Realizar la consulta SQL para la pestaña 'proyectos'
-$queryProyectos = mysqli_query($con, "SELECT * FROM proyectos");
-
-// Verificar si la consulta fue exitosa
-if (!$queryProyectos) {
-    die("Error en la consulta 'proyectos': " . mysqli_error($con));
-}
-
-// Realizar la consulta SQL para la pestaña 'publicaciones'
-$queryPublicaciones = mysqli_query($con, "SELECT * FROM publicaciones");
-
-// Verificar si la consulta fue exitosa
-if (!$queryPublicaciones) {
-    die("Error en la consulta 'publicaciones': " . mysqli_error($con));
-}
-
-// Realizar la consulta SQL para la pestaña 'tesis'
-$queryTesis = mysqli_query($con, "SELECT * FROM tesis");
-
-// Verificar si la consulta fue exitosa
-if (!$queryTesis) {
-    die("Error en la consulta 'tesis': " . mysqli_error($con));
-}
-
 ?>
 
 <!DOCTYPE html>
@@ -57,14 +93,26 @@ if (!$queryTesis) {
             <div class="logo">
                 <img src="img/logo-udacorp-txtblanco.png" alt="Logo de la marca">
             </div>
-            <nav>
-            <ul class="nav-links">
-                    <li><a class="nav-link" href="#">Boton 1</a></li>
-                    <li><a class="nav-link" href="#">Boton 2</a></li>
-                    <li><a class="nav-link" href="#">Boton 3</a></li>
-            </ul>            
-            </nav>
-            <a class="btn" href="#"><button>Nombre</button></a>
+            <?php
+                    session_start();
+
+                    if(isset($_SESSION["correo"])){
+                        $Nombre_profesor = $_SESSION["nombre"];
+
+                        echo '<div class="btn-group">';
+                        echo '  <button type="button" class="btn btn-success dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">';
+                        echo $Nombre_profesor;
+                        echo '  </button>';
+                        echo '  <ul class="dropdown-menu">';
+                        echo '    <li><a class="dropdown-item" style="color: black" href="index.php">Home</a></li>';
+                        echo '    <li><a class="dropdown-item" style="color: black" href="panel.php">Mi panel</a></li>';
+                        echo '    <li><a class="dropdown-item" style="color: black" href="logout.php">Cerrar sesion</a></li>';
+                        echo '  </ul>';
+                        echo '</div>';
+                    }else{
+                        echo '<a class="btn" href="inicio_de_sesion.php"><button>Iniciar Sesión</button></a>';
+                    }
+                ?>
         </header>
 
 <body>
@@ -185,7 +233,6 @@ if (!$queryTesis) {
                                     <input type="file" class="form-control" id="inputGroupFile01" name="imagen">
                                 </div>
                                 <button type="submit" class="btn btn-primary" onclick="alert('¿Estas seguro de enviar estos datos?')">Enviar</button>
-                                <p class="text-center">¿Ya estás registrado? Inicia sesión <a href="inicio_de_sesion.html">Aquí</a></p>
                             </form>
                         </div>
                     </div>
@@ -213,12 +260,13 @@ if (!$queryTesis) {
                     ?>
                     <tr>
                         <td><?php echo $row['id'] ?></td>
-                        <td><img style="width:100px" src="imagenes/<?php echo $row['imagen']; ?>" alt="Imagen de perfil"></td>
+                        <td><img style="width:100px" src="<?php echo $row['imagen']; ?>" alt="Imagen de perfil"></td>
+
                         <td><?php echo $row['nombre'] ?></td>
                         <td><?php echo $row['correo'] ?></td>
                         <td><?php echo $row['cargo'] ?></td>
                         <td><?php echo $row['contrasena'] ?></td>
-                        <td><?php echo $row['descripcion'] ?></td>
+                        <td><?php echo substr($row['descripcion'], 0, 100); ?></td>
                         <td><?php echo $row['areasInteres'] ?></td>
 
                         <td><button type="button" class="btn btn-info" data-bs-toggle="modal"data-bs-target="#editModal2<?php echo $row['id']; ?>">Editar</button></td>
@@ -291,7 +339,9 @@ if (!$queryTesis) {
                                             <label class="input-group-text" for="inputGroupFile01">Imagen de perfil:</label>
                                             <input type="file" class="form-control" id="inputGroupFile01" name="imagen" value="imagenes/<?php echo $row['imagen']; ?>">
                                         </div>
+
                                         <img src="imagenes/<?php echo $row['imagen']; ?>" alt="Imagen de perfil actual" class="mb-3" width="100">
+
                                         <button type="submit" class="btn btn-primary" onclick="return confirm('¿Estás seguro de enviar estos datos?')">Actualizar</button>
                                         <a href="panel.php" class="btn btn-primary">Volver</a>
 
@@ -641,7 +691,7 @@ if (!$queryTesis) {
                         <th>Titulo</th>
                         <th>Año</th>
                         <th>Link</th>
-
+                        <th></th>
                         <th></th>
                         <th></th>
                     </tr>
@@ -727,73 +777,84 @@ if (!$queryTesis) {
 
     <!--Footer-->
     <div class="footer">
-        <div class= "container-fluid ml-5 ms-5">
-            <div class="row p-5 bg-white text-secondary">
-    
-                <!--Columna1-->
-                <div class="col-xs-12 col-md-6 col-lg-3">
-                    <img src="img/logo-udacorporativo.png" width="300" height="94">
+
+            <div class="container-fluid">
+                <div class="row p-3 p-md-5 text-secondary">
+
+                    <!-- Columna 1 -->
+                    <div class="col-xs-12 col-md-6 col-lg-3 mb-3 mb-md-0">
+                        <img src="img/logo-udacorporativo.png" class="img-fluid" alt="Logo UDA">
+                    </div>
+
+                    <!-- Columna 2 -->
+                    <div class="col-xs-12 col-md-6 col-lg-3 mb-3 mb-md-0">
+                        <p class="h5">Enlaces</p>
+
+                        <div class="mb-2 enlacesfooter">
+                            <a class="text-secondary text-decoration-none" href="#">Académicos</a>
+                        </div>
+                        <div class="mb-2 enlacesfooter">
+                            <a class="text-secondary text-decoration-none" href="#">Noticias</a>
+                        </div>
+                        <div class="mb-2 enlacesfooter">
+                            <a class="text-secondary text-decoration-none" href="#">Eventos</a>
+                        </div>
+                        <div class="mb-2 enlacesfooter">
+                            <a class="text-secondary text-decoration-none" href="#">Publicaciones</a>
+                        </div>
+
+                        <!-- Otros enlaces... -->
+                    </div>
+
+                    <!-- Columna 3 -->
+                    <div class="col-xs-12 col-md-6 col-lg-3 mb-3 mb-md-0">
+                        <p class="h5">Links</p>
+
+                        <div class="mb-2 enlacesfooter">
+                            <a class="text-secondary text-decoration-none" href="#">Intranet Alumnos</a>
+                        </div>
+                        <div class="mb-2 enlacesfooter">
+                            <a class="text-secondary text-decoration-none" href="#">Intranet Académicos</a>
+                        </div>
+                        <div class="mb-2 enlacesfooter">
+                            <a class="text-secondary text-decoration-none" href="#">Moodle</a>
+                        </div>
+                        <div class="mb-2 enlacesfooter">
+                            <a class="text-secondary text-decoration-none" href="#">Biblioteca</a>
+                        </div>
+                        <div class="mb-2 enlacesfooter">
+                            <a class="text-secondary text-decoration-none" href="#">FSCU</a>
+                        </div>
+                        <div class="mb-2 enlacesfooter">
+                            <a class="text-secondary text-decoration-none" href="#">Facultad de Ingenieria</a>
+                        </div>
+                        <div class="mb-2 enlacesfooter">
+                            <a class="text-secondary text-decoration-none" href="#">Instagram</a>
+                        </div>
+
+                        <!-- Otros enlaces... -->
+                    </div>
+
+                    <!-- Columna 4 -->
+                    <div class="col-xs-12 col-md-6 col-lg-3">
+                        <p class="h5">Contactos</p>
+                        <div class="mb-2">
+                            <p>Ubícanos en<br>Copiapó, Av. Copayapu 485</p>
+                        </div>
+                        <div class="mb-2">
+                            <p>(52) 2 255555</p>
+                        </div>
+                        <div class="mb-2">
+                            <p>anakarina.pena@uda.cl</p>
+                        </div>
+                    </div>
+
+
                 </div>
-                <!--Columna 2-->
-                <div class="col-xs-12 col-md-6 col-lg-3">
-                    <p class="h3">Informacion</p>
-                    <div class="mb-2 enlacesfooter">
-                        <a class="text-secondary text-decoration-none" href="#">Académicos</a>
-                    </div>
-                    <div class="mb-2 enlacesfooter">
-                        <a class="text-secondary text-decoration-none" href="#">Noticias</a>
-                    </div>
-                    <div class="mb-2 enlacesfooter">
-                        <a class="text-secondary text-decoration-none" href="#">Eventos</a>
-                    </div>
-                    <div class="mb-2 enlacesfooter">
-                        <a class="text-secondary text-decoration-none" href="#">Publicaciones</a>
-                    </div>
-                </div>
-                <!--Columna 3-->
-                <div class="col-xs-12 col-md-6 col-lg-3">
-                    <p class="h3">Links</p>
-                    <div class="mb-2 enlacesfooter">
-                        <a class="text-secondary text-decoration-none" href="#">Intranet Alumnos</a>
-                    </div>
-                    <div class="mb-2 enlacesfooter">
-                        <a class="text-secondary text-decoration-none" href="#">Intranet Académicos</a>
-                    </div>
-                    <div class="mb-2 enlacesfooter">
-                        <a class="text-secondary text-decoration-none" href="#">Moodle</a>
-                    </div>
-                    <div class="mb-2 enlacesfooter">
-                        <a class="text-secondary text-decoration-none" href="#">Biblioteca</a>
-                    </div>
-                    <div class="mb-2 enlacesfooter">
-                        <a class="text-secondary text-decoration-none" href="#">FSCU</a>
-                    </div>
-                    <div class="mb-2 enlacesfooter">
-                        <a class="text-secondary text-decoration-none" href="#">Facultad de Ingenieria</a>
-                    </div>
-                    <div class="mb-2 enlacesfooter">
-                        <a class="text-secondary text-decoration-none" href="#">facebook</a>
-                    </div>
-                </div>
-    
-                <!--Columna 4-->
-                <div class="col-xs-12 col-md-6 col-lg-3">
-                    <p class="h3">Contactos</p>
-                    <div class="mb-2">
-                        <p>Ubícanos en<br>Copiapó, Av. Copayapu 485</p>
-                    </div>
-                    <div class="mb-2">
-                        <p>(52) 2 255555</p>
-                    </div>
-                    <div class="mb-2">
-                        <p>anakarina.pena@uda.cl</p>
-                    </div>
-                </div>
-                
-    
+
             </div>
+    </div>
     
-        </div>
     </div>
 </body>
 <script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"></script>

@@ -1,4 +1,5 @@
 <?php
+session_start();
 include("conexion.php");
 $con = conectar();
 
@@ -7,8 +8,9 @@ $con = conectar();
 $nuevoTitulo = $_POST['R_titulo'];
 $nuevoAnio = $_POST['R_anio'];
 $nuevoLink = $_POST['R_link'];
+$idprofesor=$_SESSION['id'];
 // Query para insertar los datos
-$sql = "INSERT INTO proyectos (titulo, anio, link) VALUES (?, ?, ?)";
+$sql = "INSERT INTO proyectos (titulo, anio, link,idprofesor) VALUES (?, ?, ?,?)";
 
 
 $stmt = $con->prepare($sql);
@@ -16,11 +18,11 @@ $stmt = $con->prepare($sql);
 if ($stmt) {
     // Vincular parámetros
 
-    $stmt->bind_param("sss", $nuevoTitulo, $nuevoAnio, $nuevoLink);
+    $stmt->bind_param("ssss", $nuevoTitulo, $nuevoAnio, $nuevoLink,$idprofesor);
 
 
     if ($stmt->execute()) {
-        echo "<script>alert('¡Inicio de sesión exitoso!');</script>";
+        echo "<script>alert('¡Ingreso exitoso!');</script>";
         header("refresh:0;url=panel.php");
     } else {
         echo "Error al insertar datos: " . $stmt->error;

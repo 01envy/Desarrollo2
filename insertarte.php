@@ -1,4 +1,5 @@
 <?php
+session_start();
 include("conexion.php");
 $con = conectar();
 
@@ -6,9 +7,10 @@ $con = conectar();
 $nuevoTitulo = $_POST['R_titulo'];
 $nuevoAnio = $_POST['R_anio'];
 $nuevoLink = $_POST['R_link'];
+$idprofesor=$_SESSION['id'];
 
 // Query para insertar los datos
-$sql = "INSERT INTO tesis (titulo, anio, link) VALUES ('$nuevoTitulo', '$nuevoAnio', '$nuevoLink')";
+$sql = "INSERT INTO tesis (titulo, anio, link,idprofesor) VALUES ('$nuevoTitulo', '$nuevoAnio', '$nuevoLink','$idprofesor')";
 
 $stmt = $con->prepare($sql);
 
@@ -18,6 +20,7 @@ if ($stmt) {
 
     if ($stmt->execute()) {
         echo "Datos insertados correctamente";
+        header("refresh:0;url=panel.php");
     } else {
         echo "Error al insertar datos: " . $stmt->error;
     }

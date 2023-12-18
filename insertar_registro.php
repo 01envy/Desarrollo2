@@ -10,26 +10,35 @@
     $Grado_Re = $_POST["R_grado"];
     $Contrasena_Re = $_POST["R_contrasena"];
 
+    $hashed_contrasena = password_hash($Contrasena_Re, PASSWORD_DEFAULT);
+
     $Areas_de_interes_Re = isset($_POST['AreasInteres']) ? $_POST['AreasInteres'] : [];
     $Areas_de_interes_Re_Str = implode(", ", $Areas_de_interes_Re);
 
     $Imagen = '';
 
-    if(isset($_FILES["R_imagen_perfil"])){
+    if (isset($_FILES["R_imagen_perfil"])) {
         $file = $_FILES["R_imagen_perfil"];
         $Nombre_I = $file["name"];
 
-        $Ruta_provisional= $file["tmp_name"];
-
-        $Carpeta = "fotos/";
-
-        $src = $Carpeta.$Nombre_I;
-        move_uploaded_file($Ruta_provisional, $src);
-        $Imagen_de_Perfil= "fotos/".$Nombre_I;
+        if (!empty($Nombre_I)) {
+            // Se proporcionó una imagen, procesa la carga
+            $Ruta_provisional = $file["tmp_name"];
+            $Carpeta = "imagenes/";
+            $src = $Carpeta . $Nombre_I;
+            move_uploaded_file($Ruta_provisional, $src);
+            $Imagen_de_Perfil = "imagenes/" . $Nombre_I;
+        } else {
+            // No se proporcionó ninguna imagen, utiliza la imagen predeterminada
+            $Imagen_de_Perfil = "img/icono.png";
+        }
+    } else {
+        // No se proporcionó ninguna imagen, utiliza la imagen predeterminada
+        $Imagen_de_Perfil = "fotos/imagen_predeterminada.jpg";
     }
 
-    $sql = "INSERT INTO profesores (Nombre, Correo, Fono, Cargo, Descripcion, Grado, Contrasena, Areas, Imagen_perfil) 
-    VALUES ('$Nombre_Re', '$Correo_Re', '$Fono_Re', '$Cargo_Re', '$Descripcion_Re', '$Grado_Re', '$Contrasena_Re', '$Areas_de_interes_Re_Str', '$Imagen_de_Perfil')";
+    $sql = "INSERT INTO informacion (nombre, correo, fono, cargo, descripcion, grado, contrasena, areasInteres, imagen) 
+    VALUES ('$Nombre_Re', '$Correo_Re', '$Fono_Re', '$Cargo_Re', '$Descripcion_Re', '$Grado_Re', '$hashed_contrasena', '$Areas_de_interes_Re_Str', '$Imagen_de_Perfil')";
 
     $query = mysqli_query($con, $sql);
 
