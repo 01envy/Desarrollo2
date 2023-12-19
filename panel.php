@@ -80,25 +80,27 @@ if ($correo_persona == "admin.admin@uda.cl") {
 
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <title>PAGINA ALUMNO</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="style.css">
-
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous"></head>
+    <link rel="stylesheet" href="estilosindex.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+</head>
+<body class="position-relative" data-spy="scroll" data-target="#navabar-scrollspy">
     <!--Barra de navegacion-->
-    <header class="header sticky-top navbar nav-scrollspy" id="navabar-scrollspy">
-        <div class="logo">
-            <img src="img/logo-udacorp-txtblanco.png" alt="Logo de la marca">
-        </div>
-        <nav style="margin-right: 50px">
+    <header class="header">
+            <div class="logo">
+                <img src="img/logo-udacorp-txtblanco.png" alt="Logo de la marca">
+            </div>
+            <nav class="nav-scrollspy" id="navabar-scrollspy">
+            <ul class="nav-links text-white">
+                <li class="nav-item">
                 <?php
                     if(isset($_SESSION["correo"])){
                         $Nombre_profesor = $_SESSION["nombre"];
 
-                        echo '<div class="btn-group">';
+                        echo '<div class="btn-group" style="padding-right: 10px">';
                         echo '  <button type="button" class="btn btn-success dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">';
                         echo $Nombre_profesor;
                         echo '  </button>';
@@ -112,7 +114,9 @@ if ($correo_persona == "admin.admin@uda.cl") {
                     }else{
                         echo '<a class="btn" href="inicio_de_sesion.php"><button>Iniciar Sesión</button></a>';
                     }
-                ?>           
+                ?>
+                </li>
+            </ul>            
         </nav>
     </header>
 
@@ -142,6 +146,10 @@ if ($correo_persona == "admin.admin@uda.cl") {
 </ul>
 
 <!--a-->
+<<<<<<< HEAD
+    
+=======
+>>>>>>> 5ff8292774f80e8929d1dd0ad5a8e3ef543980e2
 
     <div class="tab-content mt-2">
         <!-- Informacion -->
@@ -162,7 +170,7 @@ if ($correo_persona == "admin.admin@uda.cl") {
 
                                 <div>
                                     <label for="I_nombre">Nombre:</label>
-                                    <input type="text" class="form-control" name="R_nombre" id="I_nombre required">
+                                    <input type="text" class="form-control" name="R_nombre" id="I_nombre" required>
                                     <div id="error-nombre" class="text-danger"></div>
                                 </div>
                                 <div>
@@ -236,19 +244,29 @@ if ($correo_persona == "admin.admin@uda.cl") {
                     </div>
                 </div>
             </div>
-
-            <table class="table mx-auto">
+            <div class="col-3" style="padding-top: 10px">
+                <input type="text" class="form-control" id="inputBuscarNombre" placeholder="Buscar por nombre" oninput="buscarTabla()">
+            </div>
+            <table class="table mx-auto" id="tablaProfesores">
                 <thead class="table-success table-striped">
                     <tr>
                         <th>Id</th>
+<<<<<<< HEAD
+                        <th>Imagen</th>
+=======
 
                         <th>imagen</th>
+>>>>>>> 5ff8292774f80e8929d1dd0ad5a8e3ef543980e2
                         <th>Nombre</th>
                         <th>Email</th>
                         <th>Cargo</th>
                         <th>Informacion</th>
+<<<<<<< HEAD
+                        <th>Area</th>
+=======
                         <th>Areas</th>
 
+>>>>>>> 5ff8292774f80e8929d1dd0ad5a8e3ef543980e2
                         <th></th>
                         <th></th>
                     </tr>
@@ -259,15 +277,22 @@ if ($correo_persona == "admin.admin@uda.cl") {
                     ?>
                     <tr>
                         <td><?php echo $row['id'] ?></td>
-                        <td><?php echo $row['imagen'] ?></td>
+                        <td><img style="width:100px" src="<?php echo $row['imagen']; ?>" alt="Imagen de perfil"></td>
+
                         <td><?php echo $row['nombre'] ?></td>
                         <td><?php echo $row['correo'] ?></td>
                         <td><?php echo $row['cargo'] ?></td>
+<<<<<<< HEAD
+                        <td><?php echo substr($row['descripcion'], 0, 100); ?></td>
+=======
 
                         <td><?php echo $row['descripcion'] ?></td>
+>>>>>>> 5ff8292774f80e8929d1dd0ad5a8e3ef543980e2
                         <td><?php echo $row['areasInteres'] ?></td>
-                        <td><button type="button" class="btn btn-info" data-bs-toggle="modal"data-bs-target="#editModal<?php echo $row['id']; ?>">Editar</button></td>
-                        <div class="modal fade" id="editModal<?php echo $row['id']; ?>" tabindex="-1" aria-labelledby="editModalLabel<?php echo $row['id']; ?>" aria-hidden="true">
+
+                        <td><button type="button" class="btn btn-info" data-bs-toggle="modal"data-bs-target="#editModal2<?php echo $row['id']; ?>">Editar</button></td>
+                        <div class="modal fade" id="editModal2<?php echo $row['id']; ?>" tabindex="-1"aria-labelledby="editModalLabel<?php echo $row['id']; ?>" aria-hidden="true">
+
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
@@ -276,27 +301,73 @@ if ($correo_persona == "admin.admin@uda.cl") {
                                     </div>
                                     <div style="color:black" class="modal-body">
                                     <!--formulario de actualizar-->
-                                        <form action="update.php" method="POST">
 
-                                            <input type="hidden" name="id" value="<?php echo $row['id'] ?? ''; ?>">
+                                        <form action="actualizarinfo.php" method="POST" enctype="multipart/form-data">
 
-                                            <label>Nombre</label>
-                                            <input type="text" class="form-control mb-3" name="nombre"placeholder="Nombre" value="<?php echo $row['nombre'] ?? ''; ?>">
-                                            <label>Apellido</label>
-                                            <input type="text" class="form-control mb-3" name="apellido"placeholder="Apellido" value="<?php echo $row['apellido'] ?? ''; ?>">
-                                            <label>imagen</label>
-                                            <input type="text" class="form-control mb-3" name="imagen"placeholder="Imagen" value="<?php echo $row['imagen'] ?? ''; ?>">
-                                            <label>Correo</label>
-                                            <input type="text" class="form-control mb-3" name="correo"placeholder="Correo" value="<?php echo $row['correo'] ?? ''; ?>">
-                                            <label>Cargo Academico</label>
-                                            <input type="text" class="form-control mb-3" name="cargo"placeholder="Cargo Academico" value="<?php echo $row['cargo'] ?? ''; ?>">
-                                            <label>Informacion</label>
-                                            <input type="text" class="form-control mb-3" name="informacion"placeholder="Informacion" value="<?php echo $row['informacion'] ?? ''; ?>">
-                                            <label>Rut</label>
-                                            <input type="text" class="form-control mb-3" name="rut"placeholder="12345678-9" value="<?php echo $row['rut'] ?? ''; ?>">
-                                            <button type="submit" class="btn btn-primary">Actualizar</button>
-                                            <a href="panel.php" class="btn btn-primary">Volver</a>
+                                        <input type="hidden" name="id" value="<?php echo $row['id'] ?? ''; ?>">
+
+                                        <label for="R_nombre">Nombre:</label>
+                                        <input type="text" class="form-control mb-3" name="R_nombre" placeholder="Nombre" value="<?php echo $row['nombre'] ?? ''; ?>">
+
+                                        <label for="R_correo">Correo:</label>
+                                        <input type="email" class="form-control mb-3" name="R_correo" placeholder="Correo" value="<?php echo $row['correo'] ?? ''; ?>">
+
+                                        <label for="R_fono">Fono:</label>
+                                        <input type="text" class="form-control mb-3" name="R_fono" placeholder="Fono" value="<?php echo $row['fono'] ?? ''; ?>">
+
+                                        <label for="R_cargo">Cargo:</label>
+                                        <input type="text" class="form-control mb-3" name="R_cargo" placeholder="Cargo" value="<?php echo $row['cargo'] ?? ''; ?>">
+
+                                        <label for="I_descripcion">Descripción:</label>
+                                        <textarea class="form-control mb-3" name="I_descripcion" placeholder="Descripción"><?php echo $row['descripcion'] ?? ''; ?></textarea>
+
+                                        <label for="R_grado">Grado académico:</label>
+                                        <input type="text" class="form-control mb-3" name="R_grado" placeholder="Grado académico" value="<?php echo $row['grado'] ?? ''; ?>">
+
+                                        <label for="R_contrasena">Contraseña:</label>
+                                        <input type="password" class="form-control mb-3" name="R_contrasena" placeholder="Contraseña">
+
+                                        <label for="R_confirmacion_contrasena">Confirmación de contraseña:</label>
+                                        <input type="password" class="form-control mb-3" name="R_confirmacion_contrasena" placeholder="Confirmación de contraseña">
+
+                                        <div class="container">
+                                            <label>Áreas de interés:</label>
+                                            <div class="row align-items-start">
+                                                <div class="col-4">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" id="I_check1" name="areasInteres[]" value="Gestión informática" <?php echo in_array('Gestión informática', explode(', ', $row['areasInteres'])) ? 'checked' : ''; ?>>
+                                                    <label class="form-check-label" for="I_check1">Gestión informática</label>
+                                                </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" id="I_check2" name="areasInteres[]" value="Ciencia de datos"<?php echo in_array('Ciencia de datos', explode(', ', $row['areasInteres'])) ? 'checked' : ''; ?>>
+                                                        <label class="form-check-label" for="I_check2">Ciencia de datos</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-4">
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" id="I_check3" name="areasInteres[]" value="Ingeniería de software"<?php echo in_array('Ingeniería de software', explode(', ', $row['areasInteres'])) ? 'checked' : ''; ?>>
+                                                        <label class="form-check-label" for="I_check3">Ingeniería de software</label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" id="I_check4" name="areasInteres[]" value="Informática educativa"<?php echo in_array('Informática educativa', explode(', ', $row['areasInteres'])) ? 'checked' : ''; ?>>
+                                                        <label class="form-check-label" for="I_check4">Informática educativa</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div id="error-areas" class="text-danger"></div>
+                                        </div>
+                                        <div class="input-group mb-3">
+                                            <label class="input-group-text" for="inputGroupFile01">Imagen de perfil:</label>
+                                            <input type="file" class="form-control" id="inputGroupFile01" name="imagen" value="imagenes/<?php echo $row['imagen']; ?>">
+                                        </div>
+
+                                        <img src="imagenes/<?php echo $row['imagen']; ?>" alt="Imagen de perfil actual" class="mb-3" width="100">
+
+                                        <button type="submit" class="btn btn-primary" onclick="return confirm('¿Estás seguro de enviar estos datos?')">Actualizar</button>
+                                        <a href="panel.php" class="btn btn-primary">Volver</a>
+
                                         </form>
+
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary"data-bs-dismiss="modal">Cerrar</button>
@@ -306,7 +377,7 @@ if ($correo_persona == "admin.admin@uda.cl") {
                         </div>
                         <!--eliminar-->
                         <td><a class="btn btn-danger" data-bs-toggle="modal"data-bs-target="#confirmDeleteModal<?php echo $row['id']; ?>">Eliminar</a></td>
-                        <div class="modal fade" id="confirmDeleteModal<?php echo $row['id']; ?>" tabindex="-1" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
+                        <div class="modal fade" id="confirmDeleteModal<?php echo $row['id']; ?>" tabindex="-1" aria-labelledby="confirmDeleteModalLabel<?php echo $row['id']; ?>" aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
@@ -318,7 +389,7 @@ if ($correo_persona == "admin.admin@uda.cl") {
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                                        <a href="delete.php?id=<?php echo $row['Id']; ?>" class="btn btn-danger">Eliminar</a>
+                                        <a href="eliminarinfo.php?id=<?php echo $row['id']; ?>" class="btn btn-danger">Eliminar</a>
                                     </div>
                                 </div>
                             </div>
@@ -332,7 +403,6 @@ if ($correo_persona == "admin.admin@uda.cl") {
         </div>
         <!-- Proyectos-->
         <div class="tab-pane fade" id="tabla2">
-
             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ingresarModal2">Ingresar Proyecto</button>
             <!-- Modal para ingresar datos en la tabla 'informacion' -->
             <div class="modal fade" id="ingresarModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -344,29 +414,38 @@ if ($correo_persona == "admin.admin@uda.cl") {
                         </div>
                         <div class="modal-body">
                             <!-- Agrega aquí el formulario para ingresar datos -->
-                            <form action="insertarpro.php" method="GET" class="row g-3 needs-validation" onsubmit="return validar_registro()" novalidate>
+
+                            <form action="insertarpro.php" method="POST" class="row g-3 needs-validation" onsubmit="return validar_registro()" novalidate>
+
                                 <div>
                                     <label for="I_nombre">Titulo:</label>
-                                    <input type="text" class="form-control" name="R_titulo">
+                                    <input type="text" class="form-control" name="R_titulo" id="I_nombre required">
                                     <div id="error-nombre" class="text-danger"></div>
                                 </div>
                                 <div>
                                     <label for="I_correo">Año:</label>
-                                    <input type="email" class="form-control" name="R_anio">
+
+                                    <input type="text" class="form-control" name="R_anio" id="I_correo">
+
                                     <div id="error-correo" class="text-danger"></div>
                                 </div>
                                 <div>
                                     <label for="I_fono">Link:</label>
-                                    <input type="text" class="form-control" name="R_link">
+                                    <input type="text" class="form-control" name="R_link" id="I_fono">
                                     <div id="error-fono" class="text-danger"></div>
                                 </div>
+
                                 <button type="submit" class="btn btn-primary" onclick="alert('¿Estás seguro de enviar estos datos?')">Enviar</button>
+                                <p class="text-center">¿Ya estás registrado? Inicia sesión <a href="inicio_de_sesion.html">Aquí</a></p>
                             </form>
                         </div>
                     </div>
                 </div>
             </div>
-            <table class="table mx-auto">
+            <div class="col-3" style="padding-top: 10px">
+                <input type="text" class="form-control" id="inputBuscarTitulo" placeholder="Buscar por titulo" oninput="buscarTablaproyectos()">
+            </div>
+            <table class="table mx-auto" id="tablaProyectos">
                 <thead class="table-success table-striped">
                     <tr>
                         <th>Id</th>
@@ -380,31 +459,33 @@ if ($correo_persona == "admin.admin@uda.cl") {
                 <tbody style="color:white">
                     <?php
                         while ($row = mysqli_fetch_array($queryProyectos)) {
-                    ?>
+                            ?>
                     <tr>
                         <td><?php echo $row['idproyectos'] ?></td>
                         <td><?php echo $row['titulo'] ?></td>
                         <td><?php echo $row['anio'] ?></td>
                         <td><?php echo $row['link'] ?></td>
                         <td><button type="button" class="btn btn-info" data-bs-toggle="modal"data-bs-target="#editModal<?php echo $row['idproyectos']; ?>">Editar</button></td>
-                        <div class="modal fade" id="editModal2<?php echo $row['idproyectos']; ?>" tabindex="-1" aria-labelledby="editModalLabel<?php echo $row['idproyectos']; ?>" aria-hidden="true">
+                        <div class="modal fade" id="editModal<?php echo $row['idproyectos']; ?>" tabindex="-1"aria-labelledby="editModalLabel<?php echo $row['idproyectos']; ?>" aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="editModalLabel<?php echo $row['idproyectos']; ?>">Editar:</h5>
+                                        <h5 class="modal-title" id="editModalLabel3<?php echo $row['idproyectos']; ?>">Editar:</h5>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal"aria-label="Close"></button>
                                     </div>
                                     <div style="color:black" class="modal-body">
                                     <!--formulario de actualizar-->
-                                        <form action="update.php" method="POST">
-
-                                            <input type="hidden" name="Id"value="<?php echo $row['Id'] ?? ''; ?>">
-
-                                            <label>Nombre</label>
-                                            <input type="text" class="form-control mb-3" name="nombre"placeholder="Nombre" value="<?php echo $row['nombre'] ?? ''; ?>">
-                                            <button type="submit" class="btn btn-primary">Actualizar</button>
-                                            <a href="panel.php" class="btn btn-primary">Volver</a>
-                                        </form>
+                                    <form action="actualizarpro.php" method="POST">
+                                        <input type="hidden" name="idproyectos" value="<?php echo $row['idproyectos']; ?>">
+                                        <label>Titulo</label>
+                                        <input type="text" class="form-control mb-3" name="R_titulo" placeholder="Titulo" value="<?php echo $row['titulo']; ?>">
+                                        <label>Año</label>
+                                        <input type="text" class="form-control mb-3" name="R_anio" placeholder="Año" value="<?php echo $row['anio']; ?>">
+                                        <label>Link</label>
+                                        <input type="text" class="form-control mb-3" name="R_link" placeholder="url" value="<?php echo $row['link']; ?>">
+                                        <button type="submit" class="btn btn-primary">Actualizar</button>
+                                        <a href="panel.php" class="btn btn-primary">Volver</a>
+                                    </form>
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary"data-bs-dismiss="modal">Cerrar</button>
@@ -413,21 +494,20 @@ if ($correo_persona == "admin.admin@uda.cl") {
                             </div>
                         </div>
                         <!--eliminar-->
-                        <td><a class="btn btn-danger" data-bs-toggle="modal"data-bs-target="#confirmDeleteModal<?php echo $row['idproyectos']; ?>">Eliminar</a>
-                        </td>
-                        <div class="modal fade" id="confirmDeleteModal<?php echo $row['Id']; ?>"tabindex="-1" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
+                        <td><a class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal<?php echo $row['idproyectos']; ?>">Eliminar</a></td>
+                        <div class="modal fade" id="confirmDeleteModal<?php echo $row['idproyectos']; ?>" tabindex="-1" aria-labelledby="confirmDeleteModalLabel<?php echo $row['idproyectos']; ?>" aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <h5 class="modal-title" id="confirmDeleteModalLabel">Confirmar Eliminación</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal"aria-label="Close"></button>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
                                         <p>¿Seguro que desea eliminar de forma permanente?</p>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary"data-bs-dismiss="modal">Cancelar</button>
-                                        <a href="delete.php?id=<?php echo $row['proyectos']; ?>"class="btn btn-danger">Eliminar</a>
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                        <a href="eliminarpro.php?id=<?php echo $row['idproyectos']; ?>" class="btn btn-danger">Eliminar</a>
                                     </div>
                                 </div>
                             </div>
@@ -442,23 +522,28 @@ if ($correo_persona == "admin.admin@uda.cl") {
         <!-- Publicaciones -->
         <div class="tab-pane fade" id="tabla3">
             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ingresarModal3">Ingresar Publicacion</button>
-
             <!-- Modal para ingresar datos en la tabla 'informacion' -->
             <div class="modal fade" id="ingresarModal3" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
+<<<<<<< HEAD
+                            <h5 class="modal-title" id="exampleModalLabel">Ingresar Datos</h5>
+=======
 
                             <h5 class="modal-title" id="exampleModalLabel">Ingresar Dato</h5>
 
+>>>>>>> 5ff8292774f80e8929d1dd0ad5a8e3ef543980e2
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
                             <!-- Agrega aquí el formulario para ingresar datos -->
                             <form action="insertarpu.php" method="POST"enctype="multipart/form-data" class="row g-3 needs-validation" onsubmit="return validar_registro()" novalidate>
                                 <div>
-                                    <label for="I_nombre">Titulo:</label>
-                                    <input type="text" class="form-control" name="R_titulo" id="I_nombre required">
+
+                                    <label for="R_titulo">Título:</label>
+                                    <input type="text" class="form-control" name="R_titulo" id="I_nombre" required>
+
                                     <div id="error-nombre" class="text-danger"></div>
                                 </div>
                                 <div>
@@ -488,13 +573,16 @@ if ($correo_persona == "admin.admin@uda.cl") {
                                 </div>
                                 </div>
                                 <button type="submit" class="btn btn-primary" onclick="alert('¿Estás seguro de enviar estos datos?')">Enviar</button>
+                                <p class="text-center">¿Ya estás registrado? Inicia sesión <a href="inicio_de_sesion.html">Aquí</a></p>
                             </form>
                         </div>
                     </div>
                 </div>
             </div>
-
-            <table class="table mx-auto">
+            <div class="col-3" style="padding-top: 10px">
+                <input type="text" class="form-control" id="inputBuscarTituloPublicaciones" placeholder="Buscar por titulo" oninput="buscarTablapublicaciones()">
+            </div>
+            <table class="table mx-auto" id="tablaPublicaciones">
                 <thead class="table-success table-striped">
                     <tr>
                         <th>Id</th>
@@ -525,29 +613,44 @@ if ($correo_persona == "admin.admin@uda.cl") {
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="editModalLabel<?php echo $row['idpublicaciones']; ?>">Editar:</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal"aria-label="Close"></button>
+                                        <h5 class="modal-title" id="editModalLabel<?php echo $row['idpublicaciones']; ?>">Editar Publicación</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
-                                    <div style="color:black" class="modal-body">
-                                    <!--formulario de actualizar-->
-                                        <form action="update.php" method="POST">
-                                            <input type="hidden" name="cod_estudiante"value="<?php echo $row['idpublicaciones'] ?? ''; ?>">
-                                            <label>Nombre</label>
-                                            <input type="text" class="form-control mb-3" name="nombre"placeholder="Nombre" value="<?php echo $row['nombre'] ?? ''; ?>">
+                                    <div class="modal-body">
+                                        <!-- Formulario de actualización -->
+                                        <form action="actualizarpu.php" method="POST" enctype="multipart/form-data">
+                                            <input type="hidden" name="idpublicaciones" value="<?php echo $row['idpublicaciones']; ?>">
+                                            <label for="R_titulo">Título:</label>
+                                            <input type="text" class="form-control" name="R_titulo" value="<?php echo $row['titulo']; ?>">
+                                            
+                                            <label for="R_fecha">Fecha:</label>
+                                            <input type="text" class="form-control" name="R_fecha" value="<?php echo $row['fecha']; ?>">
+                                            
+                                            <label for="R_autor">Autor:</label>
+                                            <input type="text" class="form-control" name="R_autor" value="<?php echo $row['autor']; ?>">
+                                            
+                                            <label for="R_revision">Revisión:</label>
+                                            <input type="text" class="form-control" name="R_revision" value="<?php echo $row['revision']; ?>">
+                                            
+                                            <label for="R_acceso">Acceso:</label>
+                                            <textarea class="form-control" name="R_acceso"><?php echo $row['acceso']; ?></textarea>
+
+                                            <label for="R_archivo">Archivo:</label>
+                                            <input type="file" class="form-control" name="archivo">
+                                            
                                             <button type="submit" class="btn btn-primary">Actualizar</button>
                                             <a href="panel.php" class="btn btn-primary">Volver</a>
                                         </form>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary"data-bs-dismiss="modal">Cerrar</button>
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <!--eliminar-->
-                        <td><a class="btn btn-danger" data-bs-toggle="modal"data-bs-target="#confirmDeleteModal<?php echo $row['idpublicaciones']; ?>">Eliminar</a>
-                        </td>
-                        <div class="modal fade" id="confirmDeleteModal<?php echo $row['Id']; ?>"tabindex="-1" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
+                        <td><a class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal<?php echo $row['idpublicaciones']; ?>">Eliminar</a></td>
+                        <div class="modal fade" id="confirmDeleteModal<?php echo $row['idpublicaciones']; ?>" tabindex="-1" aria-labelledby="confirmDeleteModalLabel<?php echo $row['idpublicaciones']; ?>" aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
@@ -559,7 +662,7 @@ if ($correo_persona == "admin.admin@uda.cl") {
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary"data-bs-dismiss="modal">Cancelar</button>
-                                        <a href="delete.php?id=<?php echo $row['idpublicaciones']; ?>"class="btn btn-danger">Eliminar</a>
+                                        <a href="eliminarpu.php?id=<?php echo $row['idpublicaciones']; ?>"class="btn btn-danger">Eliminar</a>
                                     </div>
                                 </div>
                             </div>
@@ -575,7 +678,6 @@ if ($correo_persona == "admin.admin@uda.cl") {
         <div class="tab-pane fade" id="tabla4">
 
             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ingresarModal4">Ingresar Tesis</button>
-
             <!-- Modal para ingresar datos en la tabla 'informacion' -->
             <div class="modal fade" id="ingresarModal4" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
@@ -603,27 +705,28 @@ if ($correo_persona == "admin.admin@uda.cl") {
                                     <div id="error-fono" class="text-danger"></div>
                                 </div>
                                 <button type="submit" class="btn btn-primary" onclick="alert('¿Estas seguro de enviar estos datos?')">Enviar</button>
+                                <p class="text-center">¿Ya estás registrado? Inicia sesión <a href="inicio_de_sesion.html">Aquí</a></p>
                             </form>
                         </div>
                     </div>
                 </div>
             </div>
-
-            <table class="table mx-auto">
+            <div class="col-3" style="padding-top: 10px">
+                <input type="text" class="form-control" id="inputBuscarTituloTesis" placeholder="Buscar por titulo" oninput="buscarTablatesis()">
+            </div>
+            <table class="table mx-auto" id="tablaTesis">
                 <thead class="table-success table-striped">
                     <tr>
                         <th>Id</th>
                         <th>Titulo</th>
                         <th>Año</th>
                         <th>Link</th>
-
                         <th></th>
                         <th></th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php
-
                         while ($row = mysqli_fetch_array($queryTesis)) {?>
                     <tr>
                         <td><?php echo $row['idtesis'] ?></td>
@@ -640,12 +743,25 @@ if ($correo_persona == "admin.admin@uda.cl") {
                                     </div>
                                     <div style="color:black" class="modal-body">
                                     <!--formulario de actualizar-->
-                                        <form action="update.php" method="POST">
+                                        <form action="actualizarte.php" method="POST">
 
-                                            <input type="hidden" name="Id"value="<?php echo $row['idtesis'] ?? ''; ?>">
+                                            <input type="hidden" name="idtesis" value="<?php echo $row['idtesis'] ?? ''; ?>">
 
-                                            <label>Nombre</label>
-                                            <input type="text" class="form-control mb-3" name="nombre"placeholder="Nombre" value="<?php echo $row['nombre'] ?? ''; ?>">
+                                            <div class="mb-3">
+                                                <label for="titulo" class="form-label">Titulo:</label>
+                                                <input type="text" class="form-control" name="titulo" placeholder="Titulo" value="<?php echo $row['titulo'] ?? ''; ?>">
+                                            </div>
+
+                                            <div class="mb-3">
+                                                <label for="anio" class="form-label">Año:</label>
+                                                <input type="text" class="form-control" name="anio" placeholder="Año" value="<?php echo $row['anio'] ?? ''; ?>">
+                                            </div>
+
+                                            <div class="mb-3">
+                                                <label for="link" class="form-label">Link:</label>
+                                                <input type="text" class="form-control" name="link" placeholder="Link" value="<?php echo $row['link'] ?? ''; ?>">
+                                            </div>
+
                                             <button type="submit" class="btn btn-primary">Actualizar</button>
                                             <a href="panel.php" class="btn btn-primary">Volver</a>
                                         </form>
@@ -657,9 +773,8 @@ if ($correo_persona == "admin.admin@uda.cl") {
                             </div>
                         </div>
                         <!--eliminar-->
-                        <td><a class="btn btn-danger" data-bs-toggle="modal"data-bs-target="#confirmDeleteModal<?php echo $row['idtesis']; ?>">Eliminar</a>
-                        </td>
-                        <div class="modal fade" id="confirmDeleteModal<?php echo $row['idtesis']; ?>"tabindex="-1" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
+                        <td><a class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal<?php echo $row['idtesis']; ?>">Eliminar</a></td>
+                        <div class="modal fade" id="confirmDeleteModal<?php echo $row['idtesis']; ?>" tabindex="-1" aria-labelledby="confirmDeleteModalLabel<?php echo $row['idtesis']; ?>" aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
@@ -671,7 +786,7 @@ if ($correo_persona == "admin.admin@uda.cl") {
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary"data-bs-dismiss="modal">Cancelar</button>
-                                        <a href="delete.php?id=<?php echo $row['idtesis']; ?>"class="btn btn-danger">Eliminar</a>
+                                        <a href="eliminarte.php?id=<?php echo $row['idtesis']; ?>"class="btn btn-danger">Eliminar</a>
                                     </div>
                                 </div>
                             </div>
@@ -687,92 +802,105 @@ if ($correo_persona == "admin.admin@uda.cl") {
 
     <!--Footer-->
     <div class="footer">
-        <div class= "container-fluid ml-5 ms-5">
-            <div class="row p-5 bg-white text-secondary">
-    
-                <!--Columna1-->
-                <div class="col-xs-12 col-md-6 col-lg-3">
-                    <img src="img/logo-udacorporativo.png" width="300" height="94">
+
+            <div class="container-fluid">
+                <div class="row p-3 p-md-5 text-secondary">
+
+                    <!-- Columna 1 -->
+                    <div class="col-xs-12 col-md-6 col-lg-3 mb-3 mb-md-0">
+                        <img src="img/logo-udacorporativo.png" class="img-fluid" alt="Logo UDA">
+                    </div>
+
+                    <!-- Columna 2 -->
+                    <div class="col-xs-12 col-md-6 col-lg-3 mb-3 mb-md-0">
+                        <p class="h5">Enlaces</p>
+
+                        <div class="mb-2 enlacesfooter">
+                            <a class="text-secondary text-decoration-none" href="#">Académicos</a>
+                        </div>
+                        <div class="mb-2 enlacesfooter">
+                            <a class="text-secondary text-decoration-none" href="#">Noticias</a>
+                        </div>
+                        <div class="mb-2 enlacesfooter">
+                            <a class="text-secondary text-decoration-none" href="#">Eventos</a>
+                        </div>
+                        <div class="mb-2 enlacesfooter">
+                            <a class="text-secondary text-decoration-none" href="#">Publicaciones</a>
+                        </div>
+
+                        <!-- Otros enlaces... -->
+                    </div>
+
+                    <!-- Columna 3 -->
+                    <div class="col-xs-12 col-md-6 col-lg-3 mb-3 mb-md-0">
+                        <p class="h5">Links</p>
+
+                        <div class="mb-2 enlacesfooter">
+                            <a class="text-secondary text-decoration-none" href="#">Intranet Alumnos</a>
+                        </div>
+                        <div class="mb-2 enlacesfooter">
+                            <a class="text-secondary text-decoration-none" href="#">Intranet Académicos</a>
+                        </div>
+                        <div class="mb-2 enlacesfooter">
+                            <a class="text-secondary text-decoration-none" href="#">Moodle</a>
+                        </div>
+                        <div class="mb-2 enlacesfooter">
+                            <a class="text-secondary text-decoration-none" href="#">Biblioteca</a>
+                        </div>
+                        <div class="mb-2 enlacesfooter">
+                            <a class="text-secondary text-decoration-none" href="#">FSCU</a>
+                        </div>
+                        <div class="mb-2 enlacesfooter">
+                            <a class="text-secondary text-decoration-none" href="#">Facultad de Ingenieria</a>
+                        </div>
+                        <div class="mb-2 enlacesfooter">
+                            <a class="text-secondary text-decoration-none" href="#">Instagram</a>
+                        </div>
+
+                        <!-- Otros enlaces... -->
+                    </div>
+
+                    <!-- Columna 4 -->
+                    <div class="col-xs-12 col-md-6 col-lg-3">
+                        <p class="h5">Contactos</p>
+                        <div class="mb-2">
+                            <p>Ubícanos en<br>Copiapó, Av. Copayapu 485</p>
+                        </div>
+                        <div class="mb-2">
+                            <p>(52) 2 255555</p>
+                        </div>
+                        <div class="mb-2">
+                            <p>anakarina.pena@uda.cl</p>
+                        </div>
+                    </div>
+
+
                 </div>
-                <!--Columna 2-->
-                <div class="col-xs-12 col-md-6 col-lg-3">
-                    <p class="h3">Informacion</p>
-                    <div class="mb-2 enlacesfooter">
-                        <a class="text-secondary text-decoration-none" href="#">Académicos</a>
-                    </div>
-                    <div class="mb-2 enlacesfooter">
-                        <a class="text-secondary text-decoration-none" href="#">Noticias</a>
-                    </div>
-                    <div class="mb-2 enlacesfooter">
-                        <a class="text-secondary text-decoration-none" href="#">Eventos</a>
-                    </div>
-                    <div class="mb-2 enlacesfooter">
-                        <a class="text-secondary text-decoration-none" href="#">Publicaciones</a>
-                    </div>
-                </div>
-                <!--Columna 3-->
-                <div class="col-xs-12 col-md-6 col-lg-3">
-                    <p class="h3">Links</p>
-                    <div class="mb-2 enlacesfooter">
-                        <a class="text-secondary text-decoration-none" href="#">Intranet Alumnos</a>
-                    </div>
-                    <div class="mb-2 enlacesfooter">
-                        <a class="text-secondary text-decoration-none" href="#">Intranet Académicos</a>
-                    </div>
-                    <div class="mb-2 enlacesfooter">
-                        <a class="text-secondary text-decoration-none" href="#">Moodle</a>
-                    </div>
-                    <div class="mb-2 enlacesfooter">
-                        <a class="text-secondary text-decoration-none" href="#">Biblioteca</a>
-                    </div>
-                    <div class="mb-2 enlacesfooter">
-                        <a class="text-secondary text-decoration-none" href="#">FSCU</a>
-                    </div>
-                    <div class="mb-2 enlacesfooter">
-                        <a class="text-secondary text-decoration-none" href="#">Facultad de Ingenieria</a>
-                    </div>
-                    <div class="mb-2 enlacesfooter">
-                        <a class="text-secondary text-decoration-none" href="#">facebook</a>
-                    </div>
-                </div>
-    
-                <!--Columna 4-->
-                <div class="col-xs-12 col-md-6 col-lg-3">
-                    <p class="h3">Contactos</p>
-                    <div class="mb-2">
-                        <p>Ubícanos en<br>Copiapó, Av. Copayapu 485</p>
-                    </div>
-                    <div class="mb-2">
-                        <p>(52) 2 255555</p>
-                    </div>
-                    <div class="mb-2">
-                        <p>anakarina.pena@uda.cl</p>
-                    </div>
-                </div>
-                
-    
+
             </div>
+    </div>
     
-        </div>
     </div>
 </body>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-
+<script src="js/busqueda_dinamica.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
 <script>
-$(document).ready(function() {
-    $('#buscar').on('input', function() {
+$(document).ready(function () {
+    $('#buscar').on('input', function () {
         var query = $(this).val();
 
         if (query !== '') {
             $.ajax({
                 type: "POST",
                 url: "buscar.php",
+                
                 data: {
                     c: query
                 },
-                success: function(data) {
-                    $('tbody').html(data);
+                success: function (data) {
+                    $('#search-results').html(data);
                 }
             });
         } else {
@@ -782,13 +910,16 @@ $(document).ready(function() {
                 data: {
                     c: ''
                 },
-                success: function(data) {
-                    $('tbody').html(data);
+                success: function (data) {
+                    $('#search-results').html(data);
                 }
             });
         }
     });
 });
+
+
+
 </script>
 
 </html>

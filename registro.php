@@ -17,7 +17,7 @@
         </div>
         <div>
            <ul class="nav-links">
-                <li><a href="#">Bievenido, Por favor inicie sesion</a></li>
+                <li><a href="#">Bienvenido, Por favor inicie sesion</a></li>
 
            </ul>            
         </div>

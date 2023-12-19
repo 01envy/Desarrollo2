@@ -24,10 +24,10 @@
         if (!empty($Nombre_I)) {
             // Se proporcionó una imagen, procesa la carga
             $Ruta_provisional = $file["tmp_name"];
-            $Carpeta = "fotos/";
+            $Carpeta = "imagenes/";
             $src = $Carpeta . $Nombre_I;
             move_uploaded_file($Ruta_provisional, $src);
-            $Imagen_de_Perfil = "fotos/" . $Nombre_I;
+            $Imagen_de_Perfil = "imagenes/" . $Nombre_I;
         } else {
             // No se proporcionó ninguna imagen, utiliza la imagen predeterminada
             $Imagen_de_Perfil = "img/icono.png";

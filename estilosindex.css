@@ -36,7 +36,7 @@ body{
 }
 .header .logo img:hover{
     transform: scale(1.1);
-    color: yellow;
+    color: #dbca11;
 }
 .header .nav-links{
     list-style: none;
@@ -48,7 +48,7 @@ body{
 }
 .header .nav-links li:hover{
     transform: scale(1.1);
-    color: yellow;
+    color: #dbca11;
 }
 .header .nav-links a{
     color: #eceff1;
@@ -82,7 +82,7 @@ body{
 .footer{
     font-family: TrebuchetMS;
     margin: 0 200px 0 200px;
-    background: #f8f9f9;
+
 }
 
 
@@ -213,7 +213,7 @@ body{
 /*---Articulos---*/
 
 .articulos{
-    background-color: rgba(229, 229, 229, 0.956);
+    
     margin: 40px 80px 20px 80px;
     border-radius: 20px;
 }
@@ -221,7 +221,7 @@ body{
 /*---Horario---*/
 
 .horario{
-    background-color: rgba(229, 229, 229, 0.956);
+    
     margin: 40px 80px 20px 80px;
     padding: 0 0 10px 0;
     border-radius: 20px;
@@ -242,19 +242,19 @@ body{
     max-width: 600px;
     margin: 50px auto;
 }
-
 table {
+    width: 100%;
+    border-collapse: collapse;
     margin-top: 20px;
+    font-family: TrebuchetMS;
 }
 
 td.ocupado {
-
-    background-color: #00ff00;
-
+    background-color: #364c59;
 }
 
 th, td {
-    border: 1px solid #dddddd;
+    border: 1px solid #1b3039;
     text-align: left;
     padding: 8px;
 }
@@ -264,5 +264,16 @@ th {
 }
 
 .seleccionado {
-    background-color: green;
+    background-color: #364c59;
+}
+.botonestabla{
+    background-color: #364c59;
+    font-family: TrebuchetMS;
+    color: white;
+    border-radius: 10px;
+}
+.recuadrohorario{
+    background-color: rgba(229, 229, 229, 0.956);
+    padding: 10px 60px 60px 30px;
+    
 }

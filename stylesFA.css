@@ -89,13 +89,16 @@ body{
 
 /*---------formulario inicio----------*/
 
-.formularioinicio {
+
+.formularioinicio{
+
     display: flex;
     border-radius: 20px;
     background-color: rgb(218, 215, 215);
     margin: 100px 300px 200px 300px;
     box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
 }
+
 
 .formularioinicio img {
     max-width: 100%; 
@@ -157,6 +160,7 @@ body{
         margin: 50px 200px; 
     }
 }
+
 
 
 

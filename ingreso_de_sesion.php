@@ -6,10 +6,16 @@ session_start();
 
 $con = conectar();
 
+<<<<<<< HEAD
+if (isset($_GET["btnIngresar_sesion"])) {
+    $correo_login = $_GET["Sesion_correo"];
+    $Contrasena_login = $_GET["Sesion_contrasena"];
+=======
 
 if (isset($_POST["btnIngresar_sesion"])) {
     $correo_login = $_POST["sesion_correo"];
     $Contrasena_login = $_POST["sesion_contrasena"];
+>>>>>>> 5ff8292774f80e8929d1dd0ad5a8e3ef543980e2
 
 
     // Obtener el hash almacenado en la base de datos
