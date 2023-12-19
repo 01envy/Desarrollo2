@@ -76,13 +76,13 @@ $conn->close();
         <div id="carouselExampleFade" class="carousel slide carousel-fade">
             <div class="carousel-inner">
             <div class="carousel-item active">
-                <img src="FotosDIICC/_ALX9325.JPG" class="d-block w-100"  alt="foto_carrusel1">
+                <img src="fotoscarrusel/_ALX9325.JPG" class="d-block w-100"  alt="foto_carrusel1">
             </div>
             <div class="carousel-item">
-                <img src="FotosDIICC/_ALX9336.JPG" class="d-block w-100" alt="foto_carrusel2">
+                <img src="fotoscarrusel/_ALX9336.JPG" class="d-block w-100" alt="foto_carrusel2">
             </div>
             <div class="carousel-item">
-                <img src="FotosDIICC/_ALX9328.JPG" class="d-block w-100" alt="foto_carrusel3">
+                <img src="fotoscarrusel/_ALX9328.JPG" class="d-block w-100" alt="foto_carrusel3">
             </div>
             </div>
             <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
