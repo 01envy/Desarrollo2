@@ -74,6 +74,9 @@ if (!$queryTesis) {
                     <a class="nav-link text-reset" href="#informacionpersonal">Informacion personal</a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link text-reset" href="#proyectos">Proyectos</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link text-reset" href="#articulos">publicaciones</a>
                 </li>
                 <li class="nav-item">
@@ -144,9 +147,97 @@ if (!$queryTesis) {
             </div>
         </div>
 
-        <!--Publicaciones-->
-        <div id="articulos" class=" pt-5 mt-5"></div>
-        <div class="articulos">
+    
+    <!--Proyectos-->
+    <div id="proyectos" class=" pt-5 mt-5"></div>
+    <div class="articulos">
+        <h2>Proyectos</h2>
+
+
+            <table class="table mx-auto">
+                    <thead class="table-success table-striped">
+                        <tr>
+                            
+                            <th>Titulo</th>
+                            <th>Año</th>
+                            <th>Link</th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody style="color:white">
+                        <?php
+
+                            while ($row = mysqli_fetch_array($queryProyectos)) {
+                                ?>
+                        <tr>
+                            
+                            <td><?php echo $row['titulo'] ?></td>
+                            <td><?php echo $row['anio'] ?></td>
+                            <td><?php echo $row['link'] ?></td>
+                            <td><?php echo $row['proyectos'] ?></td>
+
+                            <td><button type="button" class="btn btn-info" data-bs-toggle="modal"data-bs-target="#editModal<?php echo $row['Id']; ?>">Editar</button></td>
+                            <div class="modal fade" id="editModal<?php echo $row['Id']; ?>" tabindex="-1"aria-labelledby="editModalLabel<?php echo $row['Id']; ?>" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="editModalLabel3<?php echo $row['id']; ?>">Editar:</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"aria-label="Close"></button>
+                                        </div>
+                                        <div style="color:black" class="modal-body">
+                                        <!--formulario de actualizar-->
+                                        <form action="actualizarpro.php" method="POST">
+                                            
+                                            <label>Titulo</label>
+                                            <input type="text" class="form-control mb-3" name="R_titulo" placeholder="Titulo" value="<?php echo $row['titulo']; ?>">
+                                            <label>Año</label>
+                                            <input type="text" class="form-control mb-3" name="R_anio" placeholder="Año" value="<?php echo $row['anio']; ?>">
+                                            <label>Link</label>
+                                            <input type="text" class="form-control mb-3" name="R_link" placeholder="url" value="<?php echo $row['link']; ?>">
+                                            <button type="submit" class="btn btn-primary">Actualizar</button>
+                                            <a href="panel.php" class="btn btn-primary">Volver</a>
+                                        </form>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary"data-bs-dismiss="modal">Cerrar</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--eliminar-->
+                            <td><a class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal<?php echo $row['idproyectos']; ?>">Eliminar</a></td>
+                            <div class="modal fade" id="confirmDeleteModal<?php echo $row['idproyectos']; ?>" tabindex="-1" aria-labelledby="confirmDeleteModalLabel<?php echo $row['idproyectos']; ?>" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="confirmDeleteModalLabel">Confirmar Eliminación</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p>¿Seguro que desea eliminar de forma permanente?</p>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                            <a href="eliminarpro.php?id=<?php echo $row['idproyectos']; ?>" class="btn btn-danger">Eliminar</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </tr>
+                        <?php
+                            }
+                            ?>
+                    </tbody>
+            </table>
+
+    </div>
+
+
+
+    <!--Publicaciones-->
+    <div id="articulos" class=" pt-5 mt-5"></div>
+    <div class="articulos">
             <h2>Publicaciones</h2>
             <table class="table mx-auto">
                 <thead class="table-success table-striped">
@@ -172,8 +263,11 @@ if (!$queryTesis) {
                         ?>
                 </tbody>
             </table>
-        </div>
-            <!--Horario-->
+    </div>
+            
+    
+    
+    <!--Horario-->
     <div id="horario" class="pt-5 "></div>
     <div class="horario " >
 
@@ -261,6 +355,9 @@ if (!$queryTesis) {
             </div>
         </div>
     </div>
+
+
+
     <!--Tesis-->
     <div class="tesis pt-5 mt-5" id="tesis">
             <h2>Tesis</h2>
@@ -287,17 +384,25 @@ if (!$queryTesis) {
                 </tbody>
             </table>
     </div>
+
+
     <!--Footer-->
     <div class="footer">
         <div class="container-fluid">
             <div class="row p-3 p-md-5 text-secondary">
+
                 <!-- Columna 1 -->
                 <div class="col-xs-12 col-md-6 col-lg-3 mb-3 mb-md-0">
                     <img src="img/logo-udacorporativo.png" class="img-fluid" alt="Logo UDA">
                 </div>
+
                 <!-- Columna 2 -->
                 <div class="col-xs-12 col-md-6 col-lg-3 mb-3 mb-md-0">
                     <p class="h5">Enlaces</p>
+
+                    <div class="mb-2 enlacesfooter">
+                        <a class="text-secondary text-decoration-none" href="nosotros.php">Nosotros</a>
+                    </div>
                     <div class="mb-2 enlacesfooter">
                         <a class="text-secondary text-decoration-none" href="#">Académicos</a>
                     </div>
@@ -310,12 +415,14 @@ if (!$queryTesis) {
                     <div class="mb-2 enlacesfooter">
                         <a class="text-secondary text-decoration-none" href="#">Publicaciones</a>
                     </div>
+
                     <!-- Otros enlaces... -->
                 </div>
 
                 <!-- Columna 3 -->
                 <div class="col-xs-12 col-md-6 col-lg-3 mb-3 mb-md-0">
                     <p class="h5">Links</p>
+
                     <div class="mb-2 enlacesfooter">
                         <a class="text-secondary text-decoration-none" href="#">Intranet Alumnos</a>
                     </div>
@@ -337,8 +444,10 @@ if (!$queryTesis) {
                     <div class="mb-2 enlacesfooter">
                         <a class="text-secondary text-decoration-none" href="#">Instagram</a>
                     </div>
+
                     <!-- Otros enlaces... -->
                 </div>
+
                 <!-- Columna 4 -->
                 <div class="col-xs-12 col-md-6 col-lg-3">
                     <p class="h5">Contactos</p>
@@ -353,7 +462,9 @@ if (!$queryTesis) {
                     </div>
                 </div>
 
+
             </div>
+
         </div>
     </div>
     <!--Scripts de boostrap-->
