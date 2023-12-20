@@ -1,0 +1,185 @@
+
+
+@font-face {
+    font-family: MontserratSemibold;
+    src: url(fonts/Montserrat\ Semibold.ttf);
+}
+@font-face {
+    font-family: MontserratRegular;
+    src: url(fonts/Montserrat\ Regular.ttf);
+}
+@font-face {
+    font-family: TrebuchetMS;
+    src: url(fonts/TrebuchetMS.ttf);
+}
+
+body{
+    padding: 0;
+    margin: 0;
+}
+
+
+.header{
+    background-color: #364c59;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    height: 85px;
+    padding: 5px 10%;
+    font-family: TrebuchetMS;
+}
+
+.header .logo{
+    cursor: pointer;
+    margin-right: auto;
+}
+
+.header .logo img{
+    height: 70px;
+    width: auto;
+    transition: all 0.3s;
+}
+
+.header .logo img:hover{
+    transform: scale(1.1);
+}
+
+.header .nav-links{
+    list-style: none;
+}
+
+.header .nav-links li{
+    display: inline-block;
+    padding: 0 20px;    
+    transition: all 0.3s ease 0s;
+}
+
+.header .nav-links li:hover{
+    transform: scale(1.1);
+}
+
+.header .nav-links a{
+    color: #eceff1;
+    text-decoration: none;    
+}
+
+.header .btn button{
+    margin-left: 20px;
+    font-weight: 700;
+    color: #1b3039;
+    padding: 9px 25px;
+    background: #eceff1;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease 0s;
+}
+
+.header .btn button:hover{
+    background-color: #e2f1f8;
+    color: #dbca11;
+    transform: scale(1.1);
+}
+.enlacesfooter{
+    transition: all 0.5s ease 0s;
+}
+.enlacesfooter:hover{
+    padding-left: 6px;
+}
+
+/*---------formulario inicio----------*/
+
+
+.formularioinicio{
+
+    display: flex;
+    border-radius: 20px;
+    background-color: rgb(218, 215, 215);
+    margin: 100px 300px 200px 300px;
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+}
+
+
+.formularioinicio img {
+    max-width: 100%; 
+    max-height: 100%; 
+    object-fit: cover; 
+    border-bottom-left-radius: 20px;
+    border-top-left-radius: 20px;
+    background-position: center center;
+    margin-right: 120px;
+}
+
+.formulario {
+    margin-top: 90px;
+    width: 100%;
+    
+}
+
+@media (max-width: 768px) {
+    .formularioinicio {
+        flex-direction: column;
+        margin: 20px auto;
+    }
+
+    .formularioinicio img {
+        border-bottom-left-radius: 0;
+        border-top-left-radius: 0;
+    }
+}
+
+
+
+
+/*------Formulario registro------*/
+
+
+.formularioregistro {
+    display: flex;
+    border-radius: 20px;
+    background-color: rgb(218, 215, 215);
+    margin: 50px auto; 
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+    overflow: hidden; 
+}
+
+.formularioregistro img {
+    width: 100%;
+    height: auto;
+    object-fit: cover; 
+}
+
+.contenedor_formulario {
+    padding: 40px;
+    width: 100%;
+}
+
+
+@media (min-width: 768px) {
+    .formularioregistro {
+        margin: 50px 200px; 
+    }
+}
+
+
+
+
+/*------Formulario inicio sesion------*/
+.contenedor_formulario_2{
+    width: 60%;
+    margin: auto;
+    font-family: TrebuchetMS;
+}
+
+/*-----Cpyright-----*/
+
+.copyright{
+    background-color: #364c59;
+    display: flex;
+    justify-content: space-between;
+    color: grey;
+    font-size: 17px;
+    padding: 40px 400px 40px 400px;
+    font-family: TrebuchetMS;
+}
+
